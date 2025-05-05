@@ -1,0 +1,25 @@
+<p>Bonjour
+	{{ user.pseudo }}</p>
+<p>Votre réservation à été annuler par  votre guide</p>
+<p>Voici les détails de votre réservation :</p>
+<div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item list-group-item-primary">Date :
+			{{ reservation.day|date('d/m/Y') }}</li>
+		<li class="list-group-item">Début :
+			{{ reservation.begin|date('H:i') }}</li>
+		<li class="list-group-item list-group-item-primary">Fin :
+			{{ reservation.end|date('H:i') }}</li>
+		<li class="list-group-item">Ville :
+			{{ reservation.city.name }}</li>
+		<li class="list-group-item list-group-item-primary">Place :
+			{{ reservation.guide.nbplaces }}</li>
+		<li class="list-group-item">Nom du guide :
+			{{ reservation.guide.user.pseudo }}</li>
+		<li class="list-group-item list-group-item-primary">Prix :
+			{{ reservation.price }}
+			Crédits</li>
+	</ul>
+<p>Vos crédits vous seront rendus dans les plus brefs délais.</p>
+</div>
+<p>Nous nous excusons pour la gêne occasionnée. L'équipe Japaneeds You.</p>

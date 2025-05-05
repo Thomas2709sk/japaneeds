@@ -1,0 +1,25 @@
+<div class="modal fade" id="removeModal-{{ user.id }}" tabindex="-1" aria-labelledby="removeModalLabel-{{ user.id }}" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="removeModalLabel">Suppression de l'utilisateur</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					<strong>Êtes-vous sûr de vouloir supprimer l'utilisateur</strong>?</p>
+				<p>
+					<strong>Pseudo :</strong>
+					{{ user.pseudo }}</p>
+				<p>
+					<strong>Email :</strong>
+					{{ user.email }}</p>
+			</div>
+			<div class="modal-footer">
+				<form method="POST" action="{{ path('app_admin_users_remove', {'id': user.id}) }}">
+					<button type="submit" class="btn btn-danger">Supprimer utilisateur</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	avis reçus
+{% endblock %}
+
+{% block body %}
+<main>
+    <h1 class="text-center">Avis des voyageurs pour {{ guide.user.pseudo }}</h1>
+    <section class="container">
+        {% if totalReviews > 0 %}
+            <div class="border-bottom">
+                <p class="fs-1">
+                    <strong>{{ averageRating ? averageRating|number_format(1) : 'Aucune note' }} / 5</strong>
+                    <i class="fa-solid fa-star star fs-1 text-warning"></i>
+                </p>
+                <p>
+                    <strong>{{ totalReviews }} Avis</strong>
+                </p>
+            </div>
+            <div class="ratings-distribution mt-3">
+                {% for rating in 5..1 %}
+                    <div class="mb-2">
+                        <span class="d-flex justify-content-between">
+                            <span>{{ rating }} étoile{{ rating > 1 ? 's' : '' }}</span>
+                            <span>{{ ratingsDistribution[rating] ?? 0 }} avis</span>
+                        </span>
+                        <div class="progress">
+                            <div 
+                                class="progress-bar" 
+                                role="progressbar" 
+                                style="width: {{ (ratingsDistribution[rating] / totalReviews) * 100 }}%;" 
+                                aria-valuenow="{{ (ratingsDistribution[rating] / totalReviews) * 100 }}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- avis utilisateur -->
+            <section class="container mt-5">
+                <div class="row">
+                    {% for review in reviews %}
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Note : {{ review.rate }}/5
+                                        <i class="fa-solid fa-star star fs-5 text-warning"></i>
+                                    </h5>
+                                    <p class="card-text">{{ review.commentary }}</p>
+                                    <p class="card-text">
+                                        <span class="text-muted">
+                                            Publié le : {{ review.reservation.day|date('d/m/Y') }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% else %}
+            <p class="text-center mt-4 fs-4">Aucun avis n'a encore été laissé pour ce guide.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block importmap %}
+	{{ importmap(['app', 'register']) }}
+{% endblock %}
+
+{% block body %}
+	<h1>Inscription</h1>
+
+	{{ form_errors(registrationForm) }}
+	<section class="ms-3 me-2">
+		{{ form_start(registrationForm) }}
+		<div>
+			{{ form_label(registrationForm.pseudo, null, { 'attr': { 'class': 'form-label' } }) }}
+			{{ form_widget(registrationForm.pseudo, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+		</div>
+		<div>
+			{{ form_label(registrationForm.email, null, { 'attr': { 'class': 'form-label' } }) }}
+			{{ form_widget(registrationForm.email, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+		</div>
+		<div>
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe', { 'attr': { 'class': 'form-label' } }) }}
+			{{ form_widget(registrationForm.plainPassword, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+			<div>
+				<p>Complexité du mot de passe :
+					<span id="entropy" class="text-red">Très faible</span>
+					(la complexité minimale acceptée est "Fort")</p>
+			</div>
+		</div>
+		<div>
+            {{ form_label(registrationForm.agreeTerms, 'Accepter les conditions d\'utilisations', { 'attr': { 'class': 'form-label' } }) }}
+			{{ form_widget(registrationForm.agreeTerms) }}
+		</div>
+
+		<button type="submit" class="btn" id="submit-button" disabled>M'inscrire</button>
+		{{ form_end(registrationForm) }}
+		<p>Déjà inscrit ?<a href="{{ path('app_login')}}">Me connecter</a>
+		</p>
+	</section>
+{% endblock %}

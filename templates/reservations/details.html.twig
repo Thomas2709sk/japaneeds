@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la réservation
+{% endblock %}
+
+{% block body %}
+	<main>
+		<section class="container mt-3">
+			<h2>Votre Réservation</h2>
+			<div class="container mt-5 col-lg-6 col-md-6 col-sm-10" id="reservation-container">
+				<div class="card shadow-lg" id="reservation-card">
+					<div class="card-body">
+						<div class="row mb-2 pb-2">
+							<div class="col-lg-4">
+								<strong>Date :</strong>
+								<span id="reservation-date">{{ reservation.day.format('d/m/Y') }}</span>
+							</div>
+							<div class="col-lg-4">
+								<strong>Départ :</strong>
+								<span id="reservation-depart">
+									{% if reservation.begin is not null %}
+										<span>{{ reservation.begin|date('H:i') }}</span>
+									{% else %}
+										<p>Non défini</p>
+									{% endif %}
+								</span>
+							</div>
+							<div class="col-lg-4">
+								<strong>Fin :</strong>
+								<span id="reservation-fin">
+									{% if reservation.end is not null %}
+										<span>{{ reservation.end|date('H:i') }}</span>
+									{% else %}
+										<p>Non défini</p>
+									{% endif %}
+								</span>
+							</div>
+							<div class="col-lg-4">
+								<strong>Ville :</strong>
+								<span id="reservation-ville">{{ reservation.city.name }}</span>
+							</div>
+							<div class="col-lg-4">
+								<strong>Repas compris :</strong>
+								<span id="reservation-repas">
+									{% if reservation.meal %}
+										Oui
+									{% else %}
+										Non
+									{% endif %}
+								</span>
+							</div>
+							<div class="col-lg-4">
+								<strong>Nombre de personne(s) :</strong>
+								<span>{{ reservation.guide.nbplaces }}</span>
+							</div>
+							<div class="d-flex flex-column flex-lg-row align-items-start">
+								<p class="mb-0 me-md-2">
+									<strong>Point de rencontre :</strong>
+								</p>
+								<span>
+									{% if reservation.address is not null %}
+										<a class="text-primary text-truncate d-inline-block" style="max-width: 150px;" href="https://www.google.com/maps/search/?api=1&query={{ reservation.address }}" target="_blank">
+											{{ reservation.address }}
+										{% else %}
+											<p>Le guide vous contactera</p>
+										{% endif %}
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="price-container" class="container mt-5 col-lg-6 col-md-6 col-sm-10">
+				<div class="card shadow-lg">
+					<div class="card-body">
+						<div class="d-flex justify-content-between align-items-center mb-2 pb-2">
+							<div class="fs-5 d-flex align-items-center">
+								<span class="me-2">
+									<strong>Prix :</strong>
+								</span>
+								<span id="reservation-prix">{{ reservation.price }}
+									Crédits</span>
+							</div>
+							<div class="d-flex align-items-center">
+								{% if reservation.placesDispo == 0 %}
+									<p class="text-danger mb-0">Plus de places disponibles</p>
+								{% elseif app.user %}
+									{% if app.user.credits >= reservation.price %}
+										<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmationModal">Réserver</button>
+									{% else %}
+										<p class="text-danger mb-0">Crédits insuffisants</p>
+									{% endif %}
+								{% else %}
+									<a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter pour réserver</a>
+								{% endif %}
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="container mt-3">
+			<h2>Votre guide</h2>
+			<div id="guide-details" class="container mt-5 col-lg-6 col-md-6 col-sm-10">
+				<div class="card shadow-lg">
+					<div class="card-body">
+						<div
+							class="border-bottom pb-3 mb-2 d-flex align-items-center">
+							<div class="ms-3">
+								<img id="guide-image" src="{{ reservation.guide.user.picture ? asset('uploads/users/mini/40x40-' ~ reservation.guide.user.picture) : asset('assets/images/favicon.png') }}" alt="Photo du guide" class=" rounded-circle" width="100" height="100">
+							</div>
+							<div class="ms-4">
+								<span class="fw-bold">{{ reservation.guide.user.pseudo }}</span>
+								<div class="d-flex align-items-center mt-2">
+									<span class="fw-bold me-2">
+										{% if averageRating is not null %}
+											{{ averageRating|number_format(1) }}/5
+										{% else %}
+											-/5
+										{% endif %}
+									</span>
+									<i class="fa-solid fa-star text-warning me-3"></i>
+									<a href="{{ path('app_guide_reviews_details', { 'id': reservation.guide.id }) }}" class="text-secondary">
+										<b>{{ reviewCount }}
+											Avis</b>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div>
+							<span>
+								<b>Langues parlées :</b>
+							</span>
+							<span id="guide-languages">{{ reservation.guide.languages }}</span><br><br>
+							<span>
+								<b>Spécialité :</b>
+							</span>
+							<span id="guide-specialty">{{ reservation.guide.speciality.name }}</span><br><br>
+							<span>
+								<b>Fumeur :</b>
+							</span>
+							<span id="guide-specialty">
+								{% if reservation.guide.smoking %}
+									Oui
+								{% else %}
+									Non
+								{% endif %}
+							</span><br><br>
+							<span>
+								<b>Ptéférences :</b>
+							</span>
+							<span id="guide-preferences"></span><br><br>
+							<span class="row justify-content-start">
+								<b>Description :</b>
+								<p id="guide-description" class="ms-2"></p>
+							</span>
+							<span id="guide-specialty">{{ reservation.guide.description }}</span><br><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="container mb-3 mt-3">
+			<h2>Avis reçus</h2>
+			<p id="show_review">Afficher les avis</p>
+			<div id="reviews_container" class="container mt-5 col-lg-6 col-md-6 col-sm-10">
+				<div class="card shadow-lg">
+					<div class="card-body">
+						<div class="row mb-2 border-bottom pb-2">
+							<div class="col-lg-4">
+								<strong>Date :</strong>
+								6 Mars 2025
+							</div>
+						</div>
+					</div>
+					<div class=" mb-2 d-flex align-items-center ">
+						<div class="ms-3">
+							<img src="{{ asset('assets/images/favicon.png') }}" alt="Photo du guide" class=" rounded-circle" width="50" height="50">
+						</div>
+						<div class="ms-1">
+							<strong>Thomas</strong>
+						</div>
+						<div class="ms-2">
+							<b>5
+								<i class="fa-solid fa-star text-warning"></i>
+							</b>
+						</div>
+					</div>
+					<div class="ms-3">
+						<p>C'était une expérience incroyable ! Le guide était très professionnel et la visite était bien organisée.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="confirmationModalLabel">Confirmation de réservation</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>
+						<strong>Êtes-vous sûr de vouloir réserver ce guide</strong>
+						?</p>
+					{% if app.user is defined and app.user %}
+						<p>
+							<strong>Vos crédits :</strong>
+							{{ app.user.credits }}</p>
+						<p>
+							<strong>Prix :</strong>
+							{{ reservation.price }}
+							crédits</p>
+						<p>
+							<strong>Places disponibles :</strong>
+							{{ reservation.placesDispo }}</p>
+					{% else %}
+						<p>
+							<strong>Vous devez être connecté pour réserver.</strong>
+						</p>
+					{% endif %}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+					<form method="POST" action="{{ path('app_reservations_book', {'id': reservation.id}) }}">
+						<button type="submit" class="btn btn-success">Confirmer la réservation</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

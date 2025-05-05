@@ -1,0 +1,45 @@
+<div class="col-lg-4 col-md-6 mb-3">
+	<div class="card bg-light border-primary h-100">
+		<div class="card-header">
+			Réservation N°{{ reservation.reservNumber }}
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item list-group-item-primary">Date :
+				{{ reservation.day|date('d/m/Y') }}</li>
+			<li class="list-group-item">Début :
+				{{ reservation.begin|date('H:i') }}</li>
+			<li class="list-group-item list-group-item-primary">Fin :
+				{{ reservation.end|date('H:i') }}</li>
+			<li class="list-group-item">Ville :
+				{{ reservation.city.name }}</li>
+			<li class="list-group-item list-group-item-primary">Rpas compris :
+				{% if reservation.meal %}
+					Oui
+				{% else %}
+					Non
+				{% endif %}
+			</li>
+			<li class="list-group-item">Places restantes :
+				{{ reservation.placesDispo }}</li>
+			<li class="list-group-item list-group-item-primary">Nom du guide :
+				{{ reservation.guide.user.pseudo }}</li>
+			<li class="list-group-item">Statut :
+				{{ reservation.status }}</li>
+			<li class="list-group-item list-group-item-primary">Prix :
+				{{ reservation.price }}
+				Crédits</li>
+		</ul>
+		<div class="d-flex justify-content-between card-footer">
+			{% if reservation.status == 'A venir' %}
+				<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal-{{ reservation.id }}">Annuler</button>
+			{% elseif reservation.status == 'Fini' %}
+				<button type="button" class="btn btn-warning"  data-bs-toggle="modal" data-bs-target="#user-endNoModal-{{ reservation.id }}">Non</button>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#user-endModal-{{ reservation.id }}">Oui</button>
+			{% elseif reservation.status == 'Confirmé' %}
+				<a href="{{ path('app_user_reviews_create', { 'reservationId': reservation.id }) }}" class="text-primary">Donner votre avis</a>
+			{% else %}
+				<span class="placeholder"></span>
+			{% endif %}
+		</div>
+	</div>
+</div>

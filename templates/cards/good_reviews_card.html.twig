@@ -1,0 +1,27 @@
+<div class="col-lg-6 p-3 mb-3 border rounded bg-primary text-white">
+	<div class="d-flex justify-content-between">
+		<h5 class="mb-1">
+			{% if review.reservation.users|length > 0 %}
+					{% for user in review.reservation.users %}
+						<span>{{ review.user.pseudo }}</span>
+					{% endfor %}
+				{% else %}
+					<span>Aucun nom</span>
+				{% endif %}
+			</h5>
+			<span>Guide : {{ review.reservation.guide.user.pseudo }}</span>
+			<span class="">Publié le : {{ review.reservation.day|date('d/m/Y') }}</span>
+		</div>
+		<div class="d-flex align-items-center">
+			<span class="text-warning">
+				<i class="fa-solid fa-star star fs-4"></i>
+			</span>
+			<span class="ms-2 fs-5">{{ review.rate }}/5</span>
+		</div>
+		<p class="mt-2">{{ review.commentary }}</p>
+		<div class="text-end">
+			<button class="btn btn-success btn-sm"  data-bs-toggle="modal" data-bs-target="#confirmModal-{{ review.id }}">Valider</button>
+			<button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeModal-{{ review.id }}">Rejeter</button>
+		</div>
+	</div>
+</div></div>

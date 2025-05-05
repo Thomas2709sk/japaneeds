@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crédits
+{% endblock %}
+
+{% block importmap %}
+	{{ importmap(['app', 'graphSelect', 'creditsGraph' ]) }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			{% include "_partials/_adminav.html.twig" %}
+			<main class="col-9 border border-light bg-light p-2">
+				<h1>Nombre de crédits</h1>
+
+				<select
+					id="monthSelector"><!-- Options dynamiquement ajoutées via JS -->
+				</select>
+
+				<div
+					id="creditsChartsContainer">{# Les graphes seront ajoutés ici dynamiquement #}
+				</div>
+
+				<div id="totalGlobalCredits" class="mt-3 fw-bold fs-5 text-success"></div>
+
+			</main>
+		</div>
+	</div>
+{% endblock %}

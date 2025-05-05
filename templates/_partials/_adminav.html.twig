@@ -1,0 +1,48 @@
+<aside class="col-lg-3 border border-light bg-white p-2">
+
+	<article class="card mb-3">
+		<div class="card-header">
+			Ville
+		</div>
+        <div class="card-body">
+            <p><a href="{{ path('app_admin_cities_index') }}">Liste des villes</a></p>
+            <p><a href="{{ path('app_admin_cities_add') }}">Ajouter une ville</a></p>
+        </div>
+	</article>
+	<article class="card mb-3">
+		<div class="card-header">
+			Spécialités
+		</div>
+        <div class="card-body">
+            <p><a href="{{ path('app_admin_specialities_index') }}">Liste des spécialités</a></p>
+            <p><a href="{{ path('app_admin_specialities_add') }}">Ajouter une spécialité</a></p>
+        </div>
+	</article>
+    <article class="card mb-3">
+		<div class="card-header">
+			Utilisateurs
+		</div>
+        <div class="card-body">
+            <p><a href="{{ path('app_admin_users_index') }}">Liste des Utilisateurs</a></p>
+        </div>
+	</article>
+	 <article class="card mb-3">
+		<div class="card-header">
+			Employés
+		</div>
+        <div class="card-body">
+			<p><a href="{{ path('app_admin_staff_create') }}">Ajouter employés</a></p>
+            <p><a href="{{ path('app_admin_staff_index') }}">Liste des employés</a></p>
+        </div>
+	</article>
+	<article class="card mb-3">
+		<div class="card-header">
+			Admin
+		</div>
+        <div class="card-body">
+            <p><a href="{{ path('app_admin_graph_index') }}">Réservations</a></p>
+			<p><a href="{{ path('app_admin_credits_graph_index') }}">Crédits</a></p>
+			<p><a href="{{ path('app_admin_reviews_index') }}">Avis</a></p>
+        </div>
+	</article>
+</aside>

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre avis
+{% endblock %}
+
+{% block importmap %}
+	{{ importmap(['app', 'reviewStar' ]) }}
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="ms-3">Noter votre guide</h1>
+    <section class="container">
+    <p class="fs-5">Votre journée avec {{ reservation.guide.user.pseudo }} c'est mal dérouler</p>
+    <p class="fs-5">Le {{ reservation.day.format('d/m/Y') }}</p>
+    <p class="fs-5">Dites nous pourquoi :</p>
+	{{ form_start(reviewForm) }}
+	{{ form_widget(reviewForm.rate) }}
+	<div id="stars" class="d-flex mt-3 text-secondary justify-content-center stars">
+		<i class="fa-solid fa-star star fs-1" data-value="1"></i>
+		<i class="fa-solid fa-star star fs-1" data-value="2"></i>
+		<i class="fa-solid fa-star star fs-1" data-value="3"></i>
+		<i class="fa-solid fa-star star fs-1" data-value="4"></i>
+		<i class="fa-solid fa-star star fs-1" data-value="5"></i>
+	</div>
+	<p id="note-text" class="text-center mt-2">Note: 0 sur 5</p>
+
+	{{ form_row(reviewForm.commentary) }}
+	<button type="submit" class="btn btn-primary">Envoyer</button>
+	{{ form_end(reviewForm) }}
+    </section>
+{% endblock %}

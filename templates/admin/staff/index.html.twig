@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des Employés
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			{% include "_partials/_adminav.html.twig" %}
+			<main class="col-9 border border-light bg-light p-2">
+				<h1>Liste des Employés</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Pseudo</th>
+							<th>Email</th>
+							<th>Role</th>
+							<th>Vérifié</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in users %}
+							{% if 'ROLE_ADMIN' in user.roles or 'ROLE_STAFF' in user.roles %}
+								<tr>
+									<td>{{ user.id }}</td>
+									<td>{{ user.pseudo }}</td>
+									<td>{{ user.email}}</td>
+									<td>
+										{% for role in user.roles %}
+											{% if role == "ROLE_ADMIN" %}
+												{% set name = "Administrateur" %}
+												{% set color = "danger" %}
+											{% elseif role == "ROLE_STAFF" %}
+												{% set name = "Employé" %}
+												{% set color = "warning" %}
+											{% else %}
+												{% set name = "Membre" %}
+												{% set color = "success" %}
+											{% endif %}
+										
+										<span class="badge bg-{{ color }}">{{ name }}</span>
+									{% endfor %}
+								</td>
+							</td>
+							<td>
+								<div class="form-check form-switch">
+									<input type="checkbox" class="form-check-input" role="switch" id="switch {{ user.id }}" {{ user.isVerified ? "checked" : "" }} disabled>
+									<label for="switch{{ user.id }}" class="form-check-label"></label>
+								</div>
+							</td>
+							<td>
+								<button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeModal-{{ user.id }}">Supprimer</button>
+							</td>
+						</tr>
+						<!-- Modale suppression-->
+						    {% include "modals/admin_remove_user_modal.html.twig" %}
+                        {% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</main>
+	</div>
+</div>{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="row">
+			<div class="ms-3">
+				<h2>Avis</h2>
+				<p class="border-bottom border-dark pb-3">Consultez et gérez vos avis ici.</p>
+			</div>
+			<div id="confirmReviews">
+				<div id="reviewsList" class="">
+					<h3>Avis supérieur à 3 étoiles</h3>
+					<div>
+						{% set goodReviews = false %}
+						{% for review in reviews %}
+							{% if review.rate >= 3 and not review.validate %}
+								{% set goodReviews = true %}
+								{% include "cards/good_reviews_card.html.twig" %}
+							{% endif %}
+							<!--  valider avis -->
+							{% include "modals/admin_confirm_reviews_modal.html.twig" %}
+							<!-- Supprimer avis -->
+							{% include "modals/admin_remove_review_modal.html.twig" %}
+						{% endfor %}
+						{% if not goodReviews %}
+							<p>Pas d'avis à valider</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<h3 class="mt-3">Avis inférieur à 3 étoiles</h3>
+				<!-- Bad Review -->
+				<div class="row">
+					{% set badReviews = false %}
+					{% for review in reviews %}
+						{% if review.rate < 3 and not review.validate %}
+							{% set badReviews = true %}
+							{% include "cards/bad_reviews_card.html.twig" %}
+						{% endif %}
+						<!-- MODALS -->
+							<!-- Confirmer mauvais avis -->
+						{% include "modals/admin_confirm_bad_reviews_modal.html.twig" %}
+							<!-- Supprimer mauvais avis -->						
+					{% endfor %}
+					{% if not badReviews %}
+						<p>Pas d'avis à valider</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

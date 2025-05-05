@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre compte
+{% endblock %}
+
+{% block importmap %}
+	{{ importmap(['app', 'add-photo']) }}
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="ms-3 pb-3 border-bottom border-dark">Votre compte</h1>
+
+	{{ form_start(accountForm) }}
+
+	<section class="container">
+		{{ form_row(accountForm.pseudo) }}
+		{{ form_row(accountForm.picture) }}
+		<div class="preview">
+			<img src="" class="rounded-circle" alt="" width="200">
+		</div>
+
+		{{ form_label(accountForm.role, 'Etes- vous :') }}
+		{{ form_widget(accountForm.role) }}
+
+		<div class="mt-3">
+			<button class="btn btn-primary" type="submit">Modifier</button>
+		</div>
+		{{ form_end(accountForm) }}
+	</section>
+
+	<h2 class="ms-3 mt-3 pb-3 border-bottom border-dark">Vos crédits</h2>
+	<div class="container">
+		<b>Vos crédits :</b>
+		{{ app.user.credits }}
+	</div>
+	<h2 class="ms-3 mt-3 pb-3 border-bottom border-dark">Vos réservations</h2>
+	<section>
+		<div class="container">
+			<div class="row">
+				{% for reservation in reservations %}
+					<!-- Card reservation -->
+						{% include "cards/user_reservation_card.html.twig" %}
+					<!-- Modale d'annulation -->
+					{% include "modals/cancel_modal.html.twig" %}
+					<!-- Modal confirmer fin oui -->
+					{% include "modals/user_confirm_yes_modal.html.twig" %}
+					<!-- Modal confirmer fin non -->
+					{% include "modals/user_confirm_no_modal.html.twig" %}
+				{% else %}
+					<p>Pas de réservations</p>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos avis reçus{% endblock %}
+
+{% block body %}
+<main>
+<h1 class="ms-3">Avis reçus</h1>
+<section class="container">
+ {% if reviews is not empty %}
+        <div class="row">
+            {% for review in reviews %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Note : {{ review.rate }}/5 <i class="fa-solid fa-star star fs-5 text-warning"></i></h5>
+                            <p class="card-text">{{ review.commentary }}</p>
+                            <p class="card-text">
+                                <span class="text-muted">
+                                    Publié le :  {{ review.reservation.day|date('d/m/Y') }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun avis pour l'instant.</p>
+    {% endif %}
+</section>
+</main>
+
+
+{% endblock %}

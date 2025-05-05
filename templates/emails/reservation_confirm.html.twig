@@ -1,0 +1,32 @@
+<p>Bonjour
+	{{ user.pseudo }}</p>
+<p>Merci pour votre réservation !</p>
+<p>Voici les détails de votre journée :</p>
+<div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item">Date :
+			{{ reservation.day|date('d/m/Y') }}</li>
+		<li class="list-group-item">Début :
+			{{ reservation.begin|date('H:i') }}</li>
+		<li class="list-group-item">Fin :
+			{{ reservation.end|date('H:i') }}</li>
+		<li class="list-group-item">Ville :
+			{{ reservation.city.name }}</li>
+		<li class="list-group-item">Rpas compris :
+			{% if reservation.meal %}
+				Oui
+			{% else %}
+				Non
+			{% endif %}
+		</li>
+		<li class="list-group-item">Place :
+			{{ reservation.guide.nbplaces }}</li>
+		<li class="list-group-item">Nom du guide :
+			{{ reservation.guide.user.pseudo }}</li>
+		<li class="list-group-item">Prix :
+			{{ reservation.price }}
+			Crédits</li>
+		<li>Point de rencontre : {{ reservation.address }}</li>
+	</ul>
+</div>
+<p>Merci , l'équipe Japaneeds you</p>

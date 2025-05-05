@@ -1,0 +1,31 @@
+<div class="modal fade" id="startModal-{{ reservation.id }}" tabindex="-1" aria-labelledby="startModalLabel-{{ reservation.id }}" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="cancelModalLabel">Débuter la réservation-{{ reservation.reservnumber }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					<strong>Êtes-vous sûr de vouloir commencer votre réservation</strong>?</p>
+
+					<strong>Date :</strong>
+					{{ reservation.day|date('d/m/Y') }}</p>
+
+				<p>
+					<strong>Nom voyageur(s) :</strong>
+					{% for user in reservation.users %}
+						<span>{{ user.pseudo }}</span>
+					{% else %}
+						<span>Aucune réservation</span>
+					{% endfor %}
+				</p>
+			</p>
+		</div>
+		<div class="d-flex justify-content-between modal-footer">
+			<form method="POST" action="{{ path('app_guide_reservations_start', { id: reservation.id }) }}">
+				<button type="submit" class="btn btn-info">Début</button>
+			</form>
+		</div>
+	</div>
+</div></div>

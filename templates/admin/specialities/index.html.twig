@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des spécialités
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			{% include "_partials/_adminav.html.twig" %}
+			<main class="col-9 border border-light bg-light p-2">
+				<h1>Liste des spécialités</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nom</th>
+							<th>Slug</th>
+						</tr>
+					</thead>
+                    <tbody>
+                        {% for speciality in specialities %}
+                        <tr>
+                            <td>{{ speciality.id }}</td>
+                            <td>{{ speciality.name }}</td>
+                            <td>{{ speciality.slug }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+				</table>
+			</main>
+		</div>
+	</div>
+
+{% endblock %}
+

@@ -1,0 +1,54 @@
+<div class="col-lg-4 col-md-6 mb-3">
+	<div class="card bg-light border-primary h-100">
+		<div class="card-header">
+			<span>Réservations N°
+				{{ reservation.reservnumber }}</span>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item list-group-item-primary">Date :
+				{{ reservation.day|date('d/m/Y') }}</li>
+			<li class="list-group-item">Début :
+				{{ reservation.begin|date('H:i') }}</li>
+			<li class="list-group-item list-group-item-primary">Fin :
+				{{ reservation.end|date('H:i') }}</li>
+			<li class="list-group-item">Ville :
+				{{ reservation.city.name }}</li>
+			<li class="list-group-item list-group-item-primary">Repas compris :
+				{% if reservation.meal %}
+					Oui
+				{% else %}
+					Non
+				{% endif %}
+			</li>
+			<li class="list-group-item">Place restantes :
+				{{ reservation.placesdispo }}</li>
+			<li class="list-group-item list-group-item-primary">Nom voyageur(s) :
+				{% if reservation.users|length > 0 %}
+					{% for user in reservation.users %}
+						<span>{{ user.pseudo }}</span>
+					{% endfor %}
+				{% else %}
+					<span>Aucune réservation</span>
+				{% endif %}
+			</li>
+			<li class="list-group-item">Statut :
+				{{ reservation.status }}</li>
+			<li class="list-group-item list-group-item-primary">Prix :
+				{{ reservation.price }}
+				Crédits</li>
+			<li class="list-group-item">Point de rencontre :
+				<a class="text-primary" target="blank" href="https://www.google.com/maps/search/?api=1&query={{ reservation.address }}">Voir carte</a>
+			</li>
+		</ul>
+		<div class="d-flex justify-content-between card-footer">
+			{% if reservation.status == 'A venir' %}
+				<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#startModal-{{ reservation.id }}">Début</button>
+				<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal-{{ reservation.id }}">Annuler</button>
+			{% elseif reservation.status == 'En cours' %}
+				<button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#endModal-{{ reservation.id }}">Fin</button>
+			{% else %}
+				<span class=""> </span>
+			{% endif %}
+		</div>
+	</div>
+</div>

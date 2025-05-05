@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une spécialité{% endblock %}
+
+{% block body %}
+<h1>Ajouter une spécialité</h1>
+    {{ form_start(specialityForm) }}
+        {{ form_row(specialityForm.name) }}
+        <button type="submit">Ajouter</button>
+    {{ form_end(specialityForm) }}
+{% endblock %}

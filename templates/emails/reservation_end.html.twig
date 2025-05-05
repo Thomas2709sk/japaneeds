@@ -1,0 +1,23 @@
+<p>Bonjour {{ user.pseudo }},</p>
+
+<p>Votre journée est maintenant terminée.</p>
+<p>Nous espérons que tout s'est bien passé.</p>
+
+<p>Rendez-vous dès maintenant sur votre compte pour valider que votre réservation s’est bien déroulée.</p>
+
+<div>
+  <p><strong>Rappel de votre réservation :</strong></p>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Réservation n° : {{ reservation.reservnumber }}</li>
+    <li class="list-group-item">Date : {{ reservation.day|date('d/m/Y') }}</li>
+    <li class="list-group-item">Ville : {{ reservation.city.name }}</li>
+    <li class="list-group-item">Nom du guide : {{ reservation.guide.user.pseudo }}</li>
+    <li class="list-group-item">Prix : {{ reservation.price }} Crédits</li>
+  </ul>
+</div>
+
+<p>N’hésitez pas à laisser un avis sur votre guide.</p>
+
+<p>Merci,</p>
+<p>L’équipe Japaneeds You</p>
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		{% endblock %}
+		{% block javascripts %}
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		<header class="p-3 mb-3 border-bottom bg-primary">
+			<nav class="navbar navbar-expand-lg bg-primary">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="{{path('index') }}">
+						<img src="{{ asset('assets/images/favicon.png') }}" class="me-2" alt="logo du site">Japaneeds you</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="{{path('index') }}">Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{path('app_reservations_index') }}">Réservations</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{path('app_reservations_search') }}">Recherche</a>
+							</li>
+							{% if app.user and app.user.getGuide() is not null %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{path('app_guide_reservations_add') }}">Créer réservation</a>
+								</li>
+							{% endif %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Dropdown link
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a class="dropdown-item" href="#">Action</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Another action</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</li>
+								</ul>
+							</li>
+							{% if is_granted('ROLE_ADMIN') %}
+								<li class="nav-item">
+									<a class="nav-link" href="{{ path('admin_index') }}">Administrattion</a>
+								</li>
+							{% elseif is_granted('ROLE_STAFF') %}
+								<li>
+									<a class="nav-link" href="{{ path('app_admin_reviews_index') }}">Avis à valider</a>
+								</li>
+							{% endif %}
+						</ul>
+						<div class="dropdown text-end ms-auto">
+							<a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								{% if app.user %}
+									<div class="user-profile d-flex align-items-center">
+										{% if app.user.picture %}
+											<img src="{{ asset('uploads/users/mini/40x40-' ~ app.user.picture) }}" class="rounded-circle" alt="Photo de profil" class="profile-picture">
+										{% else %}
+											<img src="{{ asset('assets/images/favicon.png') }}" alt="Photo de profil par défaut" class="profile-picture">
+										{% endif %}
+										<span class="ms-2">Bonjour,
+											{{ app.user.pseudo }}!</span>
+									</div>
+								{% else %}
+									<!-- Affichage de l'icône quand l'utilisateur n'est pas connecté -->
+									<i class="fa fa-user-circle" style="font-size: 1.5em;"></i>
+
+								{% endif %}
+							</a>
+							<ul class="dropdown-menu dropdown-menu-lg-end text-small" aria-labelledby="userDropdown">
+								{% if not app.user %}
+									<li>
+										<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
+									</li>
+								{% else %}
+									<li>
+										<a class="dropdown-item" href="{{ path('app_user_account_index') }}">Compte</a>
+									</li>
+									{% if app.user.getGuide() is not null %}
+										<li>
+											<a class="dropdown-item" href="{{ path('app_guide_account_index') }}">Compte Guide</a>
+										</li>
+									{% endif %}
+									<li><hr class="dropdown-divider"></li>
+									<li>
+										<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+									</li>
+								{% endif %}
+							</ul>
+						</div>
+					</nav>
+				</header>
+
+				{% include "flash_messages.html.twig" %}
+
+				{% block body %}{% endblock %}
+
+				<footer>
+					<section>
+						<img src="" alt="">
+					</section>
+					<section>
+						<a href="">Mentions</a>
+					</section>
+				</footer>
+
+			</body>
+		</html>
+	</body>
+</html>

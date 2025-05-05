@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block importmap %}
+	{{ importmap(['app', 'addStaff']) }}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			{% include "_partials/_adminav.html.twig" %}
+			<section class="col-lg-9 border border-light bg-light p-2">
+				<h1>Ajouter employés</h1>
+
+				{{ form_errors(staffForm) }}
+				<section class="ms-3 me-2">
+					{{ form_start(staffForm) }}
+					<div>
+						{{ form_label(staffForm.pseudo, null, { 'attr': { 'class': 'form-label' } }) }}
+						{{ form_widget(staffForm.pseudo, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+					</div>
+					<div>
+						{{ form_label(staffForm.email, null, { 'attr': { 'class': 'form-label' } }) }}
+						{{ form_widget(staffForm.email, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+					</div>
+					<div>
+						{{ form_label(staffForm.plainPassword, 'Mot de passe', { 'attr': { 'class': 'form-label' } }) }}
+						{{ form_widget(staffForm.plainPassword, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+						<div>
+							<p>Complexité du mot de passe :
+								<span id="entropy" class="text-red">Très faible</span>
+								(la complexité minimale acceptée est "Fort")</p>
+						</div>
+						<div>
+							{{ form_label(staffForm.roles, null, { 'attr': { 'class': 'form-label' } }) }}
+							{{ form_widget(staffForm.roles, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+						</div>
+					</div>
+
+					<button type="submit" class="btn" id="submit-button" disabled>M'inscrire</button>
+					{{ form_end(staffForm) }}
+				</section>
+			</section>
+		</div>
+	</div>
+{% endblock %}

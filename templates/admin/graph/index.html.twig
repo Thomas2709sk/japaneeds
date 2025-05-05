@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Administration
+{% endblock %}
+
+{% block importmap %}
+	{{ importmap(['app', 'reservGraph', 'graphSelect']) }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			{% include "_partials/_adminav.html.twig" %}
+			<main class="col-9 border border-light bg-light p-2">
+				<h1>Nombre de réservations</h1>
+
+				<select
+					id="monthSelector"><!-- Options dynamiquement ajoutées via JS -->
+				</select>
+
+				<div
+					id="chartsContainer">{# Les graphes seront ajoutés ici dynamiquement #}
+				</div>
+
+			</main>
+		</div>
+	</div>
+{% endblock %}

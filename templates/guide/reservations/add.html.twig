@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une réservation
+{% endblock %}
+
+{% block importmap %}
+{{ importmap(['app', 'addressSuggest']) }}
+{% endblock %}
+
+{% block body %}
+	<h1 class="ms-3 pb-3 border-bottom border-dark">Créer une réservation</h1>
+	<section class="container">
+		{{ form_start(form) }}
+		{{ form_row(form.day) }}
+		{{ form_row(form.begin) }}
+		{{ form_row(form.end) }}
+
+		<div class="form-group d-flex mt-2">
+			<label for="{{ form.meal.vars.id }}" class="form-label mr-2">Repas Compris :</label>
+			{{ form_widget(form.meal, { 'attr': { 'class': 'form-check-input' } }) }}
+		</div>
+		<div>
+			{{ form_row(form.price) }}
+			<p>2 crédits iront à la plateforme.</p>
+		</div>
+		{{ form_row(form.city) }}
+		{{ form_row(form.address) }}
+			<div id="autocomplete-results" style="max-height: 100px;" class="mb-2 overflow-auto autocomplete-suggestions border border-dark shadow rounded"></div>
+		<button class="btn btn-primary" type="submit">Ajouter</button>
+		{{ form_end(form) }}
+	</section>
+{% endblock %}

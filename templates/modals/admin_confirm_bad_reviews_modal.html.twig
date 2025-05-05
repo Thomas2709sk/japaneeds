@@ -1,0 +1,28 @@
+<div class="modal fade" id="confirmBadModal-{{ review.id }}" tabindex="-1" aria-labelledby="confirmBadModalLabel-{{ review.id }}" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel">Confirmer l'avis</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					<strong>Êtes-vous sûr de vouloir valider l'avis négatif</strong>?</p>
+				<p>
+					<strong>Nom voyageur :</strong>
+					{% for user in review.reservation.users %}
+						<span>{{ review.user.pseudo }}</span>
+					{% else %}
+						<span>Aucun nom</span>
+					{% endfor %}
+				</p>
+                <p><b>Note : </b> <span>{{ review.rate }}</span></p>
+			</div>
+			<div class="d-flex justify-content-between modal-footer">
+				<form method="POST" action="{{ path('app_admin_reviews_bad', { id: review.id }) }}">
+					<button type="submit" class="btn btn-info">Valider</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

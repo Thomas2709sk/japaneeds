@@ -1,0 +1,52 @@
+<div class="col-lg-5 p-3 mb-3 border rounded bg-primary text-white">
+	<div class="d-flex justify-content-between">
+		<h5 class="mb-1">
+			{% if review.reservation.users|length > 0 %}
+				{% for user in review.reservation.users %}
+					<span>{{ review.user.pseudo }}</span>
+				{% endfor %}
+			{% else %}
+				<span>Aucun nom</span>
+			{% endif %}
+		</h5>
+		<span>Guide :
+			{{ review.reservation.guide.user.pseudo }}</span>
+		<span>Publié le :
+			{{ review.reservation.day|date('d/m/Y') }}</span>
+	</div>
+	<div class="d-flex align-items-center mt-2">
+		<span class="text-warning">
+			<i class="fa-solid fa-star star fs-4"></i>
+		</span>
+		<span class="ms-2 fs-5">{{ review.rate }}/5</span>
+	</div>
+	<p class="mt-2">{{ review.commentary }}</p>
+	<div class="text-end">
+		<button class="btn btn-warning btn-sm">Afficher</button>
+		<button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#confirmBadModal-{{ review.id }}">Valider</button>
+		<button class="btn btn-danger btn-sm">Rejeter</button>
+	</div>
+	<hr class="my-3">
+	<div>
+		<b>Numéro de réservation:</b>
+		<span>{{ review.reservation.reservnumber }}</span>
+	</div>
+	<div>
+		<b>Le :</b>
+		<span>{{ review.reservation.day|date('d/m/Y') }}</span><br>
+		<b>Ville :</b>
+		<span>{{ review.reservation.city.name }}</span>
+	</div>
+	<div>
+		<b>Utilisateur:</b>
+		<span>{{ review.user.pseudo }}</span><br>
+		<b>Email Utilisateur:</b>
+		<span>{{ review.user.email }}</span>
+	</div>
+	<div>
+		<b>Guide:</b>
+		<span>{{ review.reservation.guide.user.pseudo }}</span><br>
+		<b>Email Guide:</b>
+		<span>{{ review.reservation.guide.user.email }}</span>
+	</div>
+</div>

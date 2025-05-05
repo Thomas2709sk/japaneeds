@@ -1,0 +1,25 @@
+<div class="modal fade" id="removeModal-{{ review.id }}" tabindex="-1" aria-labelledby="removeModalLabel-{{ review.id }}" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="removeModalLabel">Suppression de l'avis</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					<strong>Êtes-vous sûr de vouloir supprimer l'avis</strong>?</p>
+				<p>
+					<strong>Pseudo :</strong>
+					{{ review.user.pseudo }}</p>
+				<p>
+					<strong>Réservation numéro :</strong>
+					{{ review.reservation.reservnumber }}</p>
+			</div>
+			<div class="modal-footer">
+				<form method="POST" action="{{ path('app_admin_reviews_remove', {'id': review.id}) }}">
+					<button type="submit" class="btn btn-danger">Supprimer l'avis</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<div class="modal fade" id="cancelModal-{{ reservation.id }}" tabindex="-1" aria-labelledby="cancelModalLabel-{{ reservation.id }}" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="cancelModalLabel">Annulation de réservation-{{ reservation.reservnumber }}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>
+					<strong>Êtes-vous sûr de vouloir annuler votre réservation</strong>?</p>
+				<p>
+					<strong>Prix :</strong>
+					{{ reservation.price }}
+					crédits</p>
+				<p>
+					<strong>Date :</strong>
+					{{ reservation.day|date('d/m/Y') }}</p>
+				<p>
+					<strong>Nom du guide :</strong>
+					{{ reservation.guide.user.pseudo }}</p>
+			</div>
+			<div class="modal-footer">
+				<form method="POST" action="{{ path('app_reservations_cancel', {'reservationId': reservation.id}) }}">
+					<button type="submit" class="btn btn-danger">Annuler réservation</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
