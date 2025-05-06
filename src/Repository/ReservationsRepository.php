@@ -169,6 +169,25 @@ $qb->andWhere('r.begin <= :begin')
 return $qb->getQuery()->getResult();
 }
 
+//DQL qui ne reconnais pas le datediff
+public function findClosestAvailableDate(string $day): ?\DateTime
+{
+    $targetDate = new \DateTime($day);
+    $now = new \DateTime();
+
+    $result = $this->createQueryBuilder('r')
+        ->select('r.day')
+        ->where('r.day >= :now')
+        ->setParameter('now', $now->format('Y-m-d'))
+        ->orderBy('ABS(DATEDIFF(r.day, :targetDate))', 'ASC')
+        ->setParameter('targetDate', $targetDate->format('Y-m-d'))
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+    return $result ? $result['day'] : null;
+}
+
 
 // public function findClosestDate(string $day): ?\DateTime
 // {
