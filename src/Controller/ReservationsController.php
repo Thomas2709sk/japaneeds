@@ -286,26 +286,48 @@ class ReservationsController extends AbstractController
         Request $request,
         ReservationsRepository $reservationsRepository
     ): Response {
-
         // Récupérer les paramètres de l'URL (jour et ville)
         $day = $request->query->get('day');
         $city = $request->query->get('city');
-
-        // Récupérer les réservations avec les notes moyennes des guides (par jour et ville)
-        $reservations = $reservationsRepository->findReservationsWithGuideRatings($day, $city);
-
-        // Appliquer les filtres supplémentaires si le formulaire est soumis
-        $filtersForm = $this->createForm(SearchFiltersFormType::class);
+    
+    
+        // Pré-remplir le formulaire avec les filtres initiaux
+        $filtersForm = $this->createForm(SearchFiltersFormType::class, [
+            'date' => $day ? new \DateTime($day) : null,
+            'city' => $city,
+        ]);
+    
         $filtersForm->handleRequest($request);
-
+    
+        // Construire les filtres à partir des paramètres ou du formulaire soumis
+        $filters = [
+            'date' => $day ? new \DateTime($day) : null,
+            'city' => $city,
+        ];
+    
         if ($filtersForm->isSubmitted() && $filtersForm->isValid()) {
-            $filters = $filtersForm->getData();
-            $reservations = $reservationsRepository->filterReservations($reservations, $filters);
+            // Ajouter les filtres soumis par l'utilisateur
+            $filters = array_merge($filters, $filtersForm->getData());
         }
-
+    
+        // Récupérer les réservations avec les filtres combinés
+        $reservations = $reservationsRepository->findReservationsWithGuideRatings(
+            $filters['date'] ? $filters['date']->format('Y-m-d') : null,
+            $filters['city'],
+            $filters
+        );
+    
+        // Appeler findClosestDay uniquement si aucune réservation n'est trouvée
+        $findClosestDay = null;
+        if (empty($reservations) && $day && $city) {
+            $findClosestDay = $reservationsRepository->findClosestDay($day, $city);
+        }
+    
         return $this->render('reservations/results.html.twig', [
             'filtersForm' => $filtersForm->createView(),
             'reservations' => $reservations,
+            // 'findClosestDay' => $findClosestDay,
+            'city' => $city,
         ]);
     }
 }

@@ -61,58 +61,6 @@ public function findAllWithAverageRatings(): array
         ->getResult();
 }
 
-// Recherche par ville et date
-// A supprimer ??
-public function findByFilters(?string $date, ?string $city): array
-{
-    $qb = $this->createQueryBuilder('r');
-
-    // Ajouter un filtre sur la date si elle est spécifiée
-    if ($date) {
-        $qb->andWhere('r.day = :day')
-           ->setParameter('day', $date);
-    }
-
-    // Ajouter un filtre sur la ville si elle est spécifiée
-    if ($city) {
-        $qb->join('r.city', 'c') // Joindre l'entité Cities
-           ->andWhere('c.name LIKE :city') // Filtrer sur le champ name de Cities
-           ->setParameter('city', '%' . $city . '%');
-    }
-
-    // Trier par date (optionnel)
-    $qb->orderBy('r.day', 'ASC');
-
-    return $qb->getQuery()->getResult();
-}
-
-//Recherche par ville et date - JOIN guides et reviews
-public function findReservationsWithGuideRatings(?string $day, ?string $city): array
-{
-    $qb = $this->createQueryBuilder('r')
-        ->select('r', 'AVG(rev.rate) as averageRating')
-        ->join('r.guide', 'g')
-        ->leftJoin('g.reviews', 'rev', 'WITH', 'rev.validate = true')
-        ->groupBy('r.id')
-        ->orderBy('r.day', 'ASC');
-
-    // Ajouter le filtre sur le jour
-    if ($day) {
-        $formattedDay = (new \DateTime($day))->format('Y-m-d');
-        $qb->andWhere('r.day = :day')
-            ->setParameter('day', $formattedDay);
-    }
-
-    // Ajouter le filtre sur la ville
-    if ($city) {
-        $qb->join('r.city', 'c')
-            ->andWhere('LOWER(c.name) LIKE :city')
-            ->setParameter('city', '%' . strtolower($city) . '%');
-    }
-
-    return $qb->getQuery()->getResult();
-}
-
 //Recherche reservations la plus proche superieur
 public function findNextAvailableDate(string $day): ?\DateTime
 {
@@ -127,7 +75,7 @@ public function findNextAvailableDate(string $day): ?\DateTime
     return $result ? $result->getDay() : null;
 }
 
-
+//  Recherche jour proche (avec du php)
 public function findClosestDay(\DateTime|string $day, string $cityName): ?\DateTime
 {
     // Normaliser le paramètre $day en un objet DateTime
@@ -167,34 +115,58 @@ public function findClosestDay(\DateTime|string $day, string $cityName): ?\DateT
     return $closestDate;
 }
 
-public function filterReservations(array $reservations, array $filters): array
+/**
+* - price (float) : filtre sur le prix de la résa sur un mini (float) maxi (float)
+*/
+public function findReservationsWithGuideRatings(?string $day, ?string $city, ?array $filters = null): array
 {
-    return array_filter($reservations, function ($reservationData) use ($filters) {
-        $reservation = $reservationData[0];
-        $averageRating = $reservationData['averageRating']; // La note moyenne du guide
+$qb = $this->createQueryBuilder('r')
+->select('r', 'AVG(rev.rate) as averageRating')
+->join('r.guide', 'g')
+->leftJoin('g.reviews', 'rev', 'WITH', 'rev.validate = true')
+->groupBy('r.id')
+->orderBy('r.day', 'ASC');
 
-        // Filtrer par prix maximum
-        if (!is_null($filters['price']) && $reservation->getPrice() > $filters['price']) {
-            return false;
-        }
+// Ajouter le filtre sur le jour
+if ($day) {
+$formattedDay = (new \DateTime($day))->format('Y-m-d');
+$qb->andWhere('r.day = :day')
+->setParameter('day', $formattedDay);
+}
 
-        // Filtrer par repas inclus
-        if (!is_null($filters['meal']) && $reservation->isMeal() !== $filters['meal']) {
-            return false;
-        }
+// Ajouter le filtre sur la ville
+if ($city) {
+$qb->join('r.city', 'c')
+->andWhere('LOWER(c.name) LIKE :city')
+->setParameter('city', '%' . strtolower($city) . '%');
+}
 
-        // Filtrer par note moyenne minimale
-        if (!is_null($filters['rate']) && $averageRating < $filters['rate']) {
-            return false;
-        }
 
-        // Filtrer par heure de début
-        if (!is_null($filters['begin']) && $reservation->getBegin() < $filters['begin']) {
-            return false;
-        }
+// Filtrer par prix
+if ($price = ($filters['price'] ?? null)) {
+$qb->andWhere('r.price <= :price')
+->setParameter('price', $price);
+}
 
-        return true;
-    });
+// Filtrer par repas inclus
+if (array_key_exists('meal', $filters) && $filters['meal'] !== null) {
+    $qb->andWhere('r.meal = :meal')
+       ->setParameter('meal', $filters['meal']);
+}
+
+// Filtrer par note moyenne minimale
+if ($rate = ($filters['rate'] ?? null)) {
+    $qb->andHaving('averageRating >= :rate') // Utiliser "andHaving" pour les agrégations
+       ->setParameter('rate', $rate);
+}
+
+// Filtrer par heure de début
+if ($begin = ($filters['begin'] ?? null)) {
+$qb->andWhere('r.begin <= :begin')
+->setParameter('begin', $begin);
+}
+
+return $qb->getQuery()->getResult();
 }
 
 

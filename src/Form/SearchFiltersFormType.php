@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +15,12 @@ class SearchFiltersFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('city')
+        ->add('date', DateType::class, [
+            'widget' => 'single_text',
+            'required' => true,
+            'label' => 'Date',
+        ])
         ->add('price', NumberType::class, [
             'label' => 'Prix',
             'required' => false,
@@ -28,8 +35,9 @@ class SearchFiltersFormType extends AbstractType
                 'Oui' => true,
                 'Non' => false,
             ],
-            'expanded' => true, // Rend le champ comme des boutons radio
-            'multiple' => false, // Force un seul choix
+            'expanded' => true,
+            'multiple' => false, // Un seul choix possible
+            'placeholder' => false, // Désactive l'option vide
         ])
         ->add('rate', ChoiceType::class, [
             'label' => 'Note',
@@ -49,7 +57,8 @@ class SearchFiltersFormType extends AbstractType
             'required' => false,
             'widget' => 'single_text', // Affiche un champ de saisie simple
         ]);
-    }
+        
+    }   
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -7,22 +7,29 @@
 	<main>
 		<h1 class="ms-3">Réservations</h1>
 		<section class="container">
-			<h2>Filtres</h2>
-			{{ form_start(filtersForm, { attr: { id: 'filters-form' } }) }}
-			<div>
-				{{ form_row(filtersForm.meal) }}
-			</div>
-			<div>
-				{{ form_row(filtersForm.price) }}
-			</div>
-			<div>
-				{{ form_row(filtersForm.rate) }}
-			</div>
-			<div>
-				{{ form_row(filtersForm.begin) }}
-			</div>
-			<button type="submit" class="btn btn-primary">Appliquer</button>
-			{{ form_end(filtersForm) }}
+			{% if reservations is not empty %}
+				<h2>Filtres</h2>
+				{{ form_start(filtersForm, { attr: { id: 'filters-form' } }) }}
+				<div>
+					<div>
+						{{ form_row(filtersForm.date) }}
+						{{ form_row(filtersForm.city) }}
+					</div>
+					{{ form_row(filtersForm.meal) }}
+				</div>
+				<div>
+					{{ form_row(filtersForm.price) }}
+				</div>
+				<div>
+					{{ form_row(filtersForm.rate) }}
+				</div>
+				<div>
+					{{ form_row(filtersForm.begin) }}
+				</div>
+				<button type="submit" class="btn btn-primary">Appliquer</button>
+				<a href="" class="btn btn-secondary">Réinitialiser les filtres</a>
+				{{ form_end(filtersForm) }}
+			{% endif %}
 			<h2>Les réservations disponibles</h2>
 			<div id="results">
 				{% if reservations is not empty %}
