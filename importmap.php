@@ -52,6 +52,10 @@ return [
         'path' => './assets/js/reviewStar.js',
         'entrypoint' => true,
     ],
+    'reviewWebStar' => [
+        'path' => './assets/js/reviewWebStar.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

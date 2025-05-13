@@ -21,8 +21,7 @@
 		{{ form_label(guideForm.languages, 'Langue(s) :', { 'attr': { 'class': 'form-label' } }) }}
 		{{ form_widget(guideForm.languages, {'attr': {'class': 'form-control'}}) }}
 
-		<div
-			class="form-group d-flex mt-2">
+		<div class="form-group d-flex mt-2">
 
 			<label for="{{ guideForm.smoking.vars.id }}" class="form-label mr-2">Fumeur :</label>
 
@@ -44,44 +43,11 @@
 		{{ form_end(guideForm) }}
 	</section>
 	<section class="container">
-		<h2>Gérer vos réservations</h2>
-		<h3>
-			<i class="fas fa-hourglass-half text-warning"></i>Réservations confirmée</h3>
-		<div class="row">
-			{% if reservations is not empty %}
-				{% for reservation in reservations %}
-					{% if reservation.status in ['A venir', 'En cours'] %}
-						<!-- Card reservation -->
-						{% include "cards/guide_reservation_card.html.twig" %}
-						{# Modals #}
-						<!-- Modal début réservation -->
-						{% include "modals/guide_confirm_start_modal.html.twig" %}
-						<!-- Modal fin réservation -->
-						{% include "modals/guide_confirm_end_modal.html.twig" %}
-						<!-- Modal annulation -->
-					{% include "modals/guide_cancel_modal.html.twig" %}
-				{% endif %}
-				{% endfor %}
-			{% else %}
-				<p>Vous n'avez pas encore de réservations.</p>
-			{% endif %}
-		</div>
-	</section>
-	<section class="container border-bottom border-dark pb-3">
-		<h2>
-			<i class="fas fa-check-circle text-success"></i>Réservations Terminée
-		</h2>
-		<div class="row">
-			{% for reservation in reservations %}
-				{% if reservation.status  in ['Fini', 'Confirmé', 'Vérification par la plateforme'] %}
-					<!-- Card reservation -->
-					{% include "cards/guide_reservation_card.html.twig" %}
-				{% endif %}
-			{% endfor %}
-		</div>
+		<h2>Vos réservations</h2>
+		<a href="{{ path('app_guide_reservations_index') }}" class="text-primary">Vos réservations</a>
 	</section>
 	<section class="container">
-	<h2>Vos avis</h2>
+		<h2>Vos avis</h2>
 		<a href="{{ path('app_guide_reviews_index') }}" class="text-primary">Voir vos avis</a>
 	</section>
 {% endblock %}

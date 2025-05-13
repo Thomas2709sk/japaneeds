@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos réservations
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="ms-3 pb-3 border-bottom border-dark">Vos réservations Guide</h1>
+	<section class="container">
+		<h2>
+			<i class="fas fa-hourglass-half text-warning"></i>Réservations confirmée</h2>
+		<div class="row">
+			{% if reservations is not empty %}
+				{% for reservation in reservations %}
+					{% if reservation.status in ['A venir', 'En cours'] %}
+						<!-- Card reservation -->
+						{% include "cards/guide_reservation_card.html.twig" %}
+						{# Modals #}
+						<!-- Modal début réservation -->
+						{% include "modals/guide_confirm_start_modal.html.twig" %}
+						<!-- Modal fin réservation -->
+						{% include "modals/guide_confirm_end_modal.html.twig" %}
+						<!-- Modal annulation -->
+					{% include "modals/guide_cancel_modal.html.twig" %}
+				{% endif %}
+				{% endfor %}
+			{% else %}
+				<p>Vous n'avez pas encore de réservations.</p>
+			{% endif %}
+		</div>
+	</section>
+	<section class="container border-bottom border-dark pb-3">
+		<h2>
+			<i class="fas fa-check-circle text-success"></i>Réservations Terminée
+		</h2>
+		<div class="row">
+			{% for reservation in reservations %}
+				{% if reservation.status  in ['Fini', 'Confirmé', 'Vérification par la plateforme'] %}
+					<!-- Card reservation -->
+					<div class="col-lg-4 col-md-6 mb-3">
+						<div class="card h-100 shadow-sm">
+							<div class="card-header bg-primary bg-gradient text-white text-center">
+								<h5 class="mb-0">Réservation N°
+									{{ reservation.reservnumber }}</h5>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<i class="fas fa-calendar-alt text-primary"></i>
+									<strong>Date :</strong>
+									{{ reservation.day|date('d/m/Y') }}
+								</li>
+								<li class="list-group-item list-group-item-primary">
+									<i class="fas fa-clock text-success"></i>
+									<strong>Début :</strong>
+									{{ reservation.begin|date('H:i') }}
+									<strong>Fin :</strong>
+									{{ reservation.end|date('H:i') }}
+								</li>
+								<li class="list-group-item">
+									<i class="fas fa-map-marker-alt text-danger"></i>
+									<strong>Ville :</strong>
+									{{ reservation.city.name }}
+								</li>
+								<li class="list-group-item list-group-item-primary">
+									<i class="fas fa-coins text-warning"></i>
+									<strong>Prix :</strong>
+									{{ reservation.price }}
+									Crédits
+								</li>
+								<li class="list-group-item">
+									<i class="fas fa-users text-info"></i>
+									<strong>Voyageur(s) :</strong>
+									<ul class="list-group mt-2">
+										{% if reservation.users|length > 0 %}
+											{% for user in reservation.users %}
+												<li class="list-group-item d-flex align-items-center">
+													<i class="fas fa-user-circle text-primary me-2"></i>
+													<span>{{ user.pseudo }}</span>
+												</li>
+											{% endfor %}
+										{% else %}
+											<li class="list-group-item">Aucune réservation</li>
+										{% endif %}
+									</ul>
+								</li>
+							</ul>
+							<div class="card-footer d-flex justify-content-between align-items-center">
+								<span class="fs-6 badge bg-{{ reservation.status == 'A venir' ? 'warning' : reservation.status == 'En cours' ? 'primary' : 'success' }}">
+									{{ reservation.status }}
+								</span>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			<!-- Pagination -->
+			<nav aria-label="Page navigation">
+				<ul class="pagination justify-content-center mt-4">
+					{% for i in 1..total_pages %}
+						<li class="page-item {{ i == current_page ? 'active' : '' }}">
+							<a class="page-link" href="{{ path('app_guide_reservations_index', { page: i }) }}">{{ i }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</nav>
+		</div>
+	</section>
+{% endblock %}

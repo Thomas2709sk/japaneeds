@@ -3,13 +3,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}Japaneeds you !
 			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% block stylesheets %}
+
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+			<link rel="stylesheet" href="{{ asset('styles/css/app.css') }}">
 		{% endblock %}
 		{% block javascripts %}
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
@@ -21,8 +23,8 @@
 	<body>
 		<header class="p-3 mb-3 border-bottom bg-primary">
 			<nav class="navbar navbar-expand-lg bg-primary">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="{{path('index') }}">
+				<div class="container-fluid ">
+					<a class="navbar-brand text-white" href="{{path('index') }}">
 						<img src="{{ asset('assets/images/favicon.png') }}" class="me-2" alt="logo du site">Japaneeds you</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
@@ -30,21 +32,21 @@
 					<div class="collapse navbar-collapse" id="navbarNavDropdown">
 						<ul class="navbar-nav">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="{{path('index') }}">Accueil</a>
+								<a class="nav-link active text-white" aria-current="page" href="{{path('index') }}">Accueil</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_reservations_index') }}">Réservations</a>
+								<a class="nav-link text-white" href="{{path('app_reservations_index') }}">Réservations</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_reservations_search') }}">Recherche</a>
+								<a class="nav-link text-white" href="{{path('app_reservations_search') }}">Recherche</a>
 							</li>
 							{% if app.user and app.user.getGuide() is not null %}
 								<li class="nav-item">
-									<a class="nav-link" href="{{path('app_guide_reservations_add') }}">Créer réservation</a>
+									<a class="nav-link text-white" href="{{path('app_guide_reservations_add') }}">Créer réservation</a>
 								</li>
 							{% endif %}
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Dropdown link
 								</a>
 								<ul class="dropdown-menu">
@@ -61,16 +63,16 @@
 							</li>
 							{% if is_granted('ROLE_ADMIN') %}
 								<li class="nav-item">
-									<a class="nav-link" href="{{ path('admin_index') }}">Administrattion</a>
+									<a class="nav-link text-white" href="{{ path('admin_index') }}">Administrattion</a>
 								</li>
 							{% elseif is_granted('ROLE_STAFF') %}
 								<li>
-									<a class="nav-link" href="{{ path('app_admin_reviews_index') }}">Avis à valider</a>
+									<a class="nav-link text-white" href="{{ path('app_admin_reviews_index') }}">Avis à valider</a>
 								</li>
 							{% endif %}
 						</ul>
-						<div class="dropdown text-end ms-auto">
-							<a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<div class="dropdown text-end ms-auto ">
+							<a href="#" class="d-flex text-white align-items-center link-body-emphasis text-decoration-none dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								{% if app.user %}
 									<div class="user-profile d-flex align-items-center">
 										{% if app.user.picture %}
@@ -87,7 +89,7 @@
 
 								{% endif %}
 							</a>
-							<ul class="dropdown-menu dropdown-menu-lg-end text-small" aria-labelledby="userDropdown">
+							<ul class="dropdown-menu  dropdown-menu-lg-end text-small" aria-labelledby="userDropdown">
 								{% if not app.user %}
 									<li>
 										<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
@@ -115,13 +117,63 @@
 
 				{% block body %}{% endblock %}
 
-				<footer>
-					<section>
-						<img src="" alt="">
-					</section>
-					<section>
-						<a href="">Mentions</a>
-					</section>
+				<footer class="mt-5">
+					<div class="container-fluid bg-primary">
+						<div class="py-3">
+							<ul class="nav justify-content-center border-bottom fs-5 align-items-center pb-3 mb-3">
+								<li class="nav-item">
+									<a href="#" class="nav-link px-2 text-white">Accueil</a>
+								</li>
+								<li class="nav-item text-white">
+									<a class=" px-2" href="{{ path('app_reviews_index') }}">Votre avis</a>
+								</li>
+								<li class="nav-item text-white">
+									<a class=" px-2" href="{{ path('app_rgpd_index') }}">Mentions légales</a>
+								</li>
+								<li class="nav-item ">
+									<a href="#" class="nav-link px-2 text-light">FAQ</a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link px-2 text-light">A propos</a>
+								</li>
+								<li class="nav-item">
+									<a href="https://www.instagram.com/thomsao/" target="_blank" class="nav-link">
+										<svg width="40px" height="40px" viewbox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+											<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+											<g id="SVGRepo_iconCarrier">
+												<rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint0_radial_87_7153)"></rect>
+												<rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint1_radial_87_7153)"></rect>
+												<rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint2_radial_87_7153)"></rect>
+												<path d="M23 10.5C23 11.3284 22.3284 12 21.5 12C20.6716 12 20 11.3284 20 10.5C20 9.67157 20.6716 9 21.5 9C22.3284 9 23 9.67157 23 10.5Z" fill="white"></path>
+												<path fill-rule="evenodd" clip-rule="evenodd" d="M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21ZM16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19Z" fill="white"></path>
+												<path fill-rule="evenodd" clip-rule="evenodd" d="M6 15.6C6 12.2397 6 10.5595 6.65396 9.27606C7.2292 8.14708 8.14708 7.2292 9.27606 6.65396C10.5595 6 12.2397 6 15.6 6H16.4C19.7603 6 21.4405 6 22.7239 6.65396C23.8529 7.2292 24.7708 8.14708 25.346 9.27606C26 10.5595 26 12.2397 26 15.6V16.4C26 19.7603 26 21.4405 25.346 22.7239C24.7708 23.8529 23.8529 24.7708 22.7239 25.346C21.4405 26 19.7603 26 16.4 26H15.6C12.2397 26 10.5595 26 9.27606 25.346C8.14708 24.7708 7.2292 23.8529 6.65396 22.7239C6 21.4405 6 19.7603 6 16.4V15.6ZM15.6 8H16.4C18.1132 8 19.2777 8.00156 20.1779 8.0751C21.0548 8.14674 21.5032 8.27659 21.816 8.43597C22.5686 8.81947 23.1805 9.43139 23.564 10.184C23.7234 10.4968 23.8533 10.9452 23.9249 11.8221C23.9984 12.7223 24 13.8868 24 15.6V16.4C24 18.1132 23.9984 19.2777 23.9249 20.1779C23.8533 21.0548 23.7234 21.5032 23.564 21.816C23.1805 22.5686 22.5686 23.1805 21.816 23.564C21.5032 23.7234 21.0548 23.8533 20.1779 23.9249C19.2777 23.9984 18.1132 24 16.4 24H15.6C13.8868 24 12.7223 23.9984 11.8221 23.9249C10.9452 23.8533 10.4968 23.7234 10.184 23.564C9.43139 23.1805 8.81947 22.5686 8.43597 21.816C8.27659 21.5032 8.14674 21.0548 8.0751 20.1779C8.00156 19.2777 8 18.1132 8 16.4V15.6C8 13.8868 8.00156 12.7223 8.0751 11.8221C8.14674 10.9452 8.27659 10.4968 8.43597 10.184C8.81947 9.43139 9.43139 8.81947 10.184 8.43597C10.4968 8.27659 10.9452 8.14674 11.8221 8.0751C12.7223 8.00156 13.8868 8 15.6 8Z" fill="white"></path>
+												<defs>
+													<radialGradient id="paint0_radial_87_7153" cx="0" cy="0" r="1" gradientunits="userSpaceOnUse" gradienttransform="translate(12 23) rotate(-55.3758) scale(25.5196)">
+														<stop stop-color="#B13589"></stop>
+														<stop offset="0.79309" stop-color="#C62F94"></stop>
+														<stop offset="1" stop-color="#8A3AC8"></stop>
+													</radialGradient>
+													<radialGradient id="paint1_radial_87_7153" cx="0" cy="0" r="1" gradientunits="userSpaceOnUse" gradienttransform="translate(11 31) rotate(-65.1363) scale(22.5942)">
+														<stop stop-color="#E0E8B7"></stop>
+														<stop offset="0.444662" stop-color="#FB8A2E"></stop>
+														<stop offset="0.71474" stop-color="#E2425C"></stop>
+														<stop offset="1" stop-color="#E2425C" stop-opacity="0"></stop>
+													</radialGradient>
+													<radialGradient id="paint2_radial_87_7153" cx="0" cy="0" r="1" gradientunits="userSpaceOnUse" gradienttransform="translate(0.500002 3) rotate(-8.1301) scale(38.8909 8.31836)">
+														<stop offset="0.156701" stop-color="#406ADC"></stop>
+														<stop offset="0.467799" stop-color="#6A45BE"></stop>
+														<stop offset="1" stop-color="#6A45BE" stop-opacity="0"></stop>
+													</radialGradient>
+												</defs>
+											</g>
+										</svg>
+									</a>
+								</li>
+							</ul>
+							<p class="text-center text-light">© 2025 Japaneeds You, Thomas N</p>
+						</div>
+					</div>
 				</footer>
 
 			</body>

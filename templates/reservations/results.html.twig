@@ -9,7 +9,7 @@
 		<section class="container">
 			{% if reservations is not empty %}
 				<h2>Filtres</h2>
-				{{ form_start(filtersForm, { attr: { id: 'filters-form' } }) }}
+{{ form_start(filtersForm, {'method': 'get', 'attr': {'class': 'filter-form'}}) }}
 				<div>
 					<div>
 						{{ form_row(filtersForm.date) }}

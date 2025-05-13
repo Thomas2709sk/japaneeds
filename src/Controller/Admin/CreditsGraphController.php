@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Users;
 use App\Repository\ReservationsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -12,11 +13,22 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/credits/graph', name: 'app_admin_credits_graph_')]
 class CreditsGraphController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(): Response
-    {
-        return $this->render('admin/credits_graph/index.html.twig', []);
+    
+#[Route('/', name: 'index')]
+public function index(Security $security): Response
+{
+    $admin = $security->getUser();
+
+    if ($admin instanceof Users && in_array('ROLE_ADMIN', $admin->getRoles())) {
+        $credits = $admin->getCredits();
+    } else {
+        $credits = 0;
     }
+
+    return $this->render('admin/credits_graph/index.html.twig', [
+        'credits_total' => $credits,
+    ]);
+}
 
     #[Route('/credits', name: 'credits', methods: ['GET'])]
     public function getCreditsData(

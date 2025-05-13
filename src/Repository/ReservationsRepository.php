@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Guides;
 use App\Entity\Reservations;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -186,6 +188,29 @@ public function findClosestAvailableDate(string $day): ?\DateTime
         ->getOneOrNullResult();
 
     return $result ? $result['day'] : null;
+}
+
+public function getAllPaginated(Guides $guide, int $page = 1, int $limit = 4): array
+{
+    $offset = ($page - 1) * $limit;
+
+    $query = $this->createQueryBuilder('r')
+        ->select('DISTINCT r') // Éviter les doublons
+        ->where('r.guide = :guide')
+        ->setParameter('guide', $guide)
+        ->orderBy('r.id', 'DESC')
+        ->setFirstResult($offset)
+        ->setMaxResults($limit);
+
+    $paginator = new Paginator($query, true); // Active le mode fetchJoin pour gérer les relations
+
+    $data = $paginator->getQuery()->getResult();
+
+    return [
+        'reservations' => $data,
+        'pages' => ceil($paginator->count() / $limit), // Nombre total de pages
+        'current' => $page, // Page actuelle
+    ];
 }
 
 

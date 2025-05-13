@@ -29,7 +29,7 @@ class ReservationsController extends AbstractController
     ): Response {
 
         // Récupérez les utilisateurs (guides)
-        $users = $usersRepository->findBy([], null, 3);
+        $users = $usersRepository->findBy([], null, 4);
 
         // Récupérez toutes les réservations
         $reservationsWithRatings = $reservationsRepository->findAllWithAverageRatings();
@@ -326,7 +326,7 @@ class ReservationsController extends AbstractController
         return $this->render('reservations/results.html.twig', [
             'filtersForm' => $filtersForm->createView(),
             'reservations' => $reservations,
-            // 'findClosestDay' => $findClosestDay,
+            'findClosestDay' => $findClosestDay,
             'city' => $city,
         ]);
     }

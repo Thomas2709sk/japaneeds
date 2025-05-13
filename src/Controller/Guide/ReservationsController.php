@@ -2,10 +2,13 @@
 
 namespace App\Controller\Guide;
 
+use App\Entity\Guides;
 use App\Entity\Reservations;
+use App\Entity\Users;
 use App\Form\AddReservationFormType;
 use App\Repository\GuidesRepository;
 use App\Repository\CitiesRepository;
+use App\Repository\ReservationsRepository;
 use App\Security\Voter\ReservationsVoter;
 use App\Service\SendEmailService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +21,37 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 #[Route('/guide/reservations', name: 'app_guide_reservations_')]
 class ReservationsController extends AbstractController
 {
-    #[Route('/', name: 'add')]
+
+    #[Route('/', name: 'index')]
+    public function index(Request $request, EntityManagerInterface $em, ReservationsRepository $reservationsRepository): Response
+    {
+        // Récupérer l'utilisateur actuellement connecté
+        $user = $this->getUser();
+
+        // Vérifie si l'utilisateur est bien une instance de Users
+        if (!$user instanceof Users) {
+            throw new \LogicException('The user is not of type Users.');
+        }
+
+        // Récupérer l'entité Guide associée à l'utilisateur connecté
+        $guide = $em->getRepository(Guides::class)->findOneBy(['user' => $user]);
+
+        // On récupère le numéro de page
+        $page = $request->query->get('page', 1);
+
+
+         // Récupérer les réservations paginées associées au guide
+    $pagination = $reservationsRepository->getAllPaginated($guide, $page);
+
+    // Retourner la vue avec les données paginées
+    return $this->render('guide/reservations/index.html.twig', [
+        'reservations' => $pagination['reservations'],
+        'current_page' => $pagination['current'],
+        'total_pages' => $pagination['pages'],
+    ]);
+    }
+
+    #[Route('/add', name: 'add')]
     public function addReservation(Request $request, EntityManagerInterface $em, GuidesRepository $guidesRepository, CitiesRepository $citiesRepository): Response
     {
         // Récupérer l'utilisateur actuellement connecté

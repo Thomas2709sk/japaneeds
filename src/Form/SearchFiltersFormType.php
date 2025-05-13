@@ -34,10 +34,11 @@ class SearchFiltersFormType extends AbstractType
             'choices' => [
                 'Oui' => true,
                 'Non' => false,
+                'Non spécifié' => null,
             ],
             'expanded' => true,
-            'multiple' => false, // Un seul choix possible
-            'placeholder' => false, // Désactive l'option vide
+            'multiple' => false,
+            'placeholder' => false,
         ])
         ->add('rate', ChoiceType::class, [
             'label' => 'Note',
@@ -63,7 +64,8 @@ class SearchFiltersFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-             'method' => 'GET'
+             'method' => 'GET',
+             'csrf_protection' => false,
             // Configure your form options here
         ]);
     }

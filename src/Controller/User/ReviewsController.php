@@ -54,7 +54,7 @@ class ReviewsController extends AbstractController
         ]);
         if ($existingReview) {
             $this->addFlash('error', 'Vous avez déjà laissé un avis pour cette réservation.');
-            return $this->redirectToRoute('app_user_account_index');
+            return $this->redirectToRoute('app_user_reservations_index');
         }
 
         // Créer un nouvel avis

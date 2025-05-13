@@ -51,6 +51,8 @@ class SearchReservationsFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'method' => 'GET', 
+            'csrf_protection' => false, 
             // Configure your form options here
         ]);
     }
