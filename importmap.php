@@ -16,6 +16,14 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    'time' => [
+        'path' => './assets/js/time.js',
+        'entrypoint' => true,
+    ],
+    'weather' => [
+        'path' => './assets/js/weather.js',
+        'entrypoint' => true,
+    ],
     'register' => [
         'path' => './assets/js/register.js',
         'entrypoint' => true,

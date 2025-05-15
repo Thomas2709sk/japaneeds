@@ -13,7 +13,10 @@ services:
     image: mongo:6.0
     container_name: mongodb
     ports:
-      - "27017:27017"
+      - "8090:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: thomas
+      MONGO_INITDB_ROOT_PASSWORD: japan
     volumes:
       - mongodb_data:/data/db
 

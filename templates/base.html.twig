@@ -9,6 +9,7 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% block stylesheets %}
+			<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
 
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 			<link rel="stylesheet" href="{{ asset('styles/css/app.css') }}">
@@ -21,6 +22,7 @@
 		{% endblock %}
 	</head>
 	<body>
+		{% block header %}
 		<header class="p-3 mb-3 border-bottom bg-primary">
 			<nav class="navbar navbar-expand-lg bg-primary">
 				<div class="container-fluid ">
@@ -84,7 +86,7 @@
 											{{ app.user.pseudo }}!</span>
 									</div>
 								{% else %}
-									<!-- Affichage de l'icône quand l'utilisateur n'est pas connecté -->
+									
 									<i class="fa fa-user-circle" style="font-size: 1.5em;"></i>
 
 								{% endif %}
@@ -112,12 +114,13 @@
 						</div>
 					</nav>
 				</header>
+		{% endblock %}
 
 				{% include "flash_messages.html.twig" %}
 
 				{% block body %}{% endblock %}
 
-				<footer class="mt-5">
+				<footer class="">
 					<div class="container-fluid bg-primary">
 						<div class="py-3">
 							<ul class="nav justify-content-center border-bottom fs-5 align-items-center pb-3 mb-3">
@@ -175,7 +178,6 @@
 						</div>
 					</div>
 				</footer>
-
 			</body>
 		</html>
 	</body>
