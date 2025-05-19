@@ -1,0 +1,14 @@
+// Page reservations
+
+// images
+.custom-img {
+    height: 600px;
+    object-fit: cover;
+}
+
+@media(max-width: 768px) {
+    .custom-img {
+        height: auto;
+        max-height: 300px;
+    }
+}
