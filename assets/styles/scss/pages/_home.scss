@@ -1,0 +1,41 @@
+// Home Page
+
+.weather-icon {
+   background-color: #53a0ec;
+   border-radius: 50%;
+   padding: 10px;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+   display: inline-block;
+}
+
+.review-section {
+
+   background-image: url('/assets/images/kansai3.jpg');
+   background-size: cover;
+   color: white;
+   min-height: 25rem;
+}
+
+.exp-section {
+
+   background-image: url('/assets/images/exp.jpg');
+   background-size: cover;
+   background-position: center;
+   color: white;
+   min-height: 25rem;
+   filter: brightness(0.9);
+   position: relative;
+}
+
+.presentation-box {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   margin: 0 auto;
+   background: rgba(255, 255, 255, 0.1);
+   backdrop-filter: blur(4px);
+   border-radius: 16px;
+   padding: 30px;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}

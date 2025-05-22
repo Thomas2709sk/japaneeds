@@ -1,0 +1,96 @@
+// Login Page
+
+/* Fond animé coucher de soleil */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(180deg,
+            #1e2a78 0%,
+            #1e2a78 18%,
+            #77B5FE 40%,
+            #ffd27e 55%,
+            #ffb88c 65%,
+            #ff9966 75%,
+            #ffa07a 85%,
+            #ff5e62 100%);
+    background-size: 100% 250%;
+    animation: sunset-gradient 10s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes sunset-gradient {
+    0% {
+        background-position: 0 100%;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* Login card styles */
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    backdrop-filter: blur(6px);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 450px;
+}
+
+.brand-text {
+    font-size: 2.1rem;
+    font-weight: 700;
+    word-break: break-word;
+    text-align: center;
+    line-height: 1.05;
+}
+
+/* Japanese text */
+.japanese-text {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* Form fields */
+.form-control {
+    border: 1px solid #ddd;
+    padding: 0.65rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #003049;
+}
+
+.input-group-text {
+    border: 1px solid #ddd;
+    background: transparent;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: #003049;
+}
+
+/* Button */
+.btn-primary {
+    background: linear-gradient(45deg, #003049, #77B5FE);
+    border: none;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #77B5FE, #003049);
+    box-shadow: 0 3px 12px rgba(255, 75, 75, 0.17);
+}
+
+.a-link {
+    color: #FAB12F;
+}

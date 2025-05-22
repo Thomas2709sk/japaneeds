@@ -24,9 +24,26 @@ class ReservationsController extends AbstractController
 
     #[Route('/', name: 'index')]
     public function index(
+        Request $request,
         ReservationsRepository $reservationsRepository,
         UsersRepository $usersRepository
     ): Response {
+        
+         // Créer le formulaire
+        $form = $this->createForm(SearchReservationsFormType::class);
+
+        // Traiter la requête
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData(); // Récupérer les données du formulaire
+
+            // Rediriger vers la page des résultats avec les paramètres dans l'URL
+            return $this->redirectToRoute('app_reservations_results', [
+                'day' => $data['date'] ? $data['date']->format('Y-m-d') : null,
+                'city' => $data['city'],
+            ]);
+        }
 
         // Récupérez les utilisateurs (guides)
         $users = $usersRepository->findBy([], null, 4);
@@ -37,6 +54,7 @@ class ReservationsController extends AbstractController
         return $this->render(
             'reservations/index.html.twig',
             [
+                'form' => $form->createView(),
                 'reservationsWithRatings' => $reservationsWithRatings,
                 'users' => $users,
             ]

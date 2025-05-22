@@ -1,0 +1,73 @@
+// Form page reservations
+  .form-bandeau {
+    background: #F6F1EB;
+    border: 3px solid #003049;
+    border-radius: 1.5rem;
+    padding: 3rem 3.5rem;
+    max-width: 600px;
+    box-shadow: 0 8px 15px rgb(0 48 73 / 0.15);
+    position: relative;
+  }
+
+
+  .form-bandeau::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      repeating-linear-gradient(60deg, #e5e5e5 0, #e5e5e5 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(-60deg, #e5e5e5 0, #e5e5e5 1px, transparent 1px, transparent 20px);
+    opacity: 0.15;
+    pointer-events: none;
+    border-radius: 1.5rem;
+    z-index: 0;
+  }
+
+
+  .form-bandeau input.form-control {
+    position: relative;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #003049;
+    border-radius: 0;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+    color: #003049;
+    transition: border-color 0.3s ease;
+    z-index: 1;
+  }
+
+  .form-bandeau input.form-control::placeholder {
+    color: #a0a0a0;
+    font-style: italic;
+  }
+
+  .form-bandeau input.form-control:focus {
+    outline: none;
+    border-color: #FAB12F;
+    box-shadow: 0 2px 8px #FAB12F66;
+  }
+
+  /* Bouton */
+  .btn-carte {
+    display: block;
+    width: 100%;
+    background-color: #003049;
+    color: #F6F1EB;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.9rem 0;
+    font-weight: 700;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 48, 73, 0.3);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 1.5rem;
+  }
+
+  .btn-carte:hover {
+    background-color: #FAB12F;
+    color: #003049;
+    box-shadow: 0 8px 20px rgba(250, 177, 47, 0.6);
+  }
+

@@ -1,15 +1,24 @@
+//  Custom
 @import "./scss/_variables";
+
+// Bootstrap
+@import "../../vendor/twbs/bootstrap/scss/bootstrap";
+
+// Pages
+@import "./scss/pages/_home";
+@import "./scss/pages/_reservations";
+@import "./scss/pages/_login";
 
 
 // Components
+@import "./scss/components/_reserv-form";
 @import "./scss/components/_hero-header";
 @import "./scss/components/_hero";
 @import "./scss/components/_guide-card";
 
-// Pages
-@import "./scss/pages/reservations";
 
-@import "../../vendor/twbs/bootstrap/scss/bootstrap";
+// Layout
+@import "./scss/layout/_flux";
 
 // Mixins personnalisés
 @import "./scss/_mixins";
@@ -17,51 +26,6 @@
 .h-style {
    font-family: 'Libre Baskerville', serif;
 }
-
-// Page reservations
-
-// images
-.custom-img {
-   height: 600px;
-   object-fit: cover;
-}
-
-/* Titre sur l'image */
-.image-title {
-   position: absolute;
-   font-family: 'Libre Baskerville', serif;
-   bottom: 10%;
-   /* Place le titre en bas de l'image */
-   left: 50%;
-   transform: translateX(-50%);
-   /* Centre horizontalement */
-   background-color: rgba(0, 0, 0, 0.6);
-   /* Fond semi-transparent */
-   color: white;
-   /* Texte en blanc */
-   padding: 5px 10px;
-   border-radius: 5px;
-   font-size: 1.2rem;
-   font-weight: bold;
-   text-align: center;
-   z-index: 3;
-}
-
-@media(max-width: 768px) {
-   .custom-img {
-      height: auto;
-      max-height: 300px;
-   }
-}
-
-.instagram-media {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-
 
 .navbar {
    background-color: white;
@@ -90,6 +54,7 @@
    display: none;
 }
 
+// reset
 a {
    text-decoration: none;
    color: inherit;
@@ -101,61 +66,14 @@ canvas {
 
 }
 
+// Page creer reserv
 /* Masquer la div lorsqu'elle est vide */
 .autocomplete-suggestions:empty {
    display: none;
 }
 
 
-
-.review-section {
-
-   background-image: url('/assets/images/kansai3.jpg');
-   background-size: cover;
-   color: white;
-   min-height: 25rem;
-}
-
-.exp-section {
-
-   background-image: url('/assets/images/exp.jpg');
-   background-size: cover;
-   background-position: center;
-   color: white;
-   min-height: 25rem;
-   filter: brightness(0.9);
-   position: relative;
-}
-
-.presentation-box {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   margin: 0 auto;
-   background: rgba(255, 255, 255, 0.1);
-   backdrop-filter: blur(4px);
-   border-radius: 16px;
-   padding: 30px;
-   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-
-
-.flux {
-   max-width: 1100px;
-   margin-left: auto;
-   margin-right: auto;
-}
-
 .title {
    text-shadow: 2px 2px 8px black;
 }
 
-.weather-icon {
-   background-color: #53a0ec;
-   border-radius: 50%;
-   padding: 10px;
-   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-   display: inline-block;
-}

@@ -1,6 +1,6 @@
 @use "../_mixins" as mixins;
 
 .hero_reserv{
-    @include mixins.bigtitle($url: '/assets/images/hero.jpg');
+    @include mixins.bigtitle($url: '/assets/images/reservations.jpg');
     background-position: center;
 }

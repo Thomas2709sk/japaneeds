@@ -2,13 +2,69 @@
 
 // images
 .custom-img {
-    height: 600px;
-    object-fit: cover;
+   height: 600px;
+   object-fit: cover;
+}
+
+/* Titre sur l'image */
+.image-title {
+   position: absolute;
+   font-family: 'Libre Baskerville', serif;
+   bottom: 10%;
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: rgba(0, 0, 0, 0.6);
+   color: white;
+   padding: 5px 10px;
+   border-radius: 5px;
+   font-size: 1.2rem;
+   font-weight: bold;
+   text-align: center;
+   z-index: 3;
 }
 
 @media(max-width: 768px) {
-    .custom-img {
-        height: auto;
-        max-height: 300px;
-    }
+   .custom-img {
+      height: auto;
+      max-height: 300px;
+   }
+}
+
+.instagram-media {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.inner-bordered {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner-bordered::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.inner-bordered-small {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner-bordered-small::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 2px solid #003049;
+  pointer-events: none;
 }
