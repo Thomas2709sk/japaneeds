@@ -11855,6 +11855,36 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.form-bg {
+  background: url("/assets/images/shibu.jpg") center/cover no-repeat;
+  position: relative;
+}
+
+.form-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  filter: brightness(0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.form-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
+.autocomplete-suggestions {
+  background: #fff;
+  color: black;
+  z-index: 3;
+}
+
+.autocomplete-suggestions:empty {
+  display: none;
+}
+
 .weather-icon {
   background-color: #53a0ec;
   border-radius: 50%;
@@ -11960,7 +11990,7 @@ textarea.form-control-lg {
   pointer-events: none;
 }
 
-/* Fond animé coucher de soleil */
+/* Fond animé */
 .animated-bg {
   position: fixed;
   top: 0;
@@ -12030,13 +12060,14 @@ textarea.form-control-lg {
 }
 
 /* Button */
-.btn-primary {
+.btn-login {
   background: linear-gradient(45deg, #003049, #77B5FE);
   border: none;
   font-weight: 600;
+  color: white;
 }
 
-.btn-primary:hover {
+.btn-login:hover {
   background: linear-gradient(45deg, #77B5FE, #003049);
   box-shadow: 0 3px 12px rgba(255, 75, 75, 0.17);
 }
@@ -12050,7 +12081,7 @@ textarea.form-control-lg {
   border: 3px solid #003049;
   border-radius: 1.5rem;
   padding: 3rem 3.5rem;
-  max-width: 600px;
+  max-width: 800px;
   box-shadow: 0 8px 15px rgba(0, 48, 73, 0.15);
   position: relative;
 }
@@ -12219,6 +12250,22 @@ textarea.form-control-lg {
   margin-right: auto;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
 .h-style {
   font-family: "Libre Baskerville", serif;
 }
@@ -12253,11 +12300,6 @@ a {
 canvas {
   width: 100% !important;
   height: auto !important;
-}
-
-/* Masquer la div lorsqu'elle est vide */
-.autocomplete-suggestions:empty {
-  display: none;
 }
 
 .title {

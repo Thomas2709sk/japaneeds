@@ -22,7 +22,7 @@ class ReviewsController extends AbstractController
         ]);
     }
 
-    #[Route('/create/{reservationId}', name: 'create', methods: ['GET', 'POST'])]
+    #[Route('/create/{reservationId}', name: 'create', methods: ['POST'])]
     public function create(
         int $reservationId,
         Request $request,

@@ -5,6 +5,7 @@
 @import "../../vendor/twbs/bootstrap/scss/bootstrap";
 
 // Pages
+@import "./scss/pages/_create-reserv";
 @import "./scss/pages/_home";
 @import "./scss/pages/_reservations";
 @import "./scss/pages/_login";
@@ -22,6 +23,22 @@
 
 // Mixins personnalisés
 @import "./scss/_mixins";
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex: 1;
+}
 
 .h-style {
    font-family: 'Libre Baskerville', serif;
@@ -64,12 +81,6 @@ canvas {
    width: 100% !important;
    height: auto !important;
 
-}
-
-// Page creer reserv
-/* Masquer la div lorsqu'elle est vide */
-.autocomplete-suggestions:empty {
-   display: none;
 }
 
 

@@ -1,6 +1,6 @@
 // Login Page
 
-/* Fond animé coucher de soleil */
+/* Fond animé */
 .animated-bg {
     position: fixed;
     top: 0;
@@ -80,13 +80,14 @@
 }
 
 /* Button */
-.btn-primary {
+.btn-login {
     background: linear-gradient(45deg, #003049, #77B5FE);
     border: none;
     font-weight: 600;
+    color: white;
 }
 
-.btn-primary:hover {
+.btn-login:hover {
     background: linear-gradient(45deg, #77B5FE, #003049);
     box-shadow: 0 3px 12px rgba(255, 75, 75, 0.17);
 }

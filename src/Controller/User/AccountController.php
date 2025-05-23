@@ -77,13 +77,9 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('app_user_account_index');
         }
 
-         // Récupérer les réservations de l'utilisateur
-         $reservations = $user->getReservations();
-
 
         return $this->render('user/account/index.html.twig', [
             'accountForm' => $accountForm->createView(),
-            'reservations' => $reservations,
         ]);
     }
 }

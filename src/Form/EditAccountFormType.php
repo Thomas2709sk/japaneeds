@@ -28,7 +28,7 @@ class EditAccountFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
-        $user = $options['data'];  // L'utilisateur passé à la vue
+        $user = $options['data'];
         // Vérifier si l'utilisateur est déjà un guide dans la table Guides
         $isGuide = $this->em->getRepository(Guides::class)->findOneBy(['user' => $user]) !== null;
 
@@ -45,28 +45,18 @@ class EditAccountFormType extends AbstractType
                         'accept' => 'image/png, image/jpeg, image/webp'       
                 ]
             ])
-            // ->add('becomeGuide', CheckboxType::class, [
-            //     'label' => 'Devenir un guide',
-            //     'mapped' => false,
-            //     'required' => false,
-            // ]);
+
             ->add('role', ChoiceType::class, [
                 'choices' => [
                     'Voyageur' => 'voyageur',
                     'Guide' => 'guide',
                 ],
                 'label' => 'Rôle',
-                'mapped' => false,// Ne pas mapper directement à l'entité Users
+                'mapped' => false,
                  // Pré-sélectionner 'guide' si l'utilisateur est un guide
-                 'data' => $isGuide ? 'guide' : 'voyageur',  // Si l'utilisateur est un guide, on sélectionne "guide"
+                 'data' => $isGuide ? 'guide' : 'voyageur',
             ]);
           
-    
-            // ->add('reservations', EntityType::class, [
-            //     'class' => Reservations::class,
-            //     'choice_label' => 'id',
-            //     'multiple' => true,
-            // ])
         ;
     }
 

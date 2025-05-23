@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Entity\Reservations;
-use App\Entity\Reviews;
-use App\Form\ReviewsGuideFormType;
 use App\Form\SearchFiltersFormType;
 use App\Form\SearchReservationsFormType;
 use App\Repository\ReservationsRepository;
@@ -25,7 +23,6 @@ class ReservationsController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(
         Request $request,
-        ReservationsRepository $reservationsRepository,
         UsersRepository $usersRepository
     ): Response {
         
@@ -48,15 +45,15 @@ class ReservationsController extends AbstractController
         // Récupérez les utilisateurs (guides)
         $users = $usersRepository->findBy([], null, 4);
 
-        // Récupérez toutes les réservations
-        $reservationsWithRatings = $reservationsRepository->findAllWithAverageRatings();
+        // // Récupérez toutes les réservations
+        // $reservationsWithRatings = $reservationsRepository->findAllWithAverageRatings();
 
         return $this->render(
             'reservations/index.html.twig',
             [
                 'form' => $form->createView(),
-                'reservationsWithRatings' => $reservationsWithRatings,
                 'users' => $users,
+                // 'reservationsWithRatings' => $reservationsWithRatings,
             ]
         );
     }

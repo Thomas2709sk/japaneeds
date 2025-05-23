@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use function PHPUnit\Framework\returnSelf;
 
 class ReservationsVoter extends Voter
 {

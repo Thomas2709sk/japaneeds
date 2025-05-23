@@ -18,33 +18,33 @@
 		{% endif %}
 
 		{# <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-				<div>
-					<label for="inputEmail">Email</label>
-					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-				</div>
-				<div>
-					<label for="inputPassword">Mot de passe</label>
-					<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-				</div>
-		
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-		
-				<div class="checkbox mb-3">
-					<label>
-						<input type="checkbox" name="_remember_me">
-						Remember me
-					</label>
-				</div>
-		
-				<button class="btn btn-lg btn-primary" type="submit">
-					Me connecter
-				</button>
-				<p>
-					<a href="{{ path('forgotten_password') }}">Mot de passe oublié</a>
-				</p>
-				<p>Pas encore inscrit ?<a href="{{ path('app_register') }}">M'inscrire</a>
-				</p>
-			</form> #}
+						<div>
+							<label for="inputEmail">Email</label>
+							<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						</div>
+						<div>
+							<label for="inputPassword">Mot de passe</label>
+							<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+						</div>
+				
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				
+						<div class="checkbox mb-3">
+							<label>
+								<input type="checkbox" name="_remember_me">
+								Remember me
+							</label>
+						</div>
+				
+						<button class="btn btn-lg btn-primary" type="submit">
+							Me connecter
+						</button>
+						<p>
+							<a href="{{ path('forgotten_password') }}">Mot de passe oublié</a>
+						</p>
+						<p>Pas encore inscrit ?<a href="{{ path('app_register') }}">M'inscrire</a>
+						</p>
+					</form> #}
 
 		<div class="animated-bg"></div>
 
@@ -58,37 +58,35 @@
 							</h1>
 							<div class="japanese-text mb-3">ようこそ</div>
 						</div>
-						<form id="login-form" method="post" autocomplete="on">
-							<div class="mb-3">
-								<div class="input-group">
-									<span class="input-group-text bg-transparent border-end-0">
-										<i class="fas fa-envelope text-primary"></i>
-									</span>
-									<input type="email" class="form-control border-start-0" name="email" placeholder="Email" value="{{ last_username }}" required>
-								</div>
+						<form id="login-form" method="post">
+							<div class="form-floating mb-3">
+								<input type="email" class="form-control" id="floatingEmail" name="email" placeholder="Email" value="{{ last_username }}" required>
+								<label for="floatingEmail">
+									<i class="fas fa-envelope text-primary me-2"></i>
+									Email</label>
 							</div>
-							<div class="mb-3">
-								<div class="input-group">
-									<span class="input-group-text bg-transparent border-end-0">
-										<i class="fas fa-lock text-primary"></i>
-									</span>
-									<input type="password" class="form-control border-start-0" name="password" placeholder="Mot de passe" required>
-								</div>
+							<div class="form-floating mb-3">
+								<input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Mot de passe" required>
+								<label for="floatingPassword">
+									<i class="fas fa-lock text-primary me-2"></i>
+									Mot de passe</label>
 							</div>
+
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							
 							<div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-3 gap-2">
 								<div class="form-check">
 									<input type="checkbox" class="form-check-input" id="remember" name="remember">
 									<label class="form-check-label" for="remember">Se souvenir de moi</label>
 								</div>
-								<a href="{{ path('forgotten_password') }}" class="a-link  fw-bold text-decoration-none small">Mot de passe oublié ?</a>
+								<a href="{{ path('forgotten_password') }}" class="a-link fw-bold text-decoration-none small">Mot de passe oublié ?</a>
 							</div>
-							<button type="submit" class="btn btn-primary w-100 mb-2">
+							<button type="submit" class="btn btn-login text-white w-100 mb-2">
 								<i class="fas fa-sign-in-alt me-2"></i>Connexion
 							</button>
 							<div class="text-center">
 								<span class="text-muted">Pas encore de compte ?</span>
-								<a href="{{ path('app_register') }}" class="a-link  fw-bold text-decoration-none ms-1">S'inscrire</a>
+								<a href="{{ path('app_register') }}" class="a-link fw-bold text-decoration-none ms-1">S'inscrire</a>
 							</div>
 						</form>
 					</div>

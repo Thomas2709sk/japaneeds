@@ -4,12 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<main>
+	<main class="wrapper">
 		<h1 class="ms-3">Réservations</h1>
 		<section class="container">
 			{% if reservations is not empty %}
 				<h2>Filtres</h2>
-{{ form_start(filtersForm, {'method': 'get', 'attr': {'class': 'filter-form'}}) }}
+				{{ form_start(filtersForm, {'method': 'get', 'attr': {'class': 'filter-form'}}) }}
 				<div>
 					<div>
 						{{ form_row(filtersForm.date) }}
@@ -30,7 +30,7 @@
 				<a href="" class="btn btn-secondary">Réinitialiser les filtres</a>
 				{{ form_end(filtersForm) }}
 			{% endif %}
-			<h2>Les réservations disponibles</h2>
+			<h2>Résultats de recherche</h2>
 			<div id="results">
 				{% if reservations is not empty %}
 					{% for data in reservations %}
@@ -106,17 +106,17 @@
 						</div>
 					{% endfor %}
 				{% else %}
-					<p>
+					<div class="fs-5 text-center pt-5 row">
 						{% if findClosestDay is not null %}
 							<p>Nous n'avons aucun guide disponible pour la date choisi.</p>
 							<p>Date la plus proche disponible :</p>
-							<a class="text-primary" href="{{ path('app_reservations_results', { day: findClosestDay|date('Y-m-d'), city: city }) }}">
+							<a class="text-warning fw-bold" href="{{ path('app_reservations_results', { day: findClosestDay|date('Y-m-d'), city: city }) }}">
 								{{ findClosestDay|date('d/m/Y') }}
 							</a>
 						{% else %}
 							Nous n'avons aucune date disponible pour le moment.
 						{% endif %}
-					</p>
+					</div>
 				{% endif %}
 			</div>
 		</section>

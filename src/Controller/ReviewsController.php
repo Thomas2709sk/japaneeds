@@ -26,7 +26,6 @@ public function index(Request $request, DocumentManager $dm): Response
         $dm->persist($review);
         $dm->flush();
 
-        // dd($review);
         $this->addFlash('success', 'Votre avis a été envoyé avec succès.');
         return $this->redirectToRoute('app_reviews_index');
     }

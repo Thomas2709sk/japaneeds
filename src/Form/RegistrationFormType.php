@@ -20,16 +20,13 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('pseudo', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'Minimum 3 caract-res'
-                ]
-            ])
+            ->add('pseudo', TextType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => 'J\'accepte les conditions d\'utilisation',
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les termes',
                     ]),
                 ],
             ])
@@ -38,9 +35,10 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
+                'label' => 'Mot de passe', 
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 8,

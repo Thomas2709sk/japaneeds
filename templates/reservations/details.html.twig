@@ -59,7 +59,7 @@
 								</p>
 								<span>
 									{% if reservation.address is not null %}
-										<a class="text-primary text-truncate d-inline-block" style="max-width: 150px;" href="https://www.google.com/maps/search/?api=1&query={{ reservation.address }}" target="_blank">
+										<a class="text-warning fw-bold text-truncate d-inline-block" style="max-width: 150px;" href="https://www.google.com/maps/search/?api=1&query={{ reservation.address }}" target="_blank">
 											{{ reservation.address }}
 										{% else %}
 											<p>Le guide vous contactera</p>
@@ -122,7 +122,7 @@
 										{% endif %}
 									</span>
 									<i class="fa-solid fa-star text-warning me-3"></i>
-									<a href="{{ path('app_guide_reviews_details', { 'id': reservation.guide.id }) }}" class="text-secondary">
+									<a href="{{ path('app_guide_reviews_details', { 'id': reservation.guide.id }) }}" class="text-warning fw-bold">
 										<b>{{ reviewCount }}
 											Avis</b>
 									</a>

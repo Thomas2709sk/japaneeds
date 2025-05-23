@@ -6,7 +6,7 @@
 {% block body %}
 	<main>
 		<section class="hero_reserv text-center d-flex align-items-center justify-content-center container-fluid">
-			<h1 class="text-white hero_title text-center">Réservations</h1>
+			<h1 class="text-white hero_title title text-center">Réservations</h1>
 		</section>
 		<section class="container">
 			<div class="flux">
@@ -17,12 +17,10 @@
 			<div class="container py-5">
 				<div
 					class="row">
-					<!-- Colonne titre -->
 					<div class="col-md-4 d-flex flex-column justify-content-center">
 						<h3 class="h-style text-center">Laissez-vous inspirer par ces destinations</h3>
 						<p class="text-muted text-center">Découvrez des villes magnifiques où chaque voyage devient une expérience unique.</p>
 					</div>
-					<!-- Colonne images -->
 					<div class="col-md-8">
 						<div class="row g-3">
 							<div class="col-12 col-md-12 col-lg-4 position-relative">
@@ -116,7 +114,7 @@
 						<div class="form-bandeau">
 							{{ form_start(form) }}
 							{{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'Date'}}) }}
-							{{ form_widget(form.city, {'attr': {'class': 'form-control bg-info mt-2', 'placeholder': 'Ville'}}) }}
+							{{ form_widget(form.city, {'attr': {'class': 'form-control pe-5 bg-info mt-2', 'placeholder': 'Ville'}}) }}
 							<button type="submit" class="btn-carte">Réserver 🌸</button>
 							{{ form_end(form) }}
 						</div>

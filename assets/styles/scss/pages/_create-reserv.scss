@@ -1,0 +1,29 @@
+// Page add reservations
+
+// Create reservations form
+.form-bg {
+  background: url('/assets/images/shibu.jpg')  center/cover no-repeat;
+  position: relative;
+}
+.form-bg::before {
+  content: "";
+  position: absolute; inset: 0;
+
+	filter: brightness(0.5);
+   backdrop-filter: blur(2px); 
+  z-index: 1;
+  border-radius: inherit;
+}
+.form-bg > * {
+  position: relative;
+  z-index: 2;
+}
+.autocomplete-suggestions {
+  background: #fff;
+  color: black;
+  z-index: 3;
+}
+
+.autocomplete-suggestions:empty {
+   display: none;
+}

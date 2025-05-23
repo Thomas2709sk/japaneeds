@@ -59,7 +59,7 @@ class ReviewsController extends AbstractController
         $reviews->setValidate(true);
 
         // Récupérer la réservation liée à l'avis
-        $reservation = $reviews->getReservation(); // Supposons que la relation existe dans l'entité Reviews
+        $reservation = $reviews->getReservation();
         if (!$reservation) {
             $this->addFlash('error', 'Aucune réservation associée à cet avis.');
             return $this->redirectToRoute('app_admin_reviews_index');

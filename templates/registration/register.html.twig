@@ -8,36 +8,55 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Inscription</h1>
 
 	{{ form_errors(registrationForm) }}
-	<section class="ms-3 me-2">
-		{{ form_start(registrationForm) }}
-		<div>
-			{{ form_label(registrationForm.pseudo, null, { 'attr': { 'class': 'form-label' } }) }}
-			{{ form_widget(registrationForm.pseudo, { 'attr': { 'class': 'form-control  border-dark' } }) }}
-		</div>
-		<div>
-			{{ form_label(registrationForm.email, null, { 'attr': { 'class': 'form-label' } }) }}
-			{{ form_widget(registrationForm.email, { 'attr': { 'class': 'form-control  border-dark' } }) }}
-		</div>
-		<div>
-            {{ form_label(registrationForm.plainPassword, 'Mot de passe', { 'attr': { 'class': 'form-label' } }) }}
-			{{ form_widget(registrationForm.plainPassword, { 'attr': { 'class': 'form-control  border-dark' } }) }}
-			<div>
-				<p>Complexité du mot de passe :
-					<span id="entropy" class="text-red">Très faible</span>
-					(la complexité minimale acceptée est "Fort")</p>
+	<section class="container my-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-5 col-md-8 col-12">
+				<div class="card shadow-lg p-4 px-sm-5 border border-2">
+					<h1 class="text-center mb-4">Inscription</h1>
+					{{ form_start(registrationForm) }}
+
+					<div class="form-floating mb-3">
+						{{ form_widget(registrationForm.pseudo, { 'attr': {'placeholder': ' ', 'class': 'form-control' } }) }}
+						{{ form_label(registrationForm.pseudo) }}
+					</div>
+
+					<div class="form-floating mb-3">
+						{{ form_widget(registrationForm.email, { 'attr': {'placeholder': ' ', 'class': 'form-control' } }) }}
+						{{ form_label(registrationForm.email) }}
+
+					</div>
+
+					<div class="form-floating mb-3">
+						{{ form_widget(registrationForm.plainPassword, { 'attr': {'placeholder': ' ', 'class': 'form-control' } }) }}
+						{{ form_label(registrationForm.plainPassword) }}
+						{{ form_errors(registrationForm.plainPassword) }}
+						<div class="form-text mt-2">
+							Complexité du mot de passe :
+							<span id="entropy" class="fw-bold text-danger">Très faible</span>
+							<br>
+							<small class="text-muted">(la complexité minimale acceptée est "Fort")</small>
+						</div>
+					</div>
+
+					<div class="form-check mb-3">
+						{{ form_widget(registrationForm.agreeTerms, { 'attr': {'class': 'form-check-input'} }) }}
+						{{ form_label(registrationForm.agreeTerms, null, { 'label_attr': {'class': 'form-check-label'} }) }}
+						{{ form_errors(registrationForm.agreeTerms) }}
+					</div>
+
+					<button type="submit" class="btn btn-primary w-100" id="submit-button" disabled>
+						<i class="fas fa-user-plus me-2"></i>M'inscrire
+					</button>
+					{{ form_end(registrationForm) }}
+
+					<p class="text-center mt-3">
+						Déjà inscrit ?
+						<a class="text-warning fw-bold" href="{{ path('app_login')}}">Me connecter</a>
+					</p>
+				</div>
 			</div>
 		</div>
-		<div>
-            {{ form_label(registrationForm.agreeTerms, 'Accepter les conditions d\'utilisations', { 'attr': { 'class': 'form-label' } }) }}
-			{{ form_widget(registrationForm.agreeTerms) }}
-		</div>
-
-		<button type="submit" class="btn" id="submit-button" disabled>M'inscrire</button>
-		{{ form_end(registrationForm) }}
-		<p>Déjà inscrit ?<a href="{{ path('app_login')}}">Me connecter</a>
-		</p>
 	</section>
 {% endblock %}
