@@ -15,8 +15,8 @@ services:
     ports:
       - "8090:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: thomas
-      MONGO_INITDB_ROOT_PASSWORD: japan
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - mongodb_data:/data/db
 

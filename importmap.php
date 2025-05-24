@@ -24,6 +24,10 @@ return [
         'path' => './assets/js/weather.js',
         'entrypoint' => true,
     ],
+     'map' => [
+        'path' => './assets/js/map.js',
+        'entrypoint' => true,
+    ],
     'register' => [
         'path' => './assets/js/register.js',
         'entrypoint' => true,

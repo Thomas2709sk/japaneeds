@@ -11856,7 +11856,7 @@ textarea.form-control-lg {
   }
 }
 .form-bg {
-  background: url("/assets/images/shibu.jpg") center/cover no-repeat;
+  background: url("/images/reservations/shibu.jpg") center/cover no-repeat;
   position: relative;
 }
 
@@ -11894,14 +11894,14 @@ textarea.form-control-lg {
 }
 
 .review-section {
-  background-image: url("/assets/images/kansai3.jpg");
+  background-image: url("/images/home/kansai3.jpg");
   background-size: cover;
   color: white;
   min-height: 25rem;
 }
 
 .exp-section {
-  background-image: url("/assets/images/exp.jpg");
+  background-image: url("/images/home/exp.jpg");
   background-size: cover;
   background-position: center;
   color: white;
@@ -12076,6 +12076,20 @@ textarea.form-control-lg {
   color: #FAB12F;
 }
 
+@media (max-width: 340px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+}
+.navbar-toggler {
+  border-color: #fff;
+  /* optionnel : bordure blanche */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 .form-bandeau {
   background: #F6F1EB;
   border: 3px solid #003049;
@@ -12148,7 +12162,7 @@ textarea.form-control-lg {
 }
 
 .hero {
-  background-image: url("/assets/images/hero.jpg");
+  background-image: url("/images/home/hero.jpg");
   background-size: cover;
   background-position: bottom;
   min-height: 40rem;
@@ -12229,7 +12243,18 @@ textarea.form-control-lg {
   width: 100%;
   height: 33rem;
   padding: 2rem;
-  background-image: url(/assets/images/reservations.jpg);
+  background-image: url(/images/reservations/reservations.jpg);
+  background-size: cover;
+  background-position: bottom;
+  text-shadow: 2px 2px 8px black;
+  background-position: center;
+}
+
+.hero_map {
+  width: 100%;
+  height: 33rem;
+  padding: 2rem;
+  background-image: url(/images/map/map.jpg);
   background-size: cover;
   background-position: bottom;
   text-shadow: 2px 2px 8px black;

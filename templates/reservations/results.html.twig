@@ -4,121 +4,120 @@
 {% endblock %}
 
 {% block body %}
-	<main class="wrapper">
-		<h1 class="ms-3">Réservations</h1>
-		<section class="container">
-			{% if reservations is not empty %}
-				<h2>Filtres</h2>
-				{{ form_start(filtersForm, {'method': 'get', 'attr': {'class': 'filter-form'}}) }}
-				<div>
-					<div>
-						{{ form_row(filtersForm.date) }}
-						{{ form_row(filtersForm.city) }}
-					</div>
-					{{ form_row(filtersForm.meal) }}
-				</div>
-				<div>
-					{{ form_row(filtersForm.price) }}
-				</div>
-				<div>
-					{{ form_row(filtersForm.rate) }}
-				</div>
-				<div>
-					{{ form_row(filtersForm.begin) }}
-				</div>
-				<button type="submit" class="btn btn-primary">Appliquer</button>
-				<a href="" class="btn btn-secondary">Réinitialiser les filtres</a>
-				{{ form_end(filtersForm) }}
-			{% endif %}
-			<h2>Résultats de recherche</h2>
-			<div id="results">
-				{% if reservations is not empty %}
-					{% for data in reservations %}
-						{% set reservation = data[0] %}
-						{% set averageRating = data['averageRating'] %}
+<main class="wrapper">
+    <section class="container mb-5">
+        <h1 class="ms-3 text-center mt-5">Résultats de recherche</h1>
+        <div class="row">
+            <div class="d-lg-none mb-3">
+                <button class="btn btn-primary w-100" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#filtersCollapse"
+                        aria-expanded="false"
+                        aria-controls="filtersCollapse">
+                    Filtres
+                </button>
+            </div>
+            <div class="col-12 col-lg-3 mb-3 mb-lg-0 border-end border-2">
+                <div class="collapse d-lg-block" id="filtersCollapse">
+                    <h2>Filtres</h2>
+                    {% if reservations is not empty %}
+                        {% include '_partials/_search_filters.html.twig' %}
+                    {% else %}
+                        <p class="fs-5">Aucun filtre disponible</p>
+                    {% endif %}
+                </div>
+            </div>
 
-						<div class="container mt-5 col-lg-6 col-md-6 col-sm-10">
-							<div class="card shadow-lg card-guide">
-								<a href="{{ path('app_reservations_details', {id: reservation.id}) }}" target="_blank">
-									<div class="card-body">
-										<div class="row mb-2 border-bottom pb-2">
-											<div class="col-lg-4">
-												<strong>Date :</strong>
-												{{ reservation.day.format('d/m/Y') }}
-											</div>
-											<div class="col-lg-4">
-												<strong>Départ :</strong>
-												{% if reservation.begin is not null %}
-													<span>{{ reservation.begin|date('H:i') }}</span>
-												{% else %}
-													<p>Non défini</p>
-												{% endif %}
-											</div>
-											<div class="col-lg-4">
-												<strong>Fin :</strong>
-												{% if reservation.end is not null %}
-													<span>{{ reservation.end|date('H:i') }}</span>
-												{% else %}
-													<p>Non défini</p>
-												{% endif %}
-											</div>
-											<div class="col-lg-4">
-												<strong>Ville :</strong>
-												{{ reservation.city.name }}
-											</div>
-											<div class="col-lg-4">
-												<strong>Repas compris :</strong>
-												{% if reservation.meal %}
-													Oui
-												{% else %}
-													Non
-												{% endif %}
-											</div>
-											<div class="col-lg-4">
-												<strong>Place restante(s) :</strong>
-												{{ reservation.placesDispo }}
+            <div id="results" class="col-12 col-lg-9">
+                {% if reservations is not empty %}
+					<div class="row justify-content-center">
+						{% for data in reservations %}
+							{% set reservation = data[0] %}
+							{% set averageRating = data['averageRating'] %}
+
+							<div class=" mt-5 col-lg-8 col-md-9 col-sm-10">
+								<div class="card shadow-lg card-guide">
+									<a href="{{ path('app_reservations_details', {id: reservation.id}) }}" target="_blank">
+										<div class="card-body">
+											<div class="row mb-2 border-bottom pb-2">
+												<div class="col-lg-4">
+													<strong>Date :</strong>
+													{{ reservation.day.format('d/m/Y') }}
+												</div>
+												<div class="col-lg-4">
+													<strong>Départ :</strong>
+													{% if reservation.begin is not null %}
+														<span>{{ reservation.begin|date('H:i') }}</span>
+													{% else %}
+														<p>Non défini</p>
+													{% endif %}
+												</div>
+												<div class="col-lg-4">
+													<strong>Fin :</strong>
+													{% if reservation.end is not null %}
+														<span>{{ reservation.end|date('H:i') }}</span>
+													{% else %}
+														<p>Non défini</p>
+													{% endif %}
+												</div>
+												<div class="col-lg-4">
+													<strong>Ville :</strong>
+													{{ reservation.city.name }}
+												</div>
+												<div class="col-lg-4">
+													<strong>Repas compris :</strong>
+													{% if reservation.meal %}
+														Oui
+													{% else %}
+														Non
+													{% endif %}
+												</div>
+												<div class="col-lg-4">
+													<strong>Place restante(s) :</strong>
+													{{ reservation.placesDispo }}
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="mb-2 d-flex align-items-center">
-										<div class="ms-3">
-											<img src="{{ reservation.guide.user.picture ? asset('uploads/users/mini/40x40-' ~ reservation.guide.user.picture) : asset('assets/images/favicon.png') }}" class="rounded-circle" alt="Photo de profil de {{ reservation.guide.user.pseudo }}"/>
+										<div class="mb-2 d-flex align-items-center">
+											<div class="ms-3">
+												<img src="{{ reservation.guide.user.picture ? asset('uploads/users/mini/40x40-' ~ reservation.guide.user.picture) : asset('assets/images/favicon.png') }}" class="rounded-circle" alt="Photo de profil de {{ reservation.guide.user.pseudo }}"/>
+											</div>
+											<div class="ms-1">
+												<strong>{{ reservation.guide.user.pseudo }}</strong>
+											</div>
+											<div class="ms-2">
+												<span class="fw-bold me-2" id="guide-note">
+													{% if averageRating is not null %}
+														{{ averageRating|number_format(1) }}/5
+													{% else %}
+														-/5
+													{% endif %}
+												</span>
+											</div>
+											<div class="ms-3">
+												<strong>Prix :</strong>
+												{{ reservation.price }}
+											</div>
 										</div>
-										<div class="ms-1">
-											<strong>{{ reservation.guide.user.pseudo }}</strong>
-										</div>
-										<div class="ms-2">
-											<span class="fw-bold me-2" id="guide-note">
-												{% if averageRating is not null %}
-													{{ averageRating|number_format(1) }}/5
-												{% else %}
-													-/5
-												{% endif %}
-											</span>
-										</div>
-										<div class="ms-3">
-											<strong>Prix :</strong>
-											{{ reservation.price }}
-										</div>
-									</div>
-								</a>
+									</a>
+								</div>
 							</div>
+						{% endfor %}
+					{% else %}
+						<div class="fs-5 text-center pt-5 row">
+							{% if findClosestDay is not null %}
+								<p>Nous n'avons aucun guide disponible pour la date choisi.</p>
+								<p>Date la plus proche disponible :</p>
+								<a class="text-warning fw-bold" href="{{ path('app_reservations_results', { day: findClosestDay|date('Y-m-d'), city: city }) }}">
+									{{ findClosestDay|date('d/m/Y') }}
+								</a>
+							{% else %}
+								Nous n'avons aucune date disponible pour le moment.
+							{% endif %}
 						</div>
-					{% endfor %}
-				{% else %}
-					<div class="fs-5 text-center pt-5 row">
-						{% if findClosestDay is not null %}
-							<p>Nous n'avons aucun guide disponible pour la date choisi.</p>
-							<p>Date la plus proche disponible :</p>
-							<a class="text-warning fw-bold" href="{{ path('app_reservations_results', { day: findClosestDay|date('Y-m-d'), city: city }) }}">
-								{{ findClosestDay|date('d/m/Y') }}
-							</a>
-						{% else %}
-							Nous n'avons aucune date disponible pour le moment.
-						{% endif %}
-					</div>
-				{% endif %}
-			</div>
-		</section>
-	</main>
+					{% endif %}
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

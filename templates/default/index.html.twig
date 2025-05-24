@@ -35,11 +35,11 @@
 							{% endif %}
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-									Dropdown link
+									Découverte
 								</a>
 								<ul class="dropdown-menu">
 									<li>
-										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="{{path('app_map_index') }}">Carte du Japon</a>
 									</li>
 									<li>
 										<a class="dropdown-item" href="#">Another action</a>
@@ -279,7 +279,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 mb-3">
 							<div class="card card-visit h-100">
-								<img src="{{ asset('assets/images/kanto2.jpg') }}" alt="" class="card-img-top">
+								<img src="{{ asset('/images/home/kanto2.jpg') }}" alt="" class="card-img-top">
 								<div class="card-body d-flex flex-column">
 									<h3 class="fs-3 text-dark">Explorez le Japon autrement</h3>
 									<p class="card-text fs-5 text-dark">Découvrez notre carte interactive des lieux emblématiques du Japon ! Cliquez sur les points d’intérêt pour en savoir plus sur chaque destination, son histoire, ses activités, et préparez votre voyage en toute simplicité.</p>
@@ -292,7 +292,7 @@
 						<!-- 2ND CARD -->
 						<div class="col-lg-6 col-md-6 mb-3">
 							<div class="card card-visit h-100">
-								<img src="{{ asset('assets/images/regions.jpg') }}" alt="" class="card-img-top">
+								<img src="{{ asset('/images/home/regions.jpg') }}" alt="" class="card-img-top">
 								<div class="card-body d-flex flex-column">
 									<h3 class="fs-3 text-dark">A la découverte des régions
 									</h3>

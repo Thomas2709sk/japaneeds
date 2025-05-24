@@ -1,0 +1,20 @@
+{{ form_start(filtersForm, {'method': 'get', 'attr': {'class': 'filter-form'}}) }}
+					<div>
+						<div>
+							{{ form_row(filtersForm.date) }}
+							{{ form_row(filtersForm.city) }}
+						</div>
+						{{ form_row(filtersForm.meal) }}
+					</div>
+					<div>
+						{{ form_row(filtersForm.price) }}
+					</div>
+					<div>
+						{{ form_row(filtersForm.rate) }}
+					</div>
+					<div>
+						{{ form_row(filtersForm.begin) }}
+					</div>
+					<button type="submit" class="btn btn-primary me-2 mb-2">Appliquer</button>
+					<a href="" class="btn btn-secondary">Réinitialiser les filtres</a>
+					{{ form_end(filtersForm) }}
