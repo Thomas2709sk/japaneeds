@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  app:
+    container_name: japaneeds
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+      - mongodb
+    networks:
+      - app-network
+
   mailhog:
     image: mailhog/mailhog
     logging:
@@ -8,7 +22,36 @@ services:
     ports:
       - 1025:1025
       - 8025:8025
+    networks:
+      - app-network
   
+  phpmyadmin:
+    image: phpmyadmin:5.2.2
+    environment:
+      PMA_HOST: ${PMA_HOST}
+      PMA_USER: ${PMA_USER}
+      PMA_PASSWORD: ${PMA_PASSWORD}
+    ports:
+      - "8081:80"
+    networks:
+      - app-network
+
+  db:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
   mongodb:
     image: mongo:6.0
     container_name: mongodb
@@ -19,7 +62,15 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - app-network
 
 volumes:
+  db_data:
+    driver: local
   mongodb_data:
     driver: local
+
+networks:
+  app-network:
+    driver: bridge
