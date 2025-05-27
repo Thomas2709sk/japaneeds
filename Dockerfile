@@ -39,6 +39,8 @@ RUN mkdir -p var/cache/prod \
     && mkdir -p var/log
 RUN chmod 777 ./var/cache/prod
 RUN chmod 777 ./var/log
+RUN chmod +x bin/console
+RUN chmod -R 777 var/
 
 # Exposer le port 80 pour Apache
 EXPOSE 80
