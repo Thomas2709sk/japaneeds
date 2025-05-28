@@ -27,17 +27,14 @@ COPY . .
 RUN curl -sS https://getcomposer.org/download/2.8.5/composer.phar -o /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
 
+# Fixer les droits
+RUN chown -R www-data:www-data /var/www
+RUN chmod +x bin/console
+RUN mkdir -p var/cache/prod var/log
+RUN chmod -R 777 var/
 
 # Installer les dépendances avec Composer
-RUN composer install --optimize-autoloader --no-scripts \
-    && chmod +x bin/console \
-    && mkdir -p var/cache/prod var/log \
-    && chmod -R 777 var/ \
-    && chmod 777 var/cache/prod var/log
-
-# Fixer les droits pour Apache
-RUN chown -R www-data:www-data /var/www && chmod -R 777 /var/www
-
+RUN composer install --optimize-autoloader --no-scripts
 
 # Exposer le port 80 pour Apache
 EXPOSE 80
