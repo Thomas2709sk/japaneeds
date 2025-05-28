@@ -164,7 +164,7 @@
 							<div class="col-6 col-md-3 mb-4 d-flex flex-column align-items-center">
 								<div class="bg-info rounded-4 text-center p-3 shadow border border-primary asanoha-card">
 									<div class="sakura-photo mb-2 mx-auto">
-										<img src="{{ user.picture ? asset('uploads/users/mini/40x40-' ~ user.picture) : asset('assets/images/favicon.png') }}" alt="{{ user.pseudo }}" width="70" height="70" class="rounded-circle border border-3 border-primary">
+										<img src="{{ user.picture ? asset('uploads/users/mini/40x40-' ~ user.picture) : asset('/images/favicon.png') }}" alt="{{ user.pseudo }}" width="70" height="70" class="rounded-circle border border-3 border-primary">
 									</div>
 									<span class="fw-bold">{{ user.pseudo }}</span>
 									<small class="d-block mb-1">{{ user.guide.languages }}</small>

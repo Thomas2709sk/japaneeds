@@ -13,7 +13,7 @@
 			<nav class="navbar navbar-expand-lg">
 				<div class="container-fluid ">
 					<a class="navbar-brand text-white" href="{{path('index') }}">
-						<img src="{{ asset('assets/images/favicon.png') }}" class="me-2" alt="logo du site">Japaneeds you</a>
+						<img src="{{ asset('/images/favicon.png') }}" class="me-2" alt="logo du site">Japaneeds you</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -24,9 +24,6 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link text-white" href="{{path('app_reservations_index') }}">Réservations</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-white" href="{{path('app_reservations_search') }}">Recherche</a>
 							</li>
 							{% if app.user and app.user.getGuide() is not null %}
 								<li class="nav-item">
@@ -66,7 +63,7 @@
 										{% if app.user.picture %}
 											<img src="{{ asset('uploads/users/mini/40x40-' ~ app.user.picture) }}" class="rounded-circle" alt="Photo de profil" class="profile-picture">
 										{% else %}
-											<img src="{{ asset('assets/images/favicon.png') }}" alt="Photo de profil par défaut" class="profile-picture">
+											<img src="{{ asset('/images/favicon.png') }}" alt="Photo de profil par défaut" class="profile-picture">
 										{% endif %}
 										<span class="ms-2">Bonjour,
 											{{ app.user.pseudo }}!</span>
@@ -284,7 +281,7 @@
 									<h3 class="fs-3 text-dark">Explorez le Japon autrement</h3>
 									<p class="card-text fs-5 text-dark">Découvrez notre carte interactive des lieux emblématiques du Japon ! Cliquez sur les points d’intérêt pour en savoir plus sur chaque destination, son histoire, ses activités, et préparez votre voyage en toute simplicité.</p>
 									<div class="mt-auto border-top text-end">
-										<a href="" class="badge text-bg-secondary text-dark fs-6 mt-2 d-inline-block">En savoir plus</a>
+										<a href="{{path('app_map_index') }}" class="badge text-bg-secondary text-dark fs-6 mt-2 d-inline-block">En savoir plus</a>
 									</div>
 								</div>
 							</div>

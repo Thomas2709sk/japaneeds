@@ -4,14 +4,23 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
             {% include "_partials/_adminav.html.twig" %}
-            <main class="col-9 border border-light bg-light p-2">
-                <h1>Administration</h1>
-            </main>
-        </div>
-	</div>
+			{# Burger offcanvas mobile #}
+			<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
+				<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminOffcanvas" aria-controls="adminOffcanvas">
+					<i class="fa fa-bars fs-4"></i>
+				</button>
+				<span class="text-white ms-3 fs-5">Menu admin</span>
+			</div>
 
+			{# Offcanvas menu mobile #}
+			{% include "_partials/_offcanvas_adminav.html.twig" %}
+
+			<main class="col-12 col-md-9 col-lg-10 border border-light bg-light p-2">
+				<h1>Administration</h1>
+			</main>
+		</div>
+	</div>
 {% endblock %}
