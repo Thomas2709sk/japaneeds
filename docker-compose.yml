@@ -5,7 +5,6 @@ services:
     container_name: japaneeds
     build:
       context: .
-    user: "www-data"
     ports:
       - "8080:80"
     volumes:
