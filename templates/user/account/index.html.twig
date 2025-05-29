@@ -8,36 +8,41 @@
 {% endblock %}
 
 {% block body %}
+	<section class="container-fluid">
+		<div class="row">
+			{% include "_partials/_usernav.html.twig" %}
 
-	<h1 class="ms-3 pb-3 border-bottom border-dark">Votre compte</h1>
+			<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
+				<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#userOffcanvas" aria-controls="userOffcanvas">
+					<i class="fa fa-bars fs-4"></i>
+				</button>
+				<span class="text-white ms-3 fs-5">Menu Utilisateur</span>
+			</div>
 
-	{{ form_start(accountForm) }}
+			{# Offcanvas menu mobile #}
+			{% include "_partials/_offcanvas_usernav.html.twig" %}
+			<section class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
+			<h1 class="ms-3 pb-3 border-bottom border-dark">Votre compte</h1>
+			{{ form_start(accountForm) }}
+				{{ form_row(accountForm.pseudo) }}
+				{{ form_row(accountForm.picture) }}
+				<div class="preview">
+					<img src="" class="rounded-circle" alt="" width="200">
+				</div>
 
-	<section class="container">
-		{{ form_row(accountForm.pseudo) }}
-		{{ form_row(accountForm.picture) }}
-		<div class="preview">
-			<img src="" class="rounded-circle" alt="" width="200">
-		</div>
+				{{ form_label(accountForm.role, 'Etes- vous :') }}
+				{{ form_widget(accountForm.role) }}
 
-		{{ form_label(accountForm.role, 'Etes- vous :') }}
-		{{ form_widget(accountForm.role) }}
-
-		<div class="mt-3">
-			<button class="btn btn-primary" type="submit">Modifier</button>
-		</div>
-		{{ form_end(accountForm) }}
-	</section>
-
-	<h2 class="ms-3 mt-3 pb-3 border-bottom border-dark">Vos crédits</h2>
-	<div class="container">
-		<b>Vos crédits :</b>
-		{{ app.user.credits }}
-	</div>
-	<h2 class="ms-3 mt-3 pb-3 border-bottom border-dark">Vos réservations</h2>
-	<section>
-		<div class="container">
-			<a href="{{ path('app_user_reservations_index') }}" class="text-primary">Voir réservations</a>
+				<div class="mt-3">
+					<button class="btn btn-primary" type="submit">Modifier</button>
+				</div>
+			{{ form_end(accountForm) }}
+				<h2 class="ms-3 mt-3 pb-3 border-bottom border-dark">Vos crédits</h2>
+				<div class="container">
+					<b>Vos crédits :</b>
+					{{ app.user.credits }}
+				</div>
+			</section>
 		</div>
 	</section>
 {% endblock %}

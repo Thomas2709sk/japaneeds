@@ -4,26 +4,27 @@
 {% endblock %}
 
 {% block body %}
+	<main class="wrapper">
+		<h1 class="ms-3 pb-3 border-bottom border-dark">Vos réservations</h1>
 
-	<h1 class="ms-3 pb-3 border-bottom border-dark">Vos réservations</h1>
-
-	<h2 class="ms-3 mt-3 pb-3">Réservations confirmée</h2>
-	<section>
-		<div class="container">
-			<div class="row">
-				{% for reservation in reservations %}
-					<!-- Card reservation -->
-						{% include "cards/user_reservation_card.html.twig" %}
-					<!-- Modale d'annulation -->
-					{% include "modals/cancel_modal.html.twig" %}
-					<!-- Modal confirmer fin oui -->
-					{% include "modals/user_confirm_yes_modal.html.twig" %}
-					<!-- Modal confirmer fin non -->
-					{% include "modals/user_confirm_no_modal.html.twig" %}
-				{% else %}
-					<p>Pas de réservations</p>
-				{% endfor %}
+		<h2 class="ms-3 mt-3 pb-3">Réservations confirmée</h2>
+		<section>
+			<div class="container">
+				<div class="row">
+					{% for reservation in reservations %}
+						<!-- Card reservation -->
+							{% include "cards/user_reservation_card.html.twig" %}
+						<!-- Modale d'annulation -->
+						{% include "modals/cancel_modal.html.twig" %}
+						<!-- Modal confirmer fin oui -->
+						{% include "modals/user_confirm_yes_modal.html.twig" %}
+						<!-- Modal confirmer fin non -->
+						{% include "modals/user_confirm_no_modal.html.twig" %}
+					{% else %}
+						<p>Pas de réservations</p>
+					{% endfor %}
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</main>
 {% endblock %}
