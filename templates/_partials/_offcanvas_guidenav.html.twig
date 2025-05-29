@@ -1,0 +1,34 @@
+<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="guideOffcanvas" aria-labelledby="guideOffcanvasLabel">
+	<div class="offcanvas-header bg-dark">
+		<h5 class="offcanvas-title text-white" id="guideOffcanvasLabel">Menu guide</h5>
+		<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+	</div>
+	<div class="offcanvas-body bg-dark p-0">
+		<nav class="navbar navbar-dark">
+		    <ul class=" navbar-nav w-100 justify-content-between">
+                <li class="nav-item ms-2">
+                    <a class="nav-account nav-link pl-0" href="{{ path('app_guide_account_index') }}">
+                        <i class="fa-solid fa-house fs-5"></i>
+                        <span class="fw-bold fs-5 text-light">Accueil Guide</span>
+                    </a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="nav-account nav-link pl-0" href="{{ path('app_guide_reviews_index') }}">
+                        <i class="fa-solid fa-comment fs-5"></i>
+                        <span class=" d-md-inline fs-5 text-light">Avis</span>
+                    </a>
+                </li>
+                <li class="ms-3">
+                    <i class="fa-solid fa-calendar text-secondary fs-5"></i>
+                    <span class=" fs-5 text-light">Réservations</span>
+                </li>
+                <li class="nav-item ms-5">
+                    <a class="nav-link" href="{{ path('app_guide_reservations_index') }}">Voir</a>
+                </li>
+                <li class="nav-item ms-5">
+                    <a class="nav-link" href="{{ path('app_guide_reservations_add') }}">Créer</a>
+                </li>
+            </ul>
+		</nav>
+	</div>
+</div>

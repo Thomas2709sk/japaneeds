@@ -4,50 +4,56 @@
 {% endblock %}
 
 {% block body %}
+	<div class="container-fluid">
+		<div class="row">
 
-	<h1 class="ms-3 pb-3 border-bottom border-dark">Votre compte Guide</h1>
+			{% include "_partials/_guidenav.html.twig" %}
 
-	<section class="container">
-		<h2>Vos informations</h2>
-		{{ form_start(guideForm) }}
-		<div>
-			{{ form_label(guideForm.cities, 'Ville :', { 'attr': { 'class': 'form-label' } }) }}
-			{{ form_widget(guideForm.cities, {'attr': {'class': 'form-control form-check'}}) }}
+			<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
+				<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#guideOffcanvas" aria-controls="guideOffcanvas">
+					<i class="fa fa-bars fs-4"></i>
+				</button>
+				<span class="text-white ms-3 fs-5">Menu guide</span>
+			</div>
+
+			{# Offcanvas menu mobile #}
+			{% include "_partials/_offcanvas_guidenav.html.twig" %}
+			<section class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
+				<h2>Vos informations de guide</h2>
+				{{ form_start(guideForm) }}
+				<div>
+					{{ form_label(guideForm.cities, 'Ville :', { 'attr': { 'class': 'form-label' } }) }}
+					{{ form_widget(guideForm.cities, {'attr': {'class': 'form-control form-check'}}) }}
+				</div>
+
+				{{ form_label(guideForm.nb_places, 'Nombre de personnes :', { 'attr': { 'class': 'form-label' } }) }}
+				{{ form_widget(guideForm.nb_places, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_label(guideForm.languages, 'Langue(s) :', { 'attr': { 'class': 'form-label' } }) }}
+				{{ form_widget(guideForm.languages, {'attr': {'class': 'form-control'}}) }}
+
+				<div class="form-group d-flex mt-2">
+
+					<label for="{{ guideForm.smoking.vars.id }}" class="form-label mr-2">Fumeur :</label>
+
+
+					{{ form_widget(guideForm.smoking, { 'attr': { 'class': 'form-check-input' } }) }}
+				</div>
+
+				{{ form_label(guideForm.description, 'Description :', { 'attr': { 'class': 'form-label' } }) }}
+				{{ form_widget(guideForm.description, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_label(guideForm.prefernces, 'Préférence(s) :', { 'attr': { 'class': 'form-label' } }) }}
+				{{ form_widget(guideForm.prefernces, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_label(guideForm.speciality, 'Spécialité :', { 'attr': { 'class': 'form-label' } }) }}
+				{{ form_widget(guideForm.speciality, {'attr': {'class': 'form-control'}}) }}
+				<div class="mt-3 pb-3">
+					<button class="btn btn-primary" type="submit">Modifier</button>
+				</div>
+				{{ form_end(guideForm) }}
+			</section>
 		</div>
+	</div>
 
-		{{ form_label(guideForm.nb_places, 'Nombre de personnes :', { 'attr': { 'class': 'form-label' } }) }}
-		{{ form_widget(guideForm.nb_places, {'attr': {'class': 'form-control'}}) }}
-
-		{{ form_label(guideForm.languages, 'Langue(s) :', { 'attr': { 'class': 'form-label' } }) }}
-		{{ form_widget(guideForm.languages, {'attr': {'class': 'form-control'}}) }}
-
-		<div class="form-group d-flex mt-2">
-
-			<label for="{{ guideForm.smoking.vars.id }}" class="form-label mr-2">Fumeur :</label>
-
-
-			{{ form_widget(guideForm.smoking, { 'attr': { 'class': 'form-check-input' } }) }}
-		</div>
-
-		{{ form_label(guideForm.description, 'Description :', { 'attr': { 'class': 'form-label' } }) }}
-		{{ form_widget(guideForm.description, {'attr': {'class': 'form-control'}}) }}
-
-		{{ form_label(guideForm.prefernces, 'Préférence(s) :', { 'attr': { 'class': 'form-label' } }) }}
-		{{ form_widget(guideForm.prefernces, {'attr': {'class': 'form-control'}}) }}
-
-		{{ form_label(guideForm.speciality, 'Spécialité :', { 'attr': { 'class': 'form-label' } }) }}
-		{{ form_widget(guideForm.speciality, {'attr': {'class': 'form-control'}}) }}
-		<div class="mt-3 pb-3 border-bottom border-dark">
-			<button class="btn btn-primary" type="submit">Modifier</button>
-		</div>
-		{{ form_end(guideForm) }}
-	</section>
-	<section class="container">
-		<h2>Vos réservations</h2>
-		<a href="{{ path('app_guide_reservations_index') }}" class="text-primary">Vos réservations</a>
-	</section>
-	<section class="container">
-		<h2>Vos avis</h2>
-		<a href="{{ path('app_guide_reviews_index') }}" class="text-primary">Voir vos avis</a>
-	</section>
 {% endblock %}

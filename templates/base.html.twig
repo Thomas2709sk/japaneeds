@@ -32,7 +32,7 @@
 	</head>
 	<body>
 		{% block header %}
-		<header class="p-3 bg-primary">
+		<header class="p-3 bg-primary fs-5">
 			<nav class="navbar navbar-expand-lg bg-primary">
 				<div class="container-fluid ">
 					<a class="navbar-brand text-white" href="{{path('index') }}">
@@ -48,11 +48,6 @@
 							<li class="nav-item">
 								<a class="nav-link text-white" href="{{path('app_reservations_index') }}">Réservations</a>
 							</li>
-							{% if app.user and app.user.getGuide() is not null %}
-								<li class="nav-item">
-									<a class="nav-link text-white" href="{{path('app_guide_reservations_add') }}">Créer réservation</a>
-								</li>
-							{% endif %}
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Découverte
@@ -69,15 +64,6 @@
 									</li>
 								</ul>
 							</li>
-							{% if is_granted('ROLE_ADMIN') %}
-								<li class="nav-item">
-									<a class="nav-link text-white" href="{{ path('admin_index') }}">Administrattion</a>
-								</li>
-							{% elseif is_granted('ROLE_STAFF') %}
-								<li>
-									<a class="nav-link text-white" href="{{ path('app_admin_reviews_index') }}">Avis à valider</a>
-								</li>
-							{% endif %}
 						</ul>
 						<div class="dropdown text-end ms-auto ">
 							<a href="#" class="d-flex text-white align-items-center link-body-emphasis text-decoration-none dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,11 +97,21 @@
 											<a class="dropdown-item" href="{{ path('app_guide_account_index') }}">Compte Guide</a>
 										</li>
 									{% endif %}
+									{% if is_granted('ROLE_ADMIN') %}
+										<li class="">
+											<a class="dropdown-item" href="{{ path('admin_index') }}">Administrateur</a>
+										</li>
+									{% elseif is_granted('ROLE_STAFF') %}
+										<li>
+											<a class="dropdown-item" href="{{ path('app_admin_reviews_index') }}">Avis à valider</a>
+										</li>
+									{% endif %}
 									<li><hr class="dropdown-divider"></li>
 									<li>
 										<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
 									</li>
 								{% endif %}
+								
 							</ul>
 						</div>
 					</nav>

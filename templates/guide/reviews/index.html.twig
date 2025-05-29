@@ -3,32 +3,45 @@
 {% block title %}Vos avis reçus{% endblock %}
 
 {% block body %}
-<main>
-<h1 class="ms-3">Avis reçus</h1>
-<section class="container">
- {% if reviews is not empty %}
-        <div class="row">
-            {% for review in reviews %}
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Note : {{ review.rate }}/5 <i class="fa-solid fa-star star fs-5 text-warning"></i></h5>
-                            <p class="card-text">{{ review.commentary }}</p>
-                            <p class="card-text">
-                                <span class="text-muted">
-                                    Publié le :  {{ review.reservation.day|date('d/m/Y') }}
-                                </span>
-                            </p>
+<section class="container-fluid wrapper">
+    <div class="row min-vh-100">
+        {% include "_partials/_guidenav.html.twig" %}
+
+			<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
+				<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#guideOffcanvas" aria-controls="guideOffcanvas">
+					<i class="fa fa-bars fs-4"></i>
+				</button>
+				<span class="text-white ms-3 fs-5">Menu guide</span>
+			</div>
+
+			{# Offcanvas menu mobile #}
+			{% include "_partials/_offcanvas_guidenav.html.twig" %}
+        <main class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
+            <h1 class="ms-3">Avis reçus</h1>
+        {% if reviews is not empty %}
+                <div class="row">
+                    {% for review in reviews %}
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Note : {{ review.rate }}/5 <i class="fa-solid fa-star star fs-5 text-warning"></i></h5>
+                                    <p class="card-text">{{ review.commentary }}</p>
+                                    <p class="card-text">
+                                        <span class="text-muted">
+                                            Publié le :  {{ review.reservation.day|date('d/m/Y') }}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>Aucun avis pour l'instant.</p>
-    {% endif %}
+            {% else %}
+                <p>Aucun avis pour l'instant.</p>
+            {% endif %}
+        </main>
+    </div>
 </section>
-</main>
 
 
 {% endblock %}

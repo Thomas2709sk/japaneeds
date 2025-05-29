@@ -8,47 +8,62 @@
 {% endblock %}
 
 {% block body %}
-<div class="container my-5">
-  <div class="form-bg p-4 p-md-5 rounded-4 text-white fs-5 shadow-lg">
-    <h1 class="mb-4 text-center text-white title fw-bold">Créer une réservation</h1>
-    {{ form_start(form) }}
-    <div class="row g-3">
-      <div class="col-md-6">
-        {{ form_label(form.day) }}
-        {{ form_widget(form.day, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="col-md-6">
-        {{ form_label(form.begin) }}
-        {{ form_widget(form.begin, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="col-md-6">
-        {{ form_label(form.end) }}
-        {{ form_widget(form.end, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="col-md-6 d-flex align-items-center pt-4">
-        <label for="{{ form.meal.vars.id }}" class="form-label me-2 mb-0">Repas compris :</label>
-        {{ form_widget(form.meal, { 'attr': { 'class': 'form-check-input' } }) }}
-      </div>
-      <div class="col-md-6">
-        {{ form_label(form.price) }}
-        {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
-        <small class="form-text text-white fs-5">2 crédits iront à la plateforme</small>
-      </div>
-      <div class="col-md-6">
-        {{ form_label(form.city) }}
-        {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="col-12">
-        {{ form_label(form.address) }}
-        {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
-        <div id="autocomplete-results" class="mb-2 w-100 autocomplete-suggestions position-absolute border border-dark shadow rounded"></div>
-      </div>
-      <div class="col-12 d-flex justify-content-end">
-        <button class="btn btn-primary px-5 py-2 mt-3" type="submit">Ajouter</button>
+<section class="container-fluid">
+  <div class="row"> 
+    	{% include "_partials/_guidenav.html.twig" %}
+
+			<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
+				<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#guideOffcanvas" aria-controls="guideOffcanvas">
+					<i class="fa fa-bars fs-4"></i>
+				</button>
+				<span class="text-white ms-3 fs-5">Menu guide</span>
+			</div>
+
+			{# Offcanvas menu mobile #}
+			{% include "_partials/_offcanvas_guidenav.html.twig" %}
+    <div class="col-12 col-lg-10 col-md-9 border border-light bg-light p-2 p-lg-5 p-md-4">
+      <div class="form-bg p-4 p-md-5 rounded-4 text-white fs-5 shadow-lg">
+        <h1 class="mb-4 text-center text-white title fw-bold">Créer une réservation</h1>
+        {{ form_start(form) }}
+        <div class="row g-3">
+          <div class="col-md-6">
+            {{ form_label(form.day) }}
+            {{ form_widget(form.day, {'attr': {'class': 'form-control'}}) }}
+          </div>
+          <div class="col-md-6">
+            {{ form_label(form.begin) }}
+            {{ form_widget(form.begin, {'attr': {'class': 'form-control'}}) }}
+          </div>
+          <div class="col-md-6">
+            {{ form_label(form.end) }}
+            {{ form_widget(form.end, {'attr': {'class': 'form-control'}}) }}
+          </div>
+          <div class="col-md-6 d-flex align-items-center pt-4">
+            <label for="{{ form.meal.vars.id }}" class="form-label me-2 mb-0">Repas compris :</label>
+            {{ form_widget(form.meal, { 'attr': { 'class': 'form-check-input' } }) }}
+          </div>
+          <div class="col-md-6">
+            {{ form_label(form.price) }}
+            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+            <small class="form-text text-white fs-5">2 crédits iront à la plateforme</small>
+          </div>
+          <div class="col-md-6">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+          </div>
+          <div class="col-12">
+            {{ form_label(form.address) }}
+            {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+            <div id="autocomplete-results" class="mb-2 w-100 autocomplete-suggestions position-absolute border border-dark shadow rounded"></div>
+          </div>
+          <div class="col-12 d-flex justify-content-end">
+            <button class="btn btn-primary px-5 py-2 mt-3" type="submit">Ajouter</button>
+          </div>
+        </div>
+        {{ form_end(form) }}
       </div>
     </div>
-    {{ form_end(form) }}
   </div>
-</div>
+</section>
 
 {% endblock %}
