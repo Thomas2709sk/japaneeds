@@ -18,6 +18,11 @@
   position: relative;
   z-index: 2;
 }
+
+// Address suggestions
+.preview {
+   display: none;
+}
 .autocomplete-suggestions {
   background: #fff;
   color: black;

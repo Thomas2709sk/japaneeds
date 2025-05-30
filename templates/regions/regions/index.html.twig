@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les régions{% endblock %}
+
+{% block body %}
+<main>
+  <section class="hero_regions text-center d-flex flex-column justify-content-center container-fluid">
+    <h1 class="text-white hero_title text-center">Les régions</h1>
+  </section>
+  <div class="flux">
+    <h2 class="text-center text-primary pt-4 pb-2 fs-3 fw-bold">Les trésors cachés des régions du Japon</h2>
+		<p class="text-center fs-5">Le Japon est un pays aux multiples visages, riche en traditions, en paysages variés et en cultures locales uniques. Des neiges d’Hokkaidō au nord aux plages tropicales d’Okinawa au sud, chaque région offre une expérience différente et inoubliable. Avant de choisir votre prochaine destination, découvrez les 9 grandes régions du Japon et ce qui les rend si spéciales.</p>
+	</div>
+  <section class="container flux my-5">
+    <div class="row g-1">
+      <!-- Upper cards -->
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="card position-relative up-card">
+          <img src="{{ asset('/images/regions/kanto.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Kanto</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card position-relative up-card">
+          <img src="{{ asset('/images/regions/chugoku2.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Chugoku</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card position-relative up-card">
+          <img src="{{ asset('/images/regions/hokkaido2.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Hokkaido</div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-1 mt-1">
+      <!-- Middle cards -->
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card position-relative mid-card">
+          <img src="{{ asset('/images/regions/shikoku2.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Shikoku</div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="card position-relative mid-card">
+          <img src="{{ asset('/images/regions/okinawa2.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Okinawa</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card position-relative mid-card">
+          <img src="{{ asset('/images/regions/tohoku2.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Tohoku</div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-1 mt-1">
+      <!-- Bottom cards -->
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card position-relative bot-card">
+          <img src="{{ asset('/images/regions/chubu2.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Chubu</div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card position-relative bot-card">
+          <img src="{{ asset('/images/regions/kyushu.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Kyushu</div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card position-relative bot-card">
+          <img src="{{ asset('/images/regions/Kansai.jpg') }}" class="img-cover" alt="">
+          <div class="image-title">Kansai</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

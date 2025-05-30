@@ -11855,6 +11855,45 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+.h-style {
+  font-family: "Libre Baskerville", serif;
+}
+
+.text-red {
+  color: red;
+}
+.text-orange {
+  color: orange;
+}
+.text-green {
+  color: green;
+}
+
+.title {
+  text-shadow: 2px 2px 8px black;
+}
+
 .form-bg {
   background: url("/images/reservations/shibu.jpg") center/cover no-repeat;
   position: relative;
@@ -11873,6 +11912,10 @@ textarea.form-control-lg {
 .form-bg > * {
   position: relative;
   z-index: 2;
+}
+
+.preview {
+  display: none;
 }
 
 .autocomplete-suggestions {
@@ -11990,6 +12033,34 @@ textarea.form-control-lg {
   pointer-events: none;
 }
 
+.up-card {
+  height: 14.375rem;
+}
+
+.mid-card {
+  height: 11.875rem;
+}
+
+.bot-card {
+  height: 13.125rem;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.card {
+  overflow: hidden;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  background: #fff;
+}
+
 /* Fond animé */
 .animated-bg {
   position: fixed;
@@ -12088,6 +12159,14 @@ textarea.form-control-lg {
 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
 }
 
 .form-bandeau {
@@ -12261,6 +12340,16 @@ textarea.form-control-lg {
   background-position: center;
 }
 
+.hero_regions {
+  width: 100%;
+  height: 33rem;
+  padding: 2rem;
+  background-image: url(/images/regions/regions.jpg);
+  background-size: cover;
+  background-position: bottom;
+  text-shadow: 2px 2px 8px black;
+}
+
 .asanoha-card {
   position: relative;
   background-color: #F6F1EB !important;
@@ -12269,64 +12358,13 @@ textarea.form-control-lg {
   background-repeat: repeat;
 }
 
-.flux {
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.wrapper {
-  flex: 1;
-}
-
-.h-style {
-  font-family: "Libre Baskerville", serif;
-}
-
-.navbar {
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  align-items: center;
-}
-
-.text-red {
-  color: red;
-}
-.text-orange {
-  color: orange;
-}
-.text-green {
-  color: green;
-}
-
-.preview {
-  display: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 canvas {
   width: 100% !important;
   height: auto !important;
 }
 
-.title {
-  text-shadow: 2px 2px 8px black;
+.flux {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }/*# sourceMappingURL=app.css.map */

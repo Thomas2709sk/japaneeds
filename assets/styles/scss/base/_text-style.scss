@@ -1,0 +1,27 @@
+// All text styles and fonts
+
+// special titltes
+.h-style {
+   font-family: 'Libre Baskerville', serif;
+}
+
+// Password register strength
+.text {
+   &-red {
+      color: red;
+   }
+
+   &-orange {
+      color: orange;
+   }
+
+   &-green {
+      color: green;
+   }
+
+}
+
+// title background
+.title {
+   text-shadow: 2px 2px 8px black;
+}

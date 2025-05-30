@@ -4,19 +4,26 @@
 // Bootstrap
 @import "../../vendor/twbs/bootstrap/scss/bootstrap";
 
+// Base
+@import "./scss/base/_reset";
+@import "./scss/base/_text-style";
+
 // Pages
 @import "./scss/pages/_create-reserv";
 @import "./scss/pages/_home";
 @import "./scss/pages/_reservations";
+@import "./scss/pages/_regions";
 @import "./scss/pages/_login";
 
 
 // Components
 @import "./scss/components/_header";
+@import "./scss/components/_navbar";
 @import "./scss/components/_reserv-form";
 @import "./scss/components/_hero-header";
 @import "./scss/components/_hero";
 @import "./scss/components/_guide-card";
+@import "./scss/components/_admin-chart";
 
 
 // Layout
@@ -24,68 +31,3 @@
 
 // Mixins personnalisés
 @import "./scss/_mixins";
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.wrapper {
-    flex: 1;
-}
-
-.h-style {
-   font-family: 'Libre Baskerville', serif;
-}
-
-.navbar {
-   background-color: white;
-   display: flex;
-   justify-content: space-between;
-   padding: 10px;
-   align-items: center;
-}
-
-.text {
-   &-red {
-      color: red;
-   }
-
-   &-orange {
-      color: orange;
-   }
-
-   &-green {
-      color: green;
-   }
-
-}
-
-.preview {
-   display: none;
-}
-
-// reset
-a {
-   text-decoration: none;
-   color: inherit;
-}
-
-canvas {
-   width: 100% !important;
-   height: auto !important;
-
-}
-
-
-.title {
-   text-shadow: 2px 2px 8px black;
-}
-

@@ -1,0 +1,28 @@
+// Regions Pages
+
+// 9 regions cards
+  .up-card{
+    height:14.375rem;
+  }
+
+  .mid-card{
+    height: 11.875rem;
+  }
+
+  .bot-card{
+    height: 13.125rem;
+  }
+  .img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+  }
+  .card {
+    overflow: hidden;
+    border-radius: 0;
+    border: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    background: #fff;
+  }

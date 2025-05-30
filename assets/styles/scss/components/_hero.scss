@@ -9,3 +9,7 @@
     @include mixins.bigtitle($url: '/images/map/map.jpg');
     background-position: center;
 }
+
+.hero_regions{
+    @include mixins.bigtitle($url: '/images/regions/regions.jpg');
+}
