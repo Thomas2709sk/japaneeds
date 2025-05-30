@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
+<main>
 	<div class="container-fluid">
 		<div class="row">
 			{% include "_partials/_adminav.html.twig" %}
@@ -41,6 +41,7 @@
 										<td>{{ user.pseudo }}</td>
 										<td>{{ user.email}}</td>
 										<td>
+										{# Change name and colors dependings of roles #}
 											{% for role in user.roles %}
 												{% if role == "ROLE_ADMIN" %}
 													{% set name = "Administrateur" %}
@@ -75,5 +76,6 @@
 			</main>
 		</div>
 	</div>
+</main>
 
 {% endblock %}

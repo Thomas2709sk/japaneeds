@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-
+<main>
 	<div class="container-fluid wrapper">
 		<div class="row">
 			{% include "_partials/_adminav.html.twig" %}
@@ -30,13 +30,13 @@
 			{% include "_partials/_offcanvas_adminav.html.twig" %}
 			<main class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
 				<h1>Nombre de crédits</h1>
-
+				{# GraphSelect.js #}
 				<select
-					id="monthSelector"><!-- Options dynamiquement ajoutées via JS -->
+					id="monthSelector">
 				</select>
-
+				{# CreditsGraph.js #}
 				<div
-					id="creditsChartsContainer">{# Les graphes seront ajoutés ici dynamiquement #}
+					id="creditsChartsContainer">
 				</div>
 
 				<div id="totalGlobalCredits" class="mt-3 fw-bold fs-5 text-success"></div>
@@ -45,4 +45,5 @@
 			</main>
 		</div>
 	</div>
+</main>
 {% endblock %}

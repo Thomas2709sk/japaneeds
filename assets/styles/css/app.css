@@ -12061,7 +12061,7 @@ body {
   background: #fff;
 }
 
-/* Fond animé */
+/* Animated background (sunset/sunrise) */
 .animated-bg {
   position: fixed;
   top: 0;
@@ -12091,7 +12091,7 @@ body {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 450px;
+  max-width: 28.125rem;
 }
 
 .brand-text {
@@ -12102,7 +12102,6 @@ body {
   line-height: 1.05;
 }
 
-/* Japanese text */
 .japanese-text {
   font-size: 1.2rem;
   letter-spacing: 1px;
@@ -12361,6 +12360,11 @@ body {
 canvas {
   width: 100% !important;
   height: auto !important;
+}
+
+.map {
+  width: 100%;
+  height: 43.75rem;
 }
 
 .flux {

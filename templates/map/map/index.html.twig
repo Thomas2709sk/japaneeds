@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block stylesheets %}
+    {# base.html.twig styles block #}
     {{ parent() }}
 				<!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -19,6 +20,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {# base.html.twig JS block #}
     {{ parent() }}
     <!-- Leaflet script -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -27,19 +29,22 @@
      <!-- leaflet cluster script -->
      <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 {% endblock %}
+
 {% block body %}
 	<main>
+    {# Hero and title #}
 		<section class="hero_map text-center d-flex align-items-center justify-content-center container-fluid">
 			<h1 class="text-white hero_title title text-center">Carte</h1>
 		</section>
-        <section class="container">
+    <section class="container">
 			<div class="flux">
 				<h2 class="text-center text-primary pt-4 pb-2 fs-3 fw-bold">À la rencontre du Japon et ses joyaux</h2>
 				<p class="text-center fs-5">Explorez facilement les points d'intérêt autour de vous sur notre carte interactive. Cliquez sur chaque emplacement pour plus d'informations et des itinéraires.
 				</p>
 			</div>
-        </section>
-         <section class="container flux mt-5 mb-5">
+    </section>
+        {# Search filters map.js #}
+      <section class="container flux mt-5 mb-5">
         <div class="mb-3 d-block bg-primary bg-gradient p-2 col-lg-5 col-md-7 col-sm-12">
             <h2 class="text-white">Filtres de recherche</h2>
             <div class="d-flex">
@@ -54,10 +59,9 @@
             </div>
         </div>
         <!-- SCRIPT map.js  -->
-        <div id="map" class=""  style="width: 100%; height: 700px;"></div>
+        <div id="map" class="map"></div>
     </section>
 	</main>
-
      <!-- MODAL map -->
          <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModal" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -75,7 +79,5 @@
                 </div>
               </div>
             </div>
-          </div>
-
-  
+          </div> 
 {% endblock %}

@@ -1,30 +1,32 @@
+{# Aside nav guide account #}
+
 <aside class="col-12 col-md-3 col-lg-2 p-0 bg-dark flex-shrink-1 d-none d-md-block">
-				<nav class="navbar navbar-expand navbar-dark bg-dark bg-gradient flex-md-column flex-row align-items-start py-2">
-					<div class="collapse navbar-collapse show">
-						<ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-							<li class="nav-item ms-2">
-								<a class="nav-account nav-link pl-0" href="{{ path('app_guide_account_index') }}">
-									<i class="fa-solid fa-house fs-5"></i>
-									<span class="fw-bold fs-5 text-light">Accueil Guide</span>
-								</a>
-							</li>
-							<li class="nav-item ms-2">
-								<a class="nav-account nav-link pl-0" href="{{ path('app_guide_reviews_index') }}">
-									<i class="fa-solid fa-comment fs-5"></i>
-									<span class="d-none d-md-inline fs-5 text-light">Avis</span>
-								</a>
-							</li>
-							<li class="ms-3">
-								<i class="fa-solid fa-calendar text-secondary fs-5"></i>
-								<span class=" fs-5 text-light">Réservations</span>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_guide_reservations_index') }}">Voir</a>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_guide_reservations_add') }}">Créer</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</aside>
+	<nav class="navbar navbar-expand navbar-dark bg-dark bg-gradient flex-md-column flex-row align-items-start py-2">
+		<div class="collapse navbar-collapse show">
+			<ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+				<li class="nav-item ms-2">
+					<a class="nav-account nav-link pl-0" href="{{ path('app_guide_account_index') }}">
+						<i class="fa-solid fa-house fs-5"></i>
+						<span class="fw-bold fs-5 text-light">Accueil Guide</span>
+					</a>
+				</li>
+				<li class="nav-item ms-2">
+					<a class="nav-account nav-link pl-0" href="{{ path('app_guide_reviews_index') }}">
+						<i class="fa-solid fa-comment fs-5"></i>
+						<span class="d-none d-md-inline fs-5 text-light">Avis</span>
+					</a>
+				</li>
+				<li class="ms-3">
+					<i class="fa-solid fa-calendar text-secondary fs-5"></i>
+					<span class=" fs-5 text-light">Réservations</span>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_guide_reservations_index') }}">Voir</a>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_guide_reservations_add') }}">Créer</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</aside>

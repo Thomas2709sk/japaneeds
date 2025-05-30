@@ -31,8 +31,11 @@
                             <!-- Card reservation -->
                             {% include "cards/guide_reservation_card.html.twig" %}
                             <!-- Modals -->
+                                {# Start reservation modal #}
                             {% include "modals/guide_confirm_start_modal.html.twig" %}
+                                {# End reservation modal #}
                             {% include "modals/guide_confirm_end_modal.html.twig" %}
+                                {# Cancel reservation modal #}
                             {% include "modals/guide_cancel_modal.html.twig" %}
                         {% endif %}
                     {% endfor %}
@@ -47,6 +50,7 @@
             </h2>
             <div class="row">
                 {% for reservation in reservations %}
+                {# After end of reservation #}
                     {% if reservation.status in ['Fini', 'Confirmé', 'Vérification par la plateforme'] %}
                         <!-- Card reservation -->
                         <div class="col-lg-4 col-md-6 mb-3">

@@ -1,5 +1,7 @@
+// Get the element by its ID
 document.querySelector('#edit_account_form_picture').addEventListener("change", checkFile);
 
+// Show preview of user profile pictures ( only jpeg, png or webp)
 function checkFile(){
     let preview = document.querySelector(".preview");
     let image =preview.querySelector("img");
@@ -12,9 +14,9 @@ function checkFile(){
         preview.style.display = "block";
     }
 
-    // On vérifie si le fichier existe
+    // if file exist
     if(file){
-        // On vérifie que le fichier est une image acceptée
+        // if file type is correct > display
         if(types.includes(file.type)){  
             reader.readAsDataURL(file);
         }

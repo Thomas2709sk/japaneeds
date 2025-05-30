@@ -5,6 +5,7 @@
 
 {% block body %}
 	<main>
+		{# Hero and title #}
 		<section class="hero_reserv text-center d-flex align-items-center justify-content-center container-fluid">
 			<h1 class="text-white hero_title title text-center">Réservations</h1>
 		</section>
@@ -17,6 +18,7 @@
 			<div class="container py-5">
 				<div
 					class="row">
+					{# Recommandations section #}
 					<div class="col-md-4 d-flex flex-column justify-content-center">
 						<h3 class="h-style text-center">Laissez-vous inspirer par ces destinations</h3>
 						<p class="text-muted text-center">Découvrez des villes magnifiques où chaque voyage devient une expérience unique.</p>
@@ -24,15 +26,15 @@
 					<div class="col-md-8">
 						<div class="row g-3">
 							<div class="col-12 col-md-12 col-lg-4 position-relative">
-								<img src="{{ asset('/images/reservations/himeji.jpg') }}" alt="Ville 1" class="img-fluid custom-img shadow">
+								<img src="{{ asset('/images/reservations/himeji.jpg') }}" alt="chateau de Himeji" class="img-fluid custom-img shadow">
 								<div class="image-title">Himeji</div>
 							</div>
 							<div class="col-12 col-md-12 col-lg-4 position-relative">
-								<img src="{{ asset('/images/reservations/kyoto.jpg') }}" alt="Ville 2" class="img-fluid custom-img shadow">
+								<img src="{{ asset('/images/reservations/kyoto.jpg') }}" alt="Temple To-ji a Kyoto" class="img-fluid custom-img shadow">
 								<div class=" image-title">Kyoto</div>
 							</div>
 							<div class="col-12 col-md-12 col-lg-4 position-relative">
-								<img src="{{ asset('/images/reservations/osaka.jpg') }}" alt="Ville 3" class="img-fluid custom-img shadow">
+								<img src="{{ asset('/images/reservations/osaka.jpg') }}" alt="Quartier namba à Osaka" class="img-fluid custom-img shadow">
 								<div class="image-title">Osaka</div>
 							</div>
 						</div>
@@ -40,6 +42,7 @@
 				</div>
 			</div>
 		</section>
+		{# Instagram section #}
 		<section class="container-fluid bg-info  pb-4">
 			<h2 class="text-center text-primary pt-4 pb-2 fs-3 fw-bold">Des lieux inoubliables vous attendent</h2>
 			<p class="fs-5 text-center">Nos guides partagent ici les plus beaux aperçus de leurs périples au Japon.</p>
@@ -49,6 +52,7 @@
 				{% include '_partials/_insta_carousel.html.twig' %}
 			</div>
 		</section>
+		{# Introductions to reservation section #}
 		<section class="container flux my-5">
 			<h2 class="mb-4 text-center text-primary">Trouvez la visite qui vous convient</h2>
 			<div class="row g-4">
@@ -104,6 +108,7 @@
 				</div>
 			</div>
 		</section>
+		{# Search reservation section #}
 		<section class="container-fluid pb-4 bg-info position-relative">
 			<div class="container flux py-4 position-relative">
 				<h2 class="text-center mb-2 fw-bold">
@@ -111,6 +116,7 @@
 				</h2>
 				<div class="row mt-2 g-5 align-items-center">
 					<div class="col-lg-6 col-md-6 d-flex justify-content-center">
+						{# Search reservations form #}
 						<div class="form-bandeau">
 							{{ form_start(form) }}
 							{{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'Date'}}) }}
@@ -149,6 +155,7 @@
 				</div>
 			</div>
 		</section>
+		{# Guides section #}
 		<section class="container flux my-5">
 			<div
 				class="row align-items-center">
@@ -173,6 +180,7 @@
 						{% endfor %}
 					</div>
 				</section>
+				{# Commitments section #}
 				<section class="container-fluid pt-4 pb-4 bg-info">
 					<div class="container flux">
 						<h2 class="mb-4 text-center text-primary">Nos engagements</h2>

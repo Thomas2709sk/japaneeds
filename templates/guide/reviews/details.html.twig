@@ -11,6 +11,8 @@
         {% if totalReviews > 0 %}
             <div class="border-bottom">
                 <p class="fs-1">
+                {# Average rating #}
+                    {# if no rating #}
                     <strong>{{ averageRating ? averageRating|number_format(1) : 'Aucune note' }} / 5</strong>
                     <i class="fa-solid fa-star star fs-1 text-warning"></i>
                 </p>
@@ -19,9 +21,11 @@
                 </p>
             </div>
             <div class="ratings-distribution mt-3">
+                {#   Displays the review distribution by star rating from 5 to 1 #}
                 {% for rating in 5..1 %}
                     <div class="mb-2">
                         <span class="d-flex justify-content-between">
+                            {# Shows the star count and the number of reviews for this rating  #}
                             <span>{{ rating }} étoile{{ rating > 1 ? 's' : '' }}</span>
                             <span>{{ ratingsDistribution[rating] ?? 0 }} avis</span>
                         </span>
@@ -29,6 +33,7 @@
                             <div 
                                 class="progress-bar" 
                                 role="progressbar" 
+                                {#   Dynamically sets the width of the progress bar according to the share of reviews for this rating. #}
                                 style="width: {{ (ratingsDistribution[rating] / totalReviews) * 100 }}%;" 
                                 aria-valuenow="{{ (ratingsDistribution[rating] / totalReviews) * 100 }}" 
                                 aria-valuemin="0" 
@@ -39,7 +44,7 @@
                 {% endfor %}
             </div>
 
-            <!-- avis utilisateur -->
+            <!-- User reviews section -->
             <section class="container mt-5">
                 <div class="row">
                     {% for review in reviews %}

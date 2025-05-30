@@ -8,13 +8,16 @@
 {% endblock %}
 
 {% block body %}
-
+<main>
 	<h1 class="ms-3">Noter votre guide</h1>
+	{# Review page for confirmation of Yes for user reservation #}
     <section class="container">
     <p class="fs-5">Votre guide {{ reservation.guide.user.pseudo }} souhaite avoir un avis pour s'améliorer</p>
     <p class="fs-5">Pour la journée du {{ reservation.day.format('d/m/Y') }}</p>
+	{# Reviews guide form #}
 	{{ form_start(reviewForm) }}
 	{{ form_widget(reviewForm.rate) }}
+	{# ReviewStar.js #}
 	<div id="stars" class="d-flex mt-3 text-secondary justify-content-center stars">
 		<i class="fa-solid fa-star star fs-1" data-value="1"></i>
 		<i class="fa-solid fa-star star fs-1" data-value="2"></i>
@@ -28,4 +31,5 @@
 	<button type="submit" class="btn btn-primary">Envoyer</button>
 	{{ form_end(reviewForm) }}
     </section>
+</main>
 {% endblock %}

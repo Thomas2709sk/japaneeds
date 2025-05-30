@@ -32,9 +32,9 @@
                 {% set goodReviews = true %}
                 {% include "cards/good_reviews_card.html.twig" %}
               {% endif %}
-              {# valider avis #}
+              {# Confirm reviews modal #}
               {% include "modals/admin_confirm_reviews_modal.html.twig" %}
-              {# Supprimer avis #}
+              {# Cancel review modal #}
               {% include "modals/admin_remove_review_modal.html.twig" %}
             {% endfor %}
             {% if not goodReviews %}
@@ -51,9 +51,9 @@
                 {% set badReviews = true %}
                 {% include "cards/bad_reviews_card.html.twig" %}
               {% endif %}
-              {# Confirmer mauvais avis #}
+              {# Confirm bad review modal #}
               {% include "modals/admin_confirm_bad_reviews_modal.html.twig" %}
-              {# Supprimer mauvais avis #}
+              {# Cancel bad review modal#}
             {% endfor %}
             {% if not badReviews %}
               <p>Pas d'avis à valider</p>

@@ -8,6 +8,7 @@
     <section class="container mb-5">
         <h1 class="ms-3 text-center mt-5">Résultats de recherche</h1>
         <div class="row">
+			{# Filters become Accordion on mobile and tablet #}
             <div class="d-lg-none mb-3">
                 <button class="btn btn-primary w-100" type="button"
                         data-bs-toggle="collapse"
@@ -17,6 +18,7 @@
                     Filtres
                 </button>
             </div>
+			{# Filters section #}
             <div class="col-12 col-lg-3 mb-3 mb-lg-0 border-end border-2">
                 <div class="collapse d-lg-block" id="filtersCollapse">
                     <h2>Filtres</h2>
@@ -27,8 +29,9 @@
                     {% endif %}
                 </div>
             </div>
-
+			{# Results section #}
             <div id="results" class="col-12 col-lg-9">
+				{# For each item in the 'reservations' array, we extract the reservation itself (data[0]) and the associated guide's average rating (data['averageRating']).#}
                 {% if reservations is not empty %}
 					<div class="row justify-content-center">
 						{% for data in reservations %}
@@ -46,6 +49,7 @@
 												</div>
 												<div class="col-lg-4">
 													<strong>Départ :</strong>
+													{# If no time defined #}
 													{% if reservation.begin is not null %}
 														<span>{{ reservation.begin|date('H:i') }}</span>
 													{% else %}
@@ -54,6 +58,7 @@
 												</div>
 												<div class="col-lg-4">
 													<strong>Fin :</strong>
+													{# If no time defined #}
 													{% if reservation.end is not null %}
 														<span>{{ reservation.end|date('H:i') }}</span>
 													{% else %}
@@ -80,6 +85,7 @@
 										</div>
 										<div class="mb-2 d-flex align-items-center">
 											<div class="ms-3">
+											{# if no user pictures #}
 												<img src="{{ reservation.guide.user.picture ? asset('uploads/users/mini/40x40-' ~ reservation.guide.user.picture) : asset('/images/favicon.png') }}" class="rounded-circle" alt="Photo de profil de {{ reservation.guide.user.pseudo }}"/>
 											</div>
 											<div class="ms-1">
@@ -87,6 +93,7 @@
 											</div>
 											<div class="ms-2">
 												<span class="fw-bold me-2" id="guide-note">
+												{# if guides has no rate #}
 													{% if averageRating is not null %}
 														{{ averageRating|number_format(1) }}/5
 													{% else %}
@@ -104,6 +111,8 @@
 							</div>
 						{% endfor %}
 					{% else %}
+					{# if no reservations on selected day use "findClosestDay" from the reservations Repository #}
+					{# Find nearest day available #}
 						<div class="fs-5 text-center pt-5 row">
 							{% if findClosestDay is not null %}
 								<p>Nous n'avons aucun guide disponible pour la date choisi.</p>

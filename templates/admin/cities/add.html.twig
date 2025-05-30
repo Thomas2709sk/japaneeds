@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-
+<main>
 	<section class="container-fluid wrapper">
 		<div class="row">
 			{% include "_partials/_adminav.html.twig" %}
@@ -21,6 +21,7 @@
 			{% include "_partials/_offcanvas_adminav.html.twig" %}
 			<main class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
 				<h1>Ajouter une ville</h1>
+				{# AddCity form #}
 				{{ form_start(cityForm) }}
 				{{ form_row(cityForm.name) }}
 				<button class="btn btn-primary" type="submit">Ajouter</button>
@@ -28,4 +29,5 @@
 			</main>
 		</div>
 	</section>
+</main>
 {% endblock %}

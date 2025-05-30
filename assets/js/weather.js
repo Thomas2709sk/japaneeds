@@ -1,12 +1,16 @@
+// Asynchronously fetches weather data for a city
 async function fetchWeather(city) {
     try {
+        //  Send a request to the backend API to get weather information
         const response = await fetch(`/api/weather?city=${city}`);
         const data = await response.json();
 
+        // If the API responds with an error > return null
         if (data.error) {
             console.error(`Erreur pour ${city}:`, data.error);
             return null;
         }
+          // if successful > return the data
         return data;
     } catch (error) {
         console.error(`Erreur lors de la récupération météo pour ${city}:`, error);
@@ -15,7 +19,7 @@ async function fetchWeather(city) {
 }
 
 function createWeatherCardDOM(cityName, temperature, description, iconUrl, humidity) {
-    // Simplification du nom de la ville
+    // Change city name if needed
     const cityNameMapping = {
         "Préfecture de Tokyo": "Tokyo",
         "Tokyo": "Tokyo",
@@ -23,7 +27,7 @@ function createWeatherCardDOM(cityName, temperature, description, iconUrl, humid
     };
     const simplifiedCityName = cityNameMapping[cityName] || cityName;
 
-
+    //  Create div with all the data 
     const col = document.createElement("div");
     col.className = "col-md-5 col-lg-4  d-flex justify-content-center mb-4";
 
@@ -58,7 +62,7 @@ function createWeatherCardDOM(cityName, temperature, description, iconUrl, humid
     const humidityP = document.createElement("p");
     humidityP.innerHTML = `<strong>Humidité :</strong> ${humidity}%`;
 
-    // Assemblage
+    // Assemble
     cardBody.append(title, img, temp, desc, hr, humidityP);
     card.appendChild(cardBody);
     col.appendChild(card);
@@ -66,6 +70,7 @@ function createWeatherCardDOM(cityName, temperature, description, iconUrl, humid
     return col;
 }
 
+//  Show weather
 async function displayWeather() {
     const cities = ["Tokyo", "Kyoto"];
     const weatherContainer = document.getElementById("meteo");
@@ -73,6 +78,7 @@ async function displayWeather() {
     for (const city of cities) {
         const weatherData = await fetchWeather(city);
 
+        // If all data > create card
         if (weatherData) {
             const cityName = weatherData.name;
             const temperature = Math.round(weatherData.main.temp);

@@ -1,5 +1,7 @@
+//  cache autocomplete results and avoid redundant API calls
 const cache = {};
 
+//  Prevent sending a request on every keydown
 function debounce(func, delay) {
     let timeout;
     return function (...args) {
@@ -8,6 +10,7 @@ function debounce(func, delay) {
     };
 }
 
+// Removes suggestion elements from the autocomplete container
 function clearSuggestions(container) {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
@@ -23,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Asynchronously fetch address suggestions from OpenStreetMap's Nominatim API
     async function fetchAddressSuggestions(query) {
         if (cache[query]) {
             return cache[query];
@@ -34,17 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         });
         const data = await response.json();
-        cache[query] = data; // Stocke les résultats dans le cache
+        // Store results in cache
+        cache[query] = data;
         return data;
     }
 
+    // Handles user input in the address field with debounce to limit API calls
     const handleInput = debounce(async () => {
         const query = addressInput.value.trim();
+        // triggers a search if the query has at least 3 characters
         if (query.length < 3) {
             clearSuggestions(suggestionsContainer);
             return;
         }
 
+        //  display address suggestions
         const suggestions = await fetchAddressSuggestions(query);
 
         clearSuggestions(suggestionsContainer);
@@ -54,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             suggestionElement.classList.add('autocomplete-suggestion', 'list-group-item', 'list-group-item-action');
             suggestionElement.textContent = suggestion.display_name;
 
+            // When a suggestion is clicked, fill the input and clear the suggestions
             suggestionElement.addEventListener('click', () => {
                 addressInput.value = suggestion.display_name;
                 clearSuggestions(suggestionsContainer);
@@ -63,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, 600);
 
+    // Close suggestions if the user clicks outside the input or suggestion list
     addressInput.addEventListener('input', handleInput);
     document.addEventListener('click', (e) => {
         if (!suggestionsContainer.contains(e.target) && e.target !== addressInput) {

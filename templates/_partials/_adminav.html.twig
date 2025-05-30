@@ -1,68 +1,70 @@
+{# Aside nav for admin account #}
+
 <aside class="col-12 col-md-3 col-lg-2 p-0 bg-dark flex-shrink-1 d-none d-md-block">
-				<nav class="navbar navbar-expand navbar-dark bg-dark bg-gradient flex-md-column flex-row align-items-start py-2">
-					<div class="collapse navbar-collapse show">
-						<ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-							<li class="nav-item ms-2">
-								<a class="nav-account nav-link pl-0" href="{{ path('admin_index') }}">
-									<i class="fa-solid fa-house fs-5"></i>
-									<span class="fw-bold fs-5 text-light">Accueil Admin</span>
-								</a>
-							</li>
-							<li class="nav-item ms-2">
-								<a class="nav-account nav-link pl-0" href="{{ path('app_admin_users_index') }}">
-									<i class="fa-solid fa-map fs-5"></i>
-									<span class="d-none d-md-inline fs-5 text-light">Utilisateurs</span>
-								</a>
-							</li>
-							<li class="nav-item ms-2">
-								<a class="nav-account nav-link pl-0" href="{{ path('app_admin_reviews_index') }}">
-									<i class="fa-solid fa-comment fs-5"></i>
-									<span class="d-none d-md-inline fs-5 text-light">Avis</span>
-								</a>
-							</li>
-							<li class="ms-3">
-								<i class="fa-solid fa-calendar text-secondary fs-5"></i>
-								<span class=" fs-5 text-light">Villes</span>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_cities_index') }}">Liste</a>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_cities_add') }}">Ajouter</a>
-							</li>
-							<li class="ms-3">
-								<i class="fa fa-heart codeply fa-fw fs-5 text-secondary"></i>
-								<span class="d-none d-md-inline fs-5 text-light">Spécialités</span>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_specialities_index') }}">Liste</a>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_specialities_add') }}">Ajouter</a>
-							</li>
+	<nav class="navbar navbar-expand navbar-dark bg-dark bg-gradient flex-md-column flex-row align-items-start py-2">
+		<div class="collapse navbar-collapse show">
+			<ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+				<li class="nav-item ms-2">
+					<a class="nav-account nav-link pl-0" href="{{ path('admin_index') }}">
+						<i class="fa-solid fa-house fs-5"></i>
+						<span class="fw-bold fs-5 text-light">Accueil Admin</span>
+					</a>
+				</li>
+				<li class="nav-item ms-2">
+					<a class="nav-account nav-link pl-0" href="{{ path('app_admin_users_index') }}">
+						<i class="fa-solid fa-map fs-5"></i>
+						<span class="d-none d-md-inline fs-5 text-light">Utilisateurs</span>
+					</a>
+				</li>
+				<li class="nav-item ms-2">
+					<a class="nav-account nav-link pl-0" href="{{ path('app_admin_reviews_index') }}">
+						<i class="fa-solid fa-comment fs-5"></i>
+						<span class="d-none d-md-inline fs-5 text-light">Avis</span>
+					</a>
+				</li>
+				<li class="ms-3">
+					<i class="fa-solid fa-calendar text-secondary fs-5"></i>
+					<span class=" fs-5 text-light">Villes</span>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_cities_index') }}">Liste</a>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_cities_add') }}">Ajouter</a>
+				</li>
+				<li class="ms-3">
+					<i class="fa fa-heart codeply fa-fw fs-5 text-secondary"></i>
+					<span class="d-none d-md-inline fs-5 text-light">Spécialités</span>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_specialities_index') }}">Liste</a>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_specialities_add') }}">Ajouter</a>
+				</li>
 
-							<li class="ms-3">
-								<i class="fa-solid fa-car fs-5 text-secondary"></i>
-								<span class="d-none d-md-inline fs-5 text-light">Employés</span>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_staff_index') }}">Liste</a>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_staff_create') }}">Ajouter</a>
-							</li>
+				<li class="ms-3">
+					<i class="fa-solid fa-car fs-5 text-secondary"></i>
+					<span class="d-none d-md-inline fs-5 text-light">Employés</span>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_staff_index') }}">Liste</a>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_staff_create') }}">Ajouter</a>
+				</li>
 
-							<li class="ms-3">
-								<i class="fa-solid fa-chart-line fs-5 text-secondary"></i>
-								<span class="d-none d-md-inline fs-5 text-light">Graphiques</span>
-							</li>
-							<li class="nav-item ms-5">
-								<a class="nav-link" href="{{ path('app_admin_graph_index') }}">Réservations</a>
-							</li>
-							<li class="nav-item ms-5">
-									<a class="nav-link" href="{{ path('app_admin_credits_graph_index') }}">Crédits</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</aside>
+				<li class="ms-3">
+					<i class="fa-solid fa-chart-line fs-5 text-secondary"></i>
+					<span class="d-none d-md-inline fs-5 text-light">Graphiques</span>
+				</li>
+				<li class="nav-item ms-5">
+					<a class="nav-link" href="{{ path('app_admin_graph_index') }}">Réservations</a>
+				</li>
+				<li class="nav-item ms-5">
+						<a class="nav-link" href="{{ path('app_admin_credits_graph_index') }}">Crédits</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</aside>

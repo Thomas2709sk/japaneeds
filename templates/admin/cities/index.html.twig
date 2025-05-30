@@ -5,41 +5,40 @@
 
 {% block body %}
 
-	<div class="container-fluid wrapper">
-		<div class="row">
-			{% include "_partials/_adminav.html.twig" %}
-			{# Burger offcanvas mobile #}
-			<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
-				<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminOffcanvas" aria-controls="adminOffcanvas">
-					<i class="fa fa-bars fs-4"></i>
-				</button>
-				<span class="text-white ms-3 fs-5">Menu admin</span>
-			</div>
-
-			{# Offcanvas menu mobile #}
-			{% include "_partials/_offcanvas_adminav.html.twig" %}
-			<main class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
-				<h1>Liste des villes</h1>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Nom</th>
-							<th>Slug</th>
-						</tr>
-					</thead>
-                    <tbody>
-                        {% for city in cities %}
-                        <tr>
-                            <td>{{ city.id }}</td>
-                            <td>{{ city.name }}</td>
-                            <td>{{ city.slug }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-				</table>
-			</main>
+<div class="container-fluid wrapper">
+	<div class="row">
+		{% include "_partials/_adminav.html.twig" %}
+		{# Burger offcanvas mobile #}
+		<div class="col-12 d-flex d-md-none align-items-center bg-dark py-2">
+			<button class="btn btn-outline-light ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminOffcanvas" aria-controls="adminOffcanvas">
+				<i class="fa fa-bars fs-4"></i>
+			</button>
+			<span class="text-white ms-3 fs-5">Menu admin</span>
 		</div>
-	</div>
 
+		{# Offcanvas menu mobile #}
+		{% include "_partials/_offcanvas_adminav.html.twig" %}
+		<main class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
+			<h1>Liste des villes</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nom</th>
+						<th>Slug</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for city in cities %}
+					<tr>
+						<td>{{ city.id }}</td>
+						<td>{{ city.name }}</td>
+						<td>{{ city.slug }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</main>
+	</div>
+</div>
 {% endblock %}

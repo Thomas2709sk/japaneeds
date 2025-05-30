@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block body %}
+<main>
 	<div class="container-fluid">
 		<div class="row">
 			{% include "_partials/_adminav.html.twig" %}
@@ -24,7 +25,7 @@
 			{% include "_partials/_offcanvas_adminav.html.twig" %}
 			<section class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
 				<h1>Ajouter employés</h1>
-
+				{# AddStaff form #}
 				{{ form_errors(staffForm) }}
 				<section class="ms-3 me-2">
 					{{ form_start(staffForm) }}
@@ -39,6 +40,7 @@
 					<div>
 						{{ form_label(staffForm.plainPassword, 'Mot de passe', { 'attr': { 'class': 'form-label' } }) }}
 						{{ form_widget(staffForm.plainPassword, { 'attr': { 'class': 'form-control  border-dark' } }) }}
+						{# AddStaff.js #}
 						<div>
 							<p>Complexité du mot de passe :
 								<span id="entropy" class="text-red">Très faible</span>
@@ -56,4 +58,5 @@
 			</section>
 		</div>
 	</div>
+</main>
 {% endblock %}

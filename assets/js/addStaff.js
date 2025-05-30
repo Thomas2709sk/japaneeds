@@ -3,29 +3,25 @@ let pseudo = false
 let email = false;
 let pass = false;
 
-// On charge les éléments du formulaire
+// check input
 document.querySelector("#add_staff_form_pseudo").addEventListener('input', checkPseudo);
 document.querySelector("#add_staff_form_email").addEventListener('input', checkEmail);
-// document.querySelector("#registration_form_agreeTerms").addEventListener('input', checkRgpd);
 document.querySelector("#add_staff_form_plainPassword").addEventListener('input', checkPass);
 
-
+// Pseudo need more than 2 characters
 function checkPseudo(){
     pseudo = this.value.length > 2;
     checkAll();
 }
 
+// Regex to check email characters
 function checkEmail(){
     let regex = new RegExp("\\S+@\\S+\\.\\S+");
     email = regex.test(this.value);
     checkAll();
 }
 
-// function checkRgpd(){
-//     rgpd = this.checked;
-//     checkAll();
-// }
-
+// If all input are coorect you can register
 function checkAll(){
     document.querySelector("#submit-button").setAttribute("disabled", "disabled");
     if(email && pseudo && pass){
@@ -33,6 +29,7 @@ function checkAll(){
     }
 }
 
+// Password strength translation in french
 const PasswordStrength = {
     STRENGTH_VERY_WEAK: 'Très faible',
     STRENGTH_WEAK: 'Faible',
@@ -42,18 +39,19 @@ const PasswordStrength = {
 }
 
 function checkPass(){
-    // On récupère le mot de passe
+    // get the password
     let mdp = this.value;
 
-    // On récupère lélément d'affichage de l'entropie
+    // get the entropy
     let entropyElement = document.querySelector("#entropy");
 
-    // On évalue la force du mot de passe
+    // check password strength
     let entropy = evaluatePasswordStrength(mdp);
 
+    // remove class colors
     entropyElement.classList.remove("text-red", "text-orange", "text-green");
 
-    // On attribue la couleur en fonction de l'entropie
+    // change colors depending of entropy strength
     switch(entropy){
         case 'Très faible' :
             entropyElement.classList.add("text-red");
@@ -87,15 +85,15 @@ function checkPass(){
 }
 
 function evaluatePasswordStrength(password){
-    // On calcule la longueur du mot de passe
+    // check password length
     let length = password.length;
 
-    // Si le mot de passe est vide
+    // if password is empty
     if(!length){
         return PasswordStrength.STRENGTH_VERY_WEAK;
     }
 
-    // On crée un objet qui contiendra les caractères et leur nombre
+    // create object with characters and numbers
     let passwordChars = {};
 
     for(let index = 0; index < password.length; index++){
@@ -103,10 +101,10 @@ function evaluatePasswordStrength(password){
         passwordChars[charCode] = (passwordChars[charCode] || 0) + 1;
     }
 
-    // On compte le nombre de caractères dans le mot de passe
+    // count password strength
     let chars = Object.keys(passwordChars).length;
 
-    // On initialise les variables des types de caractères
+    // Initialize variables for the character types
     let control = 0, digit = 0, upper = 0, lower = 0, symbol = 0, other = 0;
 
     for(let [chr, count] of Object.entries(passwordChars)){
@@ -115,24 +113,24 @@ function evaluatePasswordStrength(password){
             // Caractère de contrôle
             control = 33;
         }else if(chr >= 48 && chr <= 57){
-            // Chiffres
+            // Numbers
             digit = 10;
         }else if(chr >= 65 && chr <= 90){
-            // Majuscules
+            // Upper cases
             upper = 26;
         }else if (chr >= 97 && chr <= 122){
-            // Minuscules
+            // lower cases
             lower = 26;
         }else if (chr >= 128){
-            // Autress caractères
+            // other characters
             other = 128;
         }else{
-            // Symboles
+            // Symbols
             symbol = 33;
         }
     }
 
-    // On calcule le pool de caractères
+    // count characters
     let pool =  control + digit + upper + lower + other + symbol;
 
     // Formule de calcul de l'entropie

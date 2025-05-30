@@ -7,6 +7,7 @@
 	<main>
 		<section class="container mt-3">
 			<h2>Votre Réservation</h2>
+			{# Reservations details section #}
 			<div class="container mt-5 col-lg-6 col-md-6 col-sm-10" id="reservation-container">
 				<div class="card shadow-lg" id="reservation-card">
 					<div class="card-body">
@@ -58,6 +59,7 @@
 									<strong>Point de rencontre :</strong>
 								</p>
 								<span>
+								{# if no address defined #}
 									{% if reservation.address is not null %}
 										<a class="text-warning fw-bold text-truncate d-inline-block" style="max-width: 150px;" href="https://www.google.com/maps/search/?api=1&query={{ reservation.address }}" target="_blank">
 											{{ reservation.address }}
@@ -71,6 +73,7 @@
 					</div>
 				</div>
 			</div>
+			{# Price and confirm reservations section #}
 			<div id="price-container" class="container mt-5 col-lg-6 col-md-6 col-sm-10">
 				<div class="card shadow-lg">
 					<div class="card-body">
@@ -83,6 +86,7 @@
 									Crédits</span>
 							</div>
 							<div class="d-flex align-items-center">
+							{#  if 0 places / not enough coins or logout #}
 								{% if reservation.placesDispo == 0 %}
 									<p class="text-danger mb-0">Plus de places disponibles</p>
 								{% elseif app.user %}
@@ -101,9 +105,10 @@
 				</div>
 			</div>
 		</section>
+		{# Guides of the reservations section #}
 		<section class="container mt-3">
 			<h2>Votre guide</h2>
-			<div id="guide-details" class="container mt-5 col-lg-6 col-md-6 col-sm-10">
+			<div id="guide-details" class="container mt-5 mb-5 col-lg-6 col-md-6 col-sm-10">
 				<div class="card shadow-lg">
 					<div class="card-body">
 						<div
@@ -162,39 +167,8 @@
 				</div>
 			</div>
 		</section>
-		<section class="container mb-3 mt-3">
-			<h2>Avis reçus</h2>
-			<p id="show_review">Afficher les avis</p>
-			<div id="reviews_container" class="container mt-5 col-lg-6 col-md-6 col-sm-10">
-				<div class="card shadow-lg">
-					<div class="card-body">
-						<div class="row mb-2 border-bottom pb-2">
-							<div class="col-lg-4">
-								<strong>Date :</strong>
-								6 Mars 2025
-							</div>
-						</div>
-					</div>
-					<div class=" mb-2 d-flex align-items-center ">
-						<div class="ms-3">
-							<img src="{{ asset('/images/favicon.png') }}" alt="Photo du guide" class=" rounded-circle" width="50" height="50">
-						</div>
-						<div class="ms-1">
-							<strong>Thomas</strong>
-						</div>
-						<div class="ms-2">
-							<b>5
-								<i class="fa-solid fa-star text-warning"></i>
-							</b>
-						</div>
-					</div>
-					<div class="ms-3">
-						<p>C'était une expérience incroyable ! Le guide était très professionnel et la visite était bien organisée.</p>
-					</div>
-				</div>
-			</div>
-		</section>
 	</main>
+	{# Modal confirm reservations #}
 	<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">

@@ -19,13 +19,15 @@
 				<span class="text-white ms-3 fs-5">Menu Utilisateur</span>
 			</div>
 
-			{# Offcanvas menu mobile #}
+			{# Offcanvas mobile #}
 			{% include "_partials/_offcanvas_usernav.html.twig" %}
 			<section class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
 			<h1 class="ms-3 pb-3 border-bottom border-dark">Votre compte</h1>
+			{# Edit account form #}
 			{{ form_start(accountForm) }}
 				{{ form_row(accountForm.pseudo) }}
 				{{ form_row(accountForm.picture) }}
+				{# addPhoto.js #}
 				<div class="preview">
 					<img src="" class="rounded-circle" alt="" width="200">
 				</div>

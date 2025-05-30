@@ -8,41 +8,40 @@
 {% endblock %}
 
 {% block body %}
-	<main>
+<main>
 	<div class="container my-5 d-flex justify-content-center">
-  <div class="card shadow p-4 px-sm-5 rounded border border-2">
-    <h1 class="text-center mb-2">Donnez votre avis</h1>
-    <p class="fs-5 text-center">Votre opinion nous aide à améliorer notre site</p>
-    <p class="fs-6 text-center mb-4">Merci de prendre un moment pour nous faire part de vos impressions</p>
-    
-    {{ form_start(reviewWebForm) }}
-    
-    <div class="mb-3">
-      {{ form_label(reviewWebForm.pseudo) }}
-      {{ form_widget(reviewWebForm.pseudo, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    
-    <div class="mb-3 text-center">
-      {{ form_widget(reviewWebForm.rate) }}
-      <div id="stars" class="d-flex justify-content-center gap-2 text-secondary stars fs-1">
-        <i class="fa-solid fa-star star" data-value="1"></i>
-        <i class="fa-solid fa-star star" data-value="2"></i>
-        <i class="fa-solid fa-star star" data-value="3"></i>
-        <i class="fa-solid fa-star star" data-value="4"></i>
-        <i class="fa-solid fa-star star" data-value="5"></i>
+    <div class="card shadow p-4 px-sm-5 rounded border border-2">
+      <h1 class="text-center mb-2">Donnez votre avis</h1>
+      <p class="fs-5 text-center">Votre opinion nous aide à améliorer notre site</p>
+      <p class="fs-6 text-center mb-4">Merci de prendre un moment pour nous faire part de vos impressions</p>
+      {# Reviews website form #}
+      {{ form_start(reviewWebForm) }}
+      
+      <div class="mb-3">
+        {{ form_label(reviewWebForm.pseudo) }}
+        {{ form_widget(reviewWebForm.pseudo, {'attr': {'class': 'form-control'}}) }}
+      </div>      
+      <div class="mb-3 text-center">
+        {{ form_widget(reviewWebForm.rate) }}
+        {# reviewWebStar.js #}
+        <div id="stars" class="d-flex justify-content-center gap-2 text-secondary stars fs-1">
+          <i class="fa-solid fa-star star" data-value="1"></i>
+          <i class="fa-solid fa-star star" data-value="2"></i>
+          <i class="fa-solid fa-star star" data-value="3"></i>
+          <i class="fa-solid fa-star star" data-value="4"></i>
+          <i class="fa-solid fa-star star" data-value="5"></i>
+        </div>
+        <p id="note-text" class="text-center mt-2">Note : 0 sur 5</p>
+      </div>      
+      <div class="mb-3">
+        {{ form_row(reviewWebForm.commentary) }}
       </div>
-      <p id="note-text" class="text-center mt-2">Note : 0 sur 5</p>
+      
+      <button type="submit" class="btn btn-primary w-100">Envoyer mon avis</button>
+      
+      {{ form_end(reviewWebForm) }}
     </div>
-    
-    <div class="mb-3">
-      {{ form_row(reviewWebForm.commentary) }}
-    </div>
-    
-    <button type="submit" class="btn btn-primary w-100">Envoyer mon avis</button>
-    
-    {{ form_end(reviewWebForm) }}
   </div>
-</div>
-	</main>
+</main>
 {% endblock %}
 

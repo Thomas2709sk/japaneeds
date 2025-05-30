@@ -14,11 +14,11 @@
 					{% for reservation in reservations %}
 						<!-- Card reservation -->
 							{% include "cards/user_reservation_card.html.twig" %}
-						<!-- Modale d'annulation -->
+						<!-- Cancel reservation modal -->
 						{% include "modals/cancel_modal.html.twig" %}
-						<!-- Modal confirmer fin oui -->
+						<!-- Confirm reservation end with yes Modal -->
 						{% include "modals/user_confirm_yes_modal.html.twig" %}
-						<!-- Modal confirmer fin non -->
+						<!-- Confirm reservation end with no Modal-->
 						{% include "modals/user_confirm_no_modal.html.twig" %}
 					{% else %}
 						<p>Pas de réservations</p>

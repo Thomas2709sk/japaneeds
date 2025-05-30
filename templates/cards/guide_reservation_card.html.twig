@@ -1,3 +1,4 @@
+{# Card before end of reservation #}
 <div class="col-lg-4 col-md-6 mb-3">
 	<div class="card bg-light border-primary h-100">
 		<div class="card-header">
@@ -37,6 +38,7 @@
 				{{ reservation.price }}
 				Crédits</li>
 			<li class="list-group-item">Point de rencontre :
+				{# Use of maps with the address on create reservation #}
 				<a class="text-primary" target="blank" href="https://www.google.com/maps/search/?api=1&query={{ reservation.address }}">Voir carte</a>
 			</li>
 		</ul>

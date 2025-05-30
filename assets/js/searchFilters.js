@@ -1,3 +1,5 @@
+// not used for the moment , need to change search filters on results reservations page
+
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('filters-form');
     const resultsContainer = document.getElementById('results');

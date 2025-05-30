@@ -17,13 +17,19 @@
 		<meta property="og:type" content="website">
 		<meta property="og:site_name" content="Japaneeds you">
 		{% block stylesheets %}
+			{# Fonts #}
+			<link href="https://fonts.googleapis.com/css2?family=McLaren&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css2?family=McLaren&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+			{# Font awesome #}
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+			{# CSS #}
 			<link rel="stylesheet" href="{{ asset('styles/css/app.css') }}">
 			<link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
 		{% endblock %}
 
 		{% block javascripts %}
+			{# Bootstrap JS #}
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
 			{% block importmap %}
 				{{ importmap('app') }}
@@ -32,6 +38,7 @@
 	</head>
 	<body>
 		{% block header %}
+		{# Header for all pages except home page #}
 		<header class="p-3 bg-primary fs-5">
 			<nav class="navbar navbar-expand-lg bg-primary">
 				<div class="container-fluid ">
@@ -59,9 +66,6 @@
 									<li>
 										<a class="dropdown-item" href="{{path('app_regions_index') }}">Régions</a>
 									</li>
-									<li>
-										<a class="dropdown-item" href="#">Something else here</a>
-									</li>
 								</ul>
 							</li>
 						</ul>
@@ -77,10 +81,8 @@
 										<span class="ms-2">Bonjour,
 											{{ app.user.pseudo }}!</span>
 									</div>
-								{% else %}
-									
-									<i class="fa fa-user-circle" style="font-size: 1.5em;"></i>
-
+								{% else %}							
+									<i class="fa fa-user-circle fs-2"></i>
 								{% endif %}
 							</a>
 							<ul class="dropdown-menu  dropdown-menu-lg-end text-small" aria-labelledby="userDropdown">
@@ -89,6 +91,7 @@
 										<a class="dropdown-item" href="{{ path('app_login') }}">Connexion</a>
 									</li>
 								{% else %}
+								{# User #}
 									<li>
 										<a class="dropdown-item" href="{{ path('app_user_account_index') }}">Compte</a>
 									</li>
@@ -97,6 +100,7 @@
 											<a class="dropdown-item" href="{{ path('app_guide_account_index') }}">Compte Guide</a>
 										</li>
 									{% endif %}
+									{# Admin and staff #}
 									{% if is_granted('ROLE_ADMIN') %}
 										<li class="">
 											<a class="dropdown-item" href="{{ path('admin_index') }}">Administrateur</a>
@@ -110,8 +114,7 @@
 									<li>
 										<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
 									</li>
-								{% endif %}
-								
+								{% endif %}							
 							</ul>
 						</div>
 					</nav>
@@ -121,8 +124,8 @@
 				{% include "flash_messages.html.twig" %}
 
 				{% block body %}{% endblock %}
-
-				<footer class="">
+				{# Footer for all pages #}
+				<footer>
 					<div class="container-fluid bg-primary">
 						<div class="py-3">
 							<ul class="nav justify-content-center border-bottom fs-5 align-items-center pb-3 mb-3">

@@ -34,6 +34,7 @@
 							</tr>
 						</thead>
 						<tbody>
+							{# Only show admin and staff #}
 							{% for user in users %}
 								{% if 'ROLE_ADMIN' in user.roles or 'ROLE_STAFF' in user.roles %}
 									<tr>
@@ -67,7 +68,7 @@
 									<button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removeModal-{{ user.id }}">Supprimer</button>
 								</td>
 							</tr>
-							<!-- Modale suppression-->
+							<!-- Delete Modal-->
 								{% include "modals/admin_remove_user_modal.html.twig" %}
 							{% endif %}
 						{% endfor %}

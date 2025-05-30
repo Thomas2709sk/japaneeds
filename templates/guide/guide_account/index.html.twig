@@ -20,6 +20,7 @@
 			{% include "_partials/_offcanvas_guidenav.html.twig" %}
 			<section class="col-12 col-lg-10 col-md-9 pe-4 ps-3 border border-light bg-light p-2">
 				<h2>Vos informations de guide</h2>
+				{# Edit guide form #}
 				{{ form_start(guideForm) }}
 				<div>
 					{{ form_label(guideForm.cities, 'Ville :', { 'attr': { 'class': 'form-label' } }) }}
@@ -33,10 +34,7 @@
 				{{ form_widget(guideForm.languages, {'attr': {'class': 'form-control'}}) }}
 
 				<div class="form-group d-flex mt-2">
-
 					<label for="{{ guideForm.smoking.vars.id }}" class="form-label mr-2">Fumeur :</label>
-
-
 					{{ form_widget(guideForm.smoking, { 'attr': { 'class': 'form-check-input' } }) }}
 				</div>
 
@@ -55,5 +53,4 @@
 			</section>
 		</div>
 	</div>
-
 {% endblock %}
