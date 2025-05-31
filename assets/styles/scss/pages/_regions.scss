@@ -26,3 +26,47 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     background: #fff;
   }
+
+
+.box {
+    transition: all 500ms ease-out;
+    will-change: transform; 
+
+}
+.box img {
+  transition: transform 0.5s;
+
+  &:hover{
+      transform: scale(1.12);
+  }
+}
+
+.grid:hover .box {
+    filter: blur(5px);
+    
+}
+  
+.grid .box:hover {
+    filter: blur(0);
+}
+
+
+@media (max-width: 768px) {
+       
+    .box{
+        filter: none;
+    }
+    .box:hover{
+        transform: none;
+        
+        
+    }
+    .grid:hover .box {
+        filter: none;
+    }
+        .box:hover img {
+        transform: none;
+        filter: none;
+    }
+}
+

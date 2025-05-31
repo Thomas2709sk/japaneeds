@@ -12033,6 +12033,46 @@ body {
   pointer-events: none;
 }
 
+.field {
+  width: 20rem;
+}
+
+.flag {
+  width: 10rem;
+  height: auto;
+  justify-self: left;
+}
+
+.carousel {
+  max-width: 60rem;
+  max-height: auto;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.img-pref {
+  width: 10rem;
+}
+
+.separator {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 92px;
+  height: 17px;
+}
+
+.map {
+  max-height: 350px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
+}
+
 .up-card {
   height: 14.375rem;
 }
@@ -12061,6 +12101,41 @@ body {
   background: #fff;
 }
 
+.box {
+  transition: all 500ms ease-out;
+  will-change: transform;
+}
+
+.box img {
+  transition: transform 0.5s;
+}
+.box img:hover {
+  transform: scale(1.12);
+}
+
+.grid:hover .box {
+  filter: blur(5px);
+}
+
+.grid .box:hover {
+  filter: blur(0);
+}
+
+@media (max-width: 768px) {
+  .box {
+    filter: none;
+  }
+  .box:hover {
+    transform: none;
+  }
+  .grid:hover .box {
+    filter: none;
+  }
+  .box:hover img {
+    transform: none;
+    filter: none;
+  }
+}
 /* Animated background (sunset/sunrise) */
 .animated-bg {
   position: fixed;
@@ -12161,7 +12236,6 @@ body {
 }
 
 .navbar {
-  background-color: white;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -12347,6 +12421,17 @@ body {
   background-size: cover;
   background-position: bottom;
   text-shadow: 2px 2px 8px black;
+}
+
+.hero_kansai {
+  width: 100%;
+  height: 33rem;
+  padding: 2rem;
+  background-image: url(/images/regions/kansai/kansai4.jpg);
+  background-size: cover;
+  background-position: bottom;
+  text-shadow: 2px 2px 8px black;
+  background-position: top;
 }
 
 .asanoha-card {

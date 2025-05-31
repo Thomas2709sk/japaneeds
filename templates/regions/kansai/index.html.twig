@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kansai{% endblock %}
+
+{% block body %}
+{# This a template to show what informative pages can look like #}
+<main>
+    <section class="hero_kansai text-center d-flex flex-column justify-content-center container-fluid">
+        <h1 class="text-white hero_title text-center">Kansai</h1>
+    </section>
+     <div>
+        <p class="text-center text-primary pt-4 pb-2 fs-3 fw-bold">Berceau de nombreuses traditions culturelles</p>
+    </div>
+    <div class="container flux text-center pt-5">
+        <p class="fs-5 fw-bold">Le Kansai (関西) est une région située dans le sud-ouest du Japon, alliant patrimoine historique et culture traditionnelle avec une forte influence économique. C’est une destination idéale pour découvrir l'histoire du Japon tout en profitant de la modernité de ses grandes villes.</p>
+    </div>
+
+       <div class="row container flux justify-content-between d-flex align-items-start pt-5">
+            <fieldset class="field border col-lg-6 col-md-6 border-3 border-primary rounded-3 mb-3">
+            <legend class="float-none w-auto px-3">Sommaire</legend>
+            <ul class="fs-5">
+                <li><a href="#mie" class="text-danger fw-bold">Prefecture de Mie</a></li>
+                <li><a href="#shiga" class="text-danger fw-bold">Prefecture de Shiga</a></li>
+                <li><a href="#kyoto" class="text-danger fw-bold">Prefecture de Kyoto</a></li>
+                <li><a href="#osaka" class="text-danger fw-bold">Prefecture d'Osaka</a></li>
+                <li><a href="#hyogo" class="text-danger fw-bold">Prefecture de Hyogo</a></li>
+                <li><a href="#nara" class="text-danger fw-bold">Prefecture de Nara</a></li>
+                <li><a href="#wakayama" class="text-danger fw-bold">Prefecture de Wakayama</a></li>
+                <li><a href="#visite" class="text-danger fw-bold">Lieux à visiter</a></li>
+                <li><a href="#galerie" class="text-danger fw-bold">Galerie</a></li>
+            </ul>
+            </fieldset>
+            <!-- MAP -->
+            <div class="col-12 col-md-6 col-lg-6">
+            <h2 class="text-center pb-3">Où se situe le Kansai ?</h2>
+            <img src="{{ asset('/images/regions/kansai/mapjapankansai.png') }}" class="map img-fluid" alt="Carte du Kansai">
+            </div>
+      </div>
+        <!-- START PREFECTURE CONTENT -->
+    <section class="container flux">
+
+      <article id="mie" class="container  d-block align-items-start pt-5">
+        <img src="{{ asset('/images/regions/kansai/flag/flagmie.png') }}" class="flag img-fluid" alt="dpaeau préfecture de Mie">
+        <h3 class="pt-4 fs-2"> La préfecture de Mie</h3>
+        <p class="lh-base pb-4 fs-4">La préfecture de Mie est située dans la région du Kansai, et est connue pour ses paysages côtiers, ses montagnes et ses sites spirituels emblématiques. Elle abrite le célèbre <strong>sanctuaire d'Ise</strong>, l’un des lieux les plus sacrés du shintoïsme au Japon. Mie est également réputée pour la baie d’Ago et ses élevages de perles, ainsi que pour les <strong>ama</strong>, les célèbres plongeuses traditionnelles. </p>
+      </article>
+
+        <div class="separator bg-danger pt-2"></div>
+
+      <article id="shiga" class="container  d-block align-items-start pt-5">
+        <img src="{{ asset('/images/regions/kansai/flag/flagshiga.png') }}" class="flag img-fluid" alt="drapeau préfecture de Shiga">
+        <h3 class="pt-4 fs-2"> La préfecture de Shiga</h3>
+        <p class="lh-base pb-4 fs-4">La préfecture de Shiga est située dans la région du Kansai, et est surtout connue pour le <strong>lac Biwa</strong>, le plus grand lac du Japon, qui offre de magnifiques paysages et de nombreuses activités nautiques. La région possède également un riche patrimoine historique, avec des sites tels que le <strong>château de Hikone</strong>, l’un des rares châteaux originaux encore existants, et des temples paisibles nichés dans les montagnes environnantes. </p>
+      </article>
+
+      <div class="separator bg-danger pt-2"></div>
+
+      <article id="kyoto" class="container d-block align-items-start pt-5">
+            <img src="{{ asset('/images/regions/kansai/flag/flagkyoto.png') }}" class=" flag img-fluid" alt="drapeau préfecture de Kyoto">
+        <h3 class="pt-4 fs-2"> La préfecture de Kyoto</h3>
+        <p class="lh-base pb-4 fs-4">La préfecture de Kyoto est située dans la région du Kansai, et est réputée pour son riche patrimoine culturel et historique. La ville de Kyoto, ancienne capitale impériale pendant plus de mille ans, abrite de nombreux temples, sanctuaires, jardins et palais, dont le célèbre <strong>Kinkaku-ji</strong>(Pavillon d'Or) et le <strong>Fushimi Inari-taisha</strong>.</p>    
+      </article>
+
+      <div class="separator bg-danger pt-2"></div>
+
+      <article id="osaka" class="container d-block align-items-start pt-5">
+          <img src="{{ asset('/images/regions/kansai/flag/flagosaka.png') }}" class="flag img-fluid" alt="drapeau préfecture d'Osaka">
+        <h3 class="pt-4 fs-2"> La préfecture d'Osaka</h3>
+        <p class="lh-base pb-4 fs-4">La préfecture d’Osaka est située dans la région du Kansai, et est réputée pour son dynamisme urbain, sa scène culinaire renommée et son ambiance conviviale. La ville d’Osaka, centre économique majeur, abrite des sites emblématiques tels que le <strong>château d’Osaka</strong> et le quartier animé de <strong>Dotonbori</strong>, célèbre pour ses néons, ses restaurants et son atmosphère unique. </p>
+      </article>
+
+      <div class="separator bg-danger pt-2"></div>
+
+      <article id="hyogo" class="container d-block align-items-start pt-5">
+          <img src="{{ asset('/images/regions/kansai/flag/flaghyogo.png') }}" class="flag img-fluid" alt="drapeau préfecture de Hyogo">
+          <h3 class="pt-4 fs-2"> La préfecture de Hyogo</h3>
+          <p class="lh-base pb-4 fs-4">La préfecture de Hyogo est située dans la région du Kansai. Elle est célèbre pour sa capitale <strong>Kobe</strong>, un port important et une ville cosmopolite, connue pour son bétail de haute qualité (bœuf de Kobe). Hyogo offre une diversité de paysages, allant des montagnes à la mer, avec des sites naturels tels que le mont Rokko et des sources thermales comme celles de Arima Onsen. La préfecture est également riche en histoire, abritant des temples, des châteaux comme le <strong>château de Himeji</strong>(classé au patrimoine mondial de l'UNESCO), et une cuisine variée. </p>
+      </article>
+      
+      <div class="separator bg-danger pt-2"></div>
+
+      <article id="nara" class="container  d-block align-items-start pt-5">
+        <img src="{{ asset('/images/regions/kansai/flag/flagnara.png') }}" class="flag border border-dark img-fluid" alt="drapeau préfecture de Nara">
+        <h3 class="pt-4 fs-2"> La préfecture de Nara</h3>
+        <p class="lh-base pb-4 fs-4">La préfecture de Nara est située dans la région du Kansai, et est célèbre pour ses trésors historiques et spirituels. Ancienne capitale du Japon, elle abrite de nombreux sites classés au patrimoine mondial, comme le <strong>temple Tōdai-ji</strong>, qui abrite le Grand Bouddha, et le <strong>parc de Nara</strong>, connu pour ses daims en liberté considérés comme messagers des dieux dans la tradition shinto. </p>
+      </article>
+
+      <div class="separator bg-danger pt-2"></div>
+
+      <article id="wakayama" class="container  d-block align-items-start pt-5">
+        <img src="{{ asset('/images/regions/kansai/flag/flagwakayama.png') }}" class="flag border border-dark img-fluid" alt="drapeau préfecture de Wakayama">
+        <h3 class="pt-4 fs-2"> La préfecture de Wakayama</h3>
+        <p class="lh-base pb-4 fs-4">La préfecture de Wakayama est située dans la région du Kansai, et est réputée pour ses sites sacrés, sa nature préservée et ses paysages côtiers. Elle abrite le célèbre <strong>mont Kōya</strong>, centre spirituel du bouddhisme Shingon, ainsi que le <strong>pèlerinage de Kumano Kodo</strong>, classé au patrimoine mondial de l’UNESCO. Wakayama est également connue pour ses sources chaudes et ses vues spectaculaires sur l’océan Pacifique. </p>
+      </article>
+
+    </section>
+      <section id="visite" class="container flux pb-4 pt-5">
+        <div class="d-block justify-content-center">
+          <div class="d-flex justify-content-center">
+            <svg width="90px" height="90px" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--noto" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M40.46 35.24s-3.86-3.45-6.56-6.09c-4.12-4.03-4.95-5.41-4.86-6.25c.09-.84 7.76 1.19 7.76 1.19l16.5-8.44l23.06-.75l17.16 8.91l4.65-.93s-.71 1.96-3.33 4.77c-2.46 2.63-7.31 8.34-7.31 8.34l-47.07-.75z" fill="#546f7a"></path><path d="M63.64 45.3l-20.05.35l-17.85 2.15s-7.87-1.41-7.87-.75c0 .66.94 1.87 2.53 3.66c1.59 1.78 10.22 10.12 10.22 10.12l2.16 6.09l20.34 4.78l41.81-2.72l.94-7.87s5.72-5.62 7.59-7.22s5.01-4.4 5.57-5.25c.56-.84.38-1.79.38-1.79l-11.29 1.41l-32.42-2.68l-2.06-.28z" fill="#546f7a"></path><path d="M28.27 71.71l-17.9 4.69l-7.59-.47s-.02 1.42 1.83 3.25c2.72 2.69 8.86 8.28 9.8 9.03c.94.75 1.41 1.12 2.44 1.12s92.69 2.21 93.25 2.02c.56-.19 5.12-4.37 7.94-6.86c1.56-1.38 6.3-5.05 6.45-6.5c.12-1.15-.22-1.42-.22-1.42l-11.52.58l-33.37-4.41l-51.11-1.03z" fill="#546f7a"></path><path fill="#73a0a2" d="M16.21 81.25l.06 15.86l48.75.38l45.37-.47V81.93z"></path><path fill="#73a0a2" d="M30.15 66.93l.09-13.97l65.9-.1l.19 14.07l-36.84 3.56z"></path><path fill="#73a0a2" d="M39.83 28.76l.08 12.75l23.61 1.74l24.09-1.73V28.86z"></path><path d="M46.79 30.3l1.8-1.51s1.34.06 1.92-.31c.58-.36 5.2-5.94 6.29-6.38c.89-.36 13.69-.2 14.42.09c.73.29 5.46 5.59 6.6 6.34c.68.45 1.93.4 1.93.4l2.24 1.81l-35.2-.44z" fill="#b9ced3"></path><path fill="#b9ced3" d="M34.21 55.11l30.18 2.9l28.22-3.2l.03-1.94l-58.42.07z"></path><path fill="#ffffff" d="M20.31 81.27v15.71l86.11.64l-.11-15.71z"></path><path d="M15.29 97.94s-.21-1.18.85-1.5s92.77.37 93.53.41c1.82.11 1.44 1.62 1.44 1.62l-50 1.29l-45.82-1.82z" fill="#bcced2"></path><path fill="#ffffff" d="M34.2 67.17l.01-12.06l58.4-.3l-.19 15.03z"></path><path fill="#ffffff" d="M43.82 41.32l-.1-12.55l39.85.1l-.01 12.56z"></path><path d="M29.39 23.59s4.7 2.56 7.26 2.78c2.56.21 10.47.43 11.75-.21s5.56-6.3 7.05-7.05c1.5-.75 15.28-.63 16.95-.01c1.36.5 6.13 6.53 7.3 6.96c1.18.43 12.93.22 14.42-.21c2.06-.6 3.25-1.54 3.89-2.68c.53-.96-.26-1.7-1.22-1.59c-.96.11-4.7.96-8.01-2.14c-3.31-3.1-6.2-9.61-6.2-9.61H44.14s-1.71 6.94-3.63 8.97c-1.92 2.03-3.53 3.31-5.56 3.2c-1.82-.1-2.59-.49-3.53-.75c-1.92-.55-2.95 1.63-2.03 2.34z" fill="#385661"></path><path d="M35.06 40.25c-.48.4-3.25 4.51-8.12 5.46c-4.38.85-6.52-1.3-8.44-.44c-.98.43-.63 1.78-.63 1.78S20.48 49.7 26 50.1c1.63.12 32.34.73 37.79.52s39.89-.12 41.28-.31c1.98-.27 3.91-2.58 4.23-2.9c.32-.32.19-1.48-1.41-1.9c-1.6-.43-2.75.83-6.71.41c-4.82-.52-6.84-5.56-7.37-5.56c-.53 0-58.11-.64-58.75-.11z" fill="#385661"></path><path d="M63.66 40.62c-2.07-.11-9.34 10.56-15.67 15.87c-7.27 6.09-13.79 10.68-13.79 10.68l31.41 4.17l29.27-3.85s-10.9-6.84-16.45-11.86s-12.11-14.86-14.77-15.01z" fill="#546f7a"></path><path d="M41.14 66.96s7.05-4.81 12.18-9.4s9.4-10.47 10.36-10.58s6.23 7.03 11.22 11.32c5.34 4.6 14 10.48 14 10.48l-25.85 2.14l-21.91-3.96z" fill="#ffffff"></path><path d="M46.68 67.36s3.37-1.86 7.83-6.08c2.79-2.64 5.99-5.43 5.99-5.43s1.35 1.69 3.07 1.69s3.19-1.64 3.19-1.64s4.84 4.44 7.41 6.55c2.93 2.41 8.19 5.86 8.19 5.86s-17.67 2.5-17.67 2.24s-18.01-3.19-18.01-3.19z" fill="#b9ced3"></path><path d="M18.3 66.06c-.45.72-4.47 6.44-7.56 7.72s-5.72.26-6.8.56c-1.09.3-1.17 1.58-1.17 1.58s1.07 1.18 6.51 1.38c5.44.2 42.17.43 53.65.54s51.95 1.04 55.71.73c3.76-.31 5.81-1.56 5.81-1.56s-.23-1.58-1.9-1.58s-4.08.11-7.11-1.46c-3.03-1.56-6.71-6.78-8.28-7.3c-.77-.26-22.13.04-43.6-.1c-22.22-.14-45.02-.9-45.26-.51z" fill="#385661"></path><path d="M15.29 97.94s-3.17 9.17-4.63 12.77c-1.77 4.38-5.42 11.89-5.42 11.89l3.96 1.36l103.59.83l10.22-3.03s-4.69-6.68-8.03-13.56c-2.91-6-3.87-9.73-3.87-9.73l-95.82-.53z" fill="#89837c"></path><path fill="#2f2f2f" d="M33.66 86.02h5.11v7.79h-5.18z"></path><path d="M42.1 86.02v7.86h4.65v-7.86s-4.71.06-4.65 0z" fill="#2f2f2f"></path><path fill="#2f2f2f" d="M56.96 86.02v7.92h5.05v-7.86z"></path><path fill="#2f2f2f" d="M65.08 86.02h4.71v7.92h-4.71z"></path><path fill="#2f2f2f" d="M80.53 86.08h4.84v7.79h-4.84z"></path><path fill="#2f2f2f" d="M88.52 86.08v7.73h4.71v-7.66z"></path><path d="M57.69 60.35h2.64l-.04 6.21l-2.66-.03s.11-6.24.06-6.18z" fill="#2f2f2f"></path><path fill="#2f2f2f" d="M62.27 60.35l.01 6.24h2.75l-.01-6.19z"></path><path d="M66.94 60.4h2.75l.02 6.2h-2.75s.09-6.09-.02-6.2z" fill="#2f2f2f"></path><path fill="#2f2f2f" d="M52.78 31.81h4.69v5.45h-4.69z"></path><path d="M62.16 31.87h4.26v5.45H62.1c.01-.01.17-5.45.06-5.45z" fill="#2f2f2f"></path><path fill="#2f2f2f" d="M70.96 31.87h4.2v5.39h-4.31z"></path><path d="M79.34 9.81h1.74s-.24 1.1-.5 1.73c-.41.99-.6 1.78-.09 2.5s2.96 1.52 5.21-.59c2.24-2.12.68-7.37 1.1-8.22s1.44-1.1 1.74-1.57s-.42-2.58-2.58-2.63c-1.61-.03-2.5 1.36-2.5 1.36S82.26.8 81 .99c-1.69.25-2.75 2.12-2.67 2.58s2.33.55 2.08 2.75c-.22 1.83-1.07 3.49-1.07 3.49z" fill="#fcc01e"></path><path d="M47.46 9.81h-1.82s.04 2.46 0 3.43c-.04.97-1.06 2.07-2.84 1.82c-2.16-.3-2.92-2.29-2.8-5.12s1.2-3.74.72-4.87c-.47-1.1-1.74-.34-2.12-.59c-.57-.38.21-3.08 2.63-3.25c2.09-.15 2.71 1.43 2.71 1.43S45 1.07 46.91 1.42c2.24.42 2.67 2.8 2.33 3.13c-.34.34-1.4-.3-2.03.85c-1.19 2.17.25 4.41.25 4.41z" fill="#fcc01e"></path><path d="M9.26 113.97s1.3 1.44 1.42 5.09c.12 3.65-.92 4.9-.92 4.9s-3.81.08-4.72 0s-1.54-1.33-.51-2.8c1.03-1.47 4.73-7.19 4.73-7.19z" fill="#afa59e"></path><path d="M12.74 107.4c-.33.77-.2 2.22-.08 3.25c.12 1.03.08 2.18 1.03 2.93c.95.75 2.3.87 4.84.79c2.54-.08 3.13-.2 3.61-1.03c.48-.83.36-4.56.44-5.27c.08-.71-2.8-2.89-3.29-3.05c-.6-.2-5.88.79-6.55 2.38z" fill="#afa59e"></path><path d="M12.83 104.9s5.74-1.11 5.82-2.1c.1-1.19-1.39-1.86-2.02-2.46c-.63-.59-1.58-1.69-1.58-1.69l-2.22 6.25z" fill="#afa59e"></path><path d="M21.58 100.02c-.56.52-.95 2.42-.04 4c.9 1.57 1.94 2.42 3.49 2.46s1.9-3.01 2.18-4c.28-.99.51-1.76-1.19-2.26c-2.14-.63-4.01-.59-4.44-.2z" fill="#afa59e"></path><path d="M16.67 97.93s.87 1.43 2.3 1.47c1.43.04 2.46-1.43 2.46-1.43l-4.76-.04z" fill="#afa59e"></path><path d="M28.97 98.01s-.17 1.22.39 2.06c.56.83.36 1.98 2.18 2.14c1.82.16 5.95.36 6.82-.12c.56-.31.54-4.02.54-4.02l-9.93-.06z" fill="#afa59e"></path><path d="M34.27 103.2c-2.5.08-4.64.56-5.59 1.67c-.95 1.11-1.47 2.42-2.46 3.89c-.99 1.47-2.06 3.85-1.9 5.27c.16 1.43 2.65 3.93 3.97 3.97c1.35.04 2.66-1.42 3.33-1.47c.63-.04 1.99.96 2.97.79c1.43-.24 2.93-2.1 3.69-5.75c.84-4.08.24-5.83.16-6.15c-.09-.32-.64-2.34-4.17-2.22z" fill="#afa59e"></path><path d="M12.58 118.46c.13 1.55 2.02 4.72 3.45 4.88c1.84.2 3.7-1.63 3.85-2.62c.2-1.35-1.55-4.88-3.81-4.64c-1.32.14-3.65.44-3.49 2.38z" fill="#afa59e"></path><path d="M22.25 122.47c.37.53 3.01-.08 3.53-.28s1.98-1.15 1.86-1.74s-2.22-2.34-3.37-2.22c-1.14.11-2.57 3.44-2.02 4.24z" fill="#afa59e"></path><path d="M28.78 124.11l9.3.08s1.27-.46 1.42-1.53s-5.43-3.93-7.06-3.69c-1.63.24-2.66 1.23-3.09 2.46c-.43 1.24-.57 2.68-.57 2.68z" fill="#afa59e"></path><path d="M38 118.03c-.07.99 2.74 2.93 3.37 2.93s3.09-3.21 3.37-4.88c.34-2.06-2.69-3.71-3.53-3.41c-1.11.4-3.13 4.29-3.21 5.36z" fill="#afa59e"></path><path d="M47.71 99.32c0 .5-.99 2.05-1.14 2.53c-.16.48.59 3.97-.36 4.44c-.95.48-2.7-1.03-3.57-1.9c-.87-.87-2.26-2.26-2.34-2.78c-.08-.52.99-1.78 2.06-2.42c1.07-.63 2.49-1.09 2.49-1.09l2.15.01s.71.22.71 1.21z" fill="#afa59e"></path><path d="M41.05 106.77c-.49.34-.67 2.54-.36 3.33c.32.79 1.78 1.82 2.46 1.74s2.06-1.74 2.02-2.97c-.04-1.23-3.37-2.62-4.12-2.1z" fill="#afa59e"></path><path d="M44.97 112.16c.04.75 1.51 2.82 1.98 2.93s2.14-.91 2.62-1.11c.48-.2 2.7.16 3.29-.59c.59-.75-.71-3.25-1.11-3.93c-.4-.67-1.55-1.86-1.94-1.82s-2.22.75-2.93 1.39c-.72.63-1.94 2.41-1.91 3.13z" fill="#afa59e"></path><path d="M52.67 98.24c-.49-.11-2.1 1.27-2.78 2.38s-1.55 2.18-1.31 3.01s4.54 3.19 6.26.99c2.78-3.52-1.66-6.26-2.17-6.38z" fill="#afa59e"></path><path d="M56.93 98.18s-.3.42.3 1.17c.59.75 1.7 3.45 3.33 3.37c1.63-.08 3.09-1.67 3.81-2.54c.71-.87.79-1.97.79-1.97l-8.23-.03z" fill="#afa59e"></path><path d="M53.78 108.35c-.17.41.24 1.59.95 1.47c.71-.12 1.11-.52 2.46-.52c1.35 0 1.98 1.51 3.13 1.39c1.15-.12 2.34-.99 2.74-1.82c.4-.83.44-1.98.32-2.3s-2.1-1.63-4.2-1.51c-2.11.12-4.85 1.98-5.4 3.29z" fill="#afa59e"></path><path d="M56.16 112.12c-.94.57-1.23 1.55-1.11 2.1c.12.56-1.35 1.86-.75 3.25c.59 1.39 2.82 4.08 3.41 4.72c.59.63 2.93.67 3.37.44c.44-.24 3.09-2.7 3.37-3.61c.28-.91-1.23-4-2.06-5.04c-.84-1.03-4.33-3.01-6.23-1.86z" fill="#afa59e"></path><path d="M66.07 108.07c-.94.47-2.42 2.78-2.54 3.57s.52 2.74 1.82 2.26c1.31-.48 2.58-2.34 2.97-2.7c.4-.36 2.5-1.77 2.5-2.62c.01-1.1-4.27-.74-4.75-.51z" fill="#afa59e"></path><path d="M68.09 99.19c-.62.45-4.32 4.08-4.16 4.6c.16.52 1.82 1.98 2.58 2.38c.75.4 2.22.08 3.69.2c1.47.12 2.93.67 3.61.52c.67-.16 3.33-1.31 3.09-3.21c-.24-1.9-3.93-3.81-5.71-4.24c-1.79-.45-2.66-.57-3.1-.25z" fill="#afa59e"></path><path d="M73.67 98.26s1.01 1.36 2.63 2.47s3.13 1.39 4.16.71c1.03-.67 2.54-3.13 2.54-3.13l-9.33-.05z" fill="#afa59e"></path><path d="M81.3 102.48c-.75 0-2.06 1.27-2.46 1.63c-.4.36-.79.91-.52 1.35s2.62.63 3.13.12c.52-.52.64-3.1-.15-3.1z" fill="#afa59e"></path><path d="M83.24 103.79c.26 1.14 3.89 3.13 5.08 2.82c1.19-.32 3.17-2.82 3.21-3.53s-2.93-3.41-3.33-3.73c-.4-.32-3.25-.4-3.49-.04s-1.75 3.29-1.47 4.48z" fill="#afa59e"></path><path d="M75.66 109.38c-.13.78 1.67 2.85 2.5 3.89s.95 2.3 1.82 2.5c.87.2 2.78-.79 3.69-2.89c.91-2.1 1.39-3.13.24-4.72c-1.15-1.59-3.57-1.19-4.48-.99c-.91.19-3.57 1.06-3.77 2.21z" fill="#afa59e"></path><path d="M92.56 99.83c-.52.32-.24 3.05.52 3.41c.75.36 1.55.04 2.26-.44c.71-.48 1.67-1.55 1.43-2.02c-.25-.48-3.66-1.29-4.21-.95z" fill="#afa59e"></path><path d="M42.48 124.22s.04-.78 1.53-2.74s3.06-4.62 5.33-4.44s3.16 1.46 4.55 3.34c1.39 1.88 2.99 3.95 2.99 3.95l-14.4-.11z" fill="#afa59e"></path><path d="M63.74 124.4s2.14-2.23 2.95-2.13c.82.11.5.53 1.14 1c.64.46 1.56 1.17 1.56 1.17l-5.65-.04z" fill="#afa59e"></path><path d="M66.41 115.16c-.77.69-.81 3.05.21 4.48c1.32 1.85 3.88 3.73 5.08 4.27c1.21.53 2.49-1.35 2.42-2.42c-.07-1.07-2.06-3.66-3.24-4.73s-3.51-2.45-4.47-1.6z" fill="#afa59e"></path><path d="M68.89 113.52c-.01.44 3.03 2.97 3.82 3.82c.8.85 2.97 2.68 4.25 2.5c1.27-.19 1.86-1.43 1.59-2.63s-2.2-3.77-3.19-4.73c-.98-.96-2.34-1.62-3.05-1.59c-.71.03-3.39 1.62-3.42 2.63z" fill="#afa59e"></path><path d="M82.78 116.84c-.2.22-3.51 3.67-3.8 4.41c-.29.74.03 2.68.16 2.95s.28.33.28.33l1.41.01s1.58-2.11 2.43-3.17c.85-1.06 1.33-2.26 1.25-2.6c-.08-.36-1.49-2.19-1.73-1.93z" fill="#afa59e"></path><path d="M85.68 121.28c-.52-.02-1.73 1.38-1.99 1.7c-.27.32-1.06 1.57-1.06 1.57l5.41.04c-.01 0-1.51-3.29-2.36-3.31z" fill="#afa59e"></path><path d="M85.07 114.37c-.25 1.53.48 3.49 1.67 5.26c1.46 2.18 4.25 4.25 5.98 4.06c1.73-.19 3.82-2.47 4.44-3.93c.61-1.46.77-3.75-.56-4.73c-1.33-.98-2.5-.61-3.24-1.06c-.74-.45-3.78-3.18-4.86-3.11c-1.15.08-3.11 1.57-3.43 3.51z" fill="#afa59e"></path><path d="M91.28 108.85c.12 1.11.56 2.68 2.84 3.59c2.28.9 3.53.82 4.06.72c.53-.11 4.04-2.68 3.64-4.04c-.4-1.35-.82-1.89-2.9-1.97c-2.07-.08-3.67-1.86-4.97-1.49c-1.28.37-2.82 1.75-2.67 3.19z" fill="#afa59e"></path><path d="M96.33 103.88c-.09 1.25 1.57 1.23 2.76 1.22c1.13-.01 3.27-1.98 3.48-3.69c.08-.61-1.44-1.29-2.26-1.41c-.9-.13-3.93 3.14-3.98 3.88z" fill="#afa59e"></path><path d="M102.75 98.42s.76 1.15 2.32 1.87c1.57.72 2.36 1.43 3.37.98c1.01-.45 1.86-2.82 1.86-2.82l-7.55-.03z" fill="#afa59e"></path><path d="M102.81 104.92c.11 1.38 1.12 3.16 1.49 3.43c.37.27 3.16.37 3.67.21c.5-.16 1.73-2.71 1.91-3.05c.19-.35-.21-1.89-.58-2.07c-.37-.19-2.18-.66-2.36-.88c-.19-.21-1.59-.64-1.94-.45c-.35.18-2.29 1.53-2.19 2.81z" fill="#afa59e"></path><path d="M113.14 104.12s-1.17 2.15-2.26 3.42c-1.09 1.27-1.86 1.27-2.07 3s1.12 4.25 2.34 4.2s2.52-1.73 3.08-2.52c.56-.8 1.39-2.76 1.39-2.76s-1.02-2.05-1.31-2.69s-1.17-2.65-1.17-2.65z" fill="#afa59e"></path><path d="M101.06 112.88c-.42.44-1.73 4.06-1.59 4.67c.13.61 1.97 1.89 2.52 1.89s3.04-1.62 3.67-2.07c.66-.48 2.1-1.91 2.07-2.47c-.03-.56-1.2-4.46-2.39-4.62c-1.2-.16-3.64 1.94-4.28 2.6z" fill="#afa59e"></path><path d="M101.47 124.7s-1.25-2.76-2.9-2.84c-1.12-.05-2.96 2.78-2.96 2.78l5.86.06z" fill="#afa59e"></path><path d="M104 124.72s-1.43-1.5-1.32-2.54c.19-1.73 3.75-3.77 4.28-3.85c.53-.08 2.47 1.94 2.76 2.82c.29.88.35 2.05-.21 2.55c-.56.5-1.35 1.06-1.35 1.06l-4.16-.04z" fill="#afa59e"></path><path d="M110.2 117.66c.13.76.9 2.39 2.34 2.66c1.43.27 3.82-.37 5.23-.77s2.75-1.56 2.75-1.56l-.81-1.3s-3.16-2.05-5.61-1.42c-2.44.64-4.06 1.44-3.9 2.39z" fill="#afa59e"></path><path d="M116.82 111.75s-1.52 1.03-1.2 1.72c.32.69 2.04 1.27 2.28 1.38s.86.27.86.27l-1.94-3.37z" fill="#afa59e"></path><path d="M122.97 121.69s-1.85-1.11-3.05-.87c-1.2.24-4.83 1.41-5.76 1.94s-1.67 2.03-1.67 2.03s10.38.68 11.28-.06c.9-.74-.8-3.04-.8-3.04z" fill="#afa59e"></path><path d="M13.63 108.75c.15.81 1.38.96 2.69 1.7s1.88 1.52 3.26 1.38c1.38-.14 1.42-1.91 1.35-2.83s-.46-2.48-1.88-2.8c-1.41-.32-5.66 1.24-5.42 2.55z" fill="#dcd2c7"></path><path d="M26.99 109.53c-.28.92.21 2.34 1.17 2.2s3.97-3.08 5.03-3.65c1.06-.57 4.29-1.31 4.18-2.55s-3.7-1.73-4.85-1.31c-1.18.42-4.99 3.54-5.53 5.31z" fill="#dcd2c7"></path><path d="M41.01 101.35c.04.78.81 1.98 1.95 1.49s.89-.81 1.42-1.06c.53-.25 2.02-.6 1.7-1.63s-2.13-1.03-3.22-.57c-1.11.46-1.88 1.06-1.85 1.77z" fill="#dcd2c7"></path><path d="M49.62 101.31c-.28 1.14 1.42 1.28 2.27 1.17c.85-.11 2.59.18 2.44-1.06c-.14-1.24-1.24-1.77-2.3-1.74c-1 .04-2.09.32-2.41 1.63z" fill="#dcd2c7"></path><path d="M46.22 112.08c.37.58 1.31.6 3.08-.67c1.77-1.28 2.51-1.59 1.81-2.51c-.71-.92-2.13-.43-3.26.43c-1.14.84-2.34 1.65-1.63 2.75z" fill="#dcd2c7"></path><path d="M57.2 106.91c-.02.69.6 1.52 2.44 1.66s2.69-.32 2.8-1.2s-.89-1.42-2.3-1.63s-2.91.11-2.94 1.17z" fill="#dcd2c7"></path><path d="M70.34 100.07c-.67-.03-3.19 1.81-3.75 2.48c-.57.67-.39 1.84.71 1.91c1.1.07 2.55.04 3.83.11c1.28.07 2.55.18 3.12.04c.57-.14 1.24-1.28.53-2.16c-.72-.89-3.52-2.34-4.44-2.38z" fill="#dcd2c7"></path><path d="M56.84 112.79c-1.18.98-.49 2.73.53 3.75c1.24 1.24 3.68 1.88 4.5.85c.81-1.03.18-3.01-1.45-4.25c-1.45-1.1-2.73-1.06-3.58-.35z" fill="#dcd2c7"></path><path d="M70.05 113.11c.1.74.5 1.38 2.2 1.31c1.7-.07 2.13-1.1 1.95-1.84c-.18-.74-1.36-1.05-2.09-1.03c-1.06.04-2.2.5-2.06 1.56z" fill="#dcd2c7"></path><path d="M77.28 110.1c.77.77 1.81.74 2.41 1.1c.6.35.43 1.42 1.84 1.06c1.42-.35 2.41-1.13 2.16-2.34c-.25-1.2-.99-2.48-2.3-2.62c-1.31-.14-3.54.46-3.97 1.03c-.42.56-.5 1.41-.14 1.77z" fill="#dcd2c7"></path><path d="M86.1 114.67c.32.91 2.98 2.62 4.57 3.01s3.68.71 4.85.07c1.17-.64 1.24-2.16.11-2.48c-1.13-.32-2.69-.11-3.19-.46s-2.23-3.12-3.4-3.08c-1.17.03-3.4 1.63-2.94 2.94z" fill="#dcd2c7"></path><path d="M93.15 107.94c-.05.72 1.42 2.8 3.72 2.98c2.3.18 4.04-1.56 3.72-2.48c-.32-.92-2.3-.92-3.36-1.1c-1.06-.18-1.95-1.13-2.55-.96s-1.46.53-1.53 1.56z" fill="#dcd2c7"></path><path d="M84.96 100.43c-.31.78-.89 1.95 1.31 2.44c2.2.5 2.83.04 3.19-.74s-.71-1.45-1.98-2.02c-1.28-.57-2.3-.21-2.52.32z" fill="#dcd2c7"></path><path d="M104.13 104.29c-.09 1.09 1.06 1.74 2.3 1.74s1.88-.67 1.95-1.49c.07-.81-.89-1.56-2.02-1.59c-1.14-.04-2.13.1-2.23 1.34z" fill="#dcd2c7"></path></g></svg>
+          </div>
+          <h2 class="text-center mb-3">Lieux à visiter</h2>
+        </div>
+            <div class="row">
+              <!-- FIRST CARD -->
+              <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card card-visit h-100">
+                  <img src="{{ asset('/images/regions/kansai/kansai4.jpg') }}" alt="" class="card-img-top">
+                  <div class="card-body text-white bg-primary bg-gradient d-flex flex-column">
+                    <h3 class="fs-3">Château de Himeji<br>(姫路城, Himeji-jō)</h3>
+                    <p class="card-text fs-5">Également connu sous le nom de Château du Héron blanc en raison de la couleur blanche de ses murs. Il a été désigné trésor national en 1951 et inscrit sur la liste du patrimoine mondial de l'UNESCO en 1995.</p>
+                    <div class="mt-auto">
+                      <a href="" class="btn btn-outline-info btn-sm">Read More</a>
+                      <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 2ND CARD -->
+              <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card card-visit h-100">
+                  <img src="{{ asset('/images/regions/kansai/hikone.jpg') }}" alt="" class="card-img-top">
+                  <div class="card-body text-white bg-primary bg-gradient d-flex flex-column">
+                    <h3 class="fs-3">Château de Hikone<br>(彦根城, Hikone-jō)</h3>
+                    <p class="card-text fs-5">L'un des rares châteaux japonais à avoir conservé son donjon original, ce qui en fait un site emblématique du Japon féodal. Il est inscrit comme trésor national depuis 1952. </p>
+                    <div class="mt-auto">
+                      <a href="" class="btn btn-outline-info btn-sm">Read More</a>
+                      <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 3RD CARD -->
+              <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card card-visit h-100">
+                  <img src="{{ asset('/images/regions/kansai/osaka.jpg') }}" alt="" class="card-img-top">
+                  <div class="card-body text-white bg-primary bg-gradient d-flex flex-column">
+                    <h3 class=" fs-3">Château d'Osaka<br>(大阪城, Osaka-jō)</h3>
+                    <p class="card-text fs-5"> Symbole emblématique de la ville d'Osaka, construit à la fin du XVIe siècle par le seigneur Toyotomi Hideyoshi, il a joué un rôle clé dans l'unification du Japon.</p>
+                    <div class="mt-auto">
+                      <a href="" class="btn btn-outline-info btn-sm">Read More</a>
+                      <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+           <div class="separator bg-danger pt-2 mb-5"></div>
+        <!-- START GALLERY -->
+      <div class="d-block justify-content-center pt-5 pb-2">
+        <div class="d-flex justify-content-center">
+          <svg height="90px" width="90px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.013 512.013" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#38454F;" d="M494.3,163.306l-80.8-33.7c-9.9-4.1-14.7-11.4-18.7-20.9c-4.4-10.4-6.4-21.6-6.4-32.8 c0-15.1-12.3-27.4-27.4-27.4H254.1c-13.6,0-24.6,11-24.6,24.6v3.9c0,11.4-2.3,22.8-7.9,32.6c-4.4,7.8-10.2,13-19.9,14.8l-132.1,23.8 c-40.6,8.8-69.6,44.8-69.6,86.3v190.2c0,11.7,9.4,21.1,21.1,21.1h215.3c21.8,11.2,46.4,17.7,72.6,17.7s50.8-6.4,72.6-17.7h112.8 C517.9,445.806,517.9,163.306,494.3,163.306"></path> <g> <path style="fill:#283238;" d="M467.9,304.606c0,87.8-71.1,158.9-158.9,158.9s-158.9-71.1-158.9-158.9s71.1-158.9,158.9-158.9 S467.9,216.806,467.9,304.606"></path> <path style="fill:#283238;" d="M129.2,231.406c7.5-15.1,7.5-32.9,0-48l-18.9-37.8l-27.8,0.2l-12.9,2.3 c-40.6,8.9-69.6,44.9-69.6,86.4v190.2c0,11.7,9.4,21.1,21.1,21.1h102.5v-190.4C123.6,247.106,125.5,238.906,129.2,231.406"></path> <path style="fill:#283238;" d="M494.3,163.306l-80.8-33.7c-6.2-2.6-10.2-6.4-13.4-11.2l9.3-22.6c0.7-1.7,2.7-2.6,4.5-1.9l91.7,37.6 c1.7,0.7,2.6,2.7,1.9,4.4l-10.8,26.3C495.7,162.806,495.2,163.006,494.3,163.306"></path> </g> <path style="fill:#38454F;" d="M105.9,203.006c0,12.2-13.8,22.1-30.9,22.1s-30.9-9.9-30.9-22.1s13.9-22,30.9-22 S105.9,190.806,105.9,203.006"></path> <path style="fill:#283238;" d="M462.8,189.806h-16.4c-7.7,0-13.9,6.2-13.9,13.9v1.1c7.2,9,13.4,18.7,18.6,29.1h11.7 c7.6,0,13.9-6.2,13.9-13.9v-16.4C476.7,196.006,470.5,189.806,462.8,189.806"></path> <path style="fill:#434C6D;" d="M309,419.306c-63.3,0-114.8-51.5-114.8-114.8s51.5-114.7,114.8-114.7s114.8,51.5,114.8,114.8 S372.2,419.306,309,419.306"></path> <path style="fill:#7383BF;" d="M309,426.306c-67.1,0-121.8-54.6-121.8-121.8c0-67.1,54.6-121.8,121.8-121.8 c67.1,0,121.8,54.6,121.8,121.8C430.7,371.706,376.1,426.306,309,426.306z M309,196.806c-59.4,0-107.8,48.3-107.8,107.8 c0,59.4,48.3,107.8,107.8,107.8c59.4,0,107.8-48.3,107.8-107.8C416.7,245.106,368.4,196.806,309,196.806z"></path> <g> <path style="fill:#FFFFFF;" d="M335.4,384.006c-2.3,0-4.5-0.9-6.2-2.6c-3.5-3.5-3.5-9,0-12.5l35.3-35.3c3.5-3.5,9-3.5,12.5,0 s3.5,9,0,12.5l-35.3,35.3C340,383.106,337.7,384.006,335.4,384.006"></path> <path style="fill:#FFFFFF;" d="M300.1,375.206c-2.3,0-4.5-0.9-6.2-2.6c-3.5-3.5-3.5-9,0-12.5l61.8-61.8c3.5-3.5,9-3.5,12.5,0 s3.5,9,0,12.5l-61.8,61.8C304.7,374.306,302.4,375.206,300.1,375.206"></path> </g> <path style="fill:#283238;" d="M345.9,110.306h-73.8c-4,0-7.2-3.2-7.2-7.2v-12c0-4,3.2-7.2,7.2-7.2h73.8c4,0,7.2,3.2,7.2,7.2v12 C353.1,107.106,349.9,110.306,345.9,110.306"></path> <path style="fill:#FFFFFF;" d="M317.8,313.406c0,4.9-4,8.8-8.8,8.8s-8.8-4-8.8-8.8s4-8.8,8.8-8.8S317.8,308.506,317.8,313.406"></path> </g></svg>
+        </div>
+        <h2 class="text-center">Galerie photos</h2>
+      </div>
+        <!-- CAROUSEL -->
+      <section id="galerie" class=" container-fluid bg-info pb-5 pt-5">
+        <div class="row justify-content-center">
+          <div id="carouselExampleCaptions" class=" carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{ asset('/images/regions/kansai/carouselKansai/himeji.jpg') }}" class="img-fluid d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Château de Himeji</h5>
+                  <p>Himeji - Préfecture de Hyogo.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="{{ asset('/images/regions/kansai/carouselKansai/wakayama.jpg') }}" class="img-fluid d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block ">
+                  <h5>Château de Wakayama</h5>
+                  <p>Wakayama - Préfecture de Wakayama.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="{{ asset('/images/regions/kansai/carouselKansai/osaka.jpg') }}" class="img-fluid d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Quartier de Namba</h5>
+                  <p>Osaka - Préfecture d'Osaaka.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="{{ asset('/images/regions/kansai/carouselKansai/kyoto.jpg') }}" class="img-fluid d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Temple To-ji</h5>
+                  <p>Kyoto - Préfecture de Kyoto.</p>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+              <span class="visually-hidden ">Next</span>
+            </button>
+          </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,44 @@
+// All regions pages templates
+
+// fieldset
+.field{
+    width: 20rem;
+
+}
+
+.flag{
+    width: 10rem;
+    height: auto;
+    justify-self: left; 
+}
+
+.carousel{
+    max-width: 60rem;
+    max-height: auto;
+}
+
+.carousel-caption{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.img-pref{
+    width: 10rem;
+    
+}
+
+.separator{
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 92px;
+    height: 17px;
+}
+
+.map {
+  max-height: 350px;      
+  width: auto;           
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
+}

@@ -13,3 +13,8 @@
 .hero_regions{
     @include mixins.bigtitle($url: '/images/regions/regions.jpg');
 }
+
+.hero_kansai{
+    @include mixins.bigtitle($url: '/images/regions/kansai/kansai4.jpg');
+    background-position: top; 
+}

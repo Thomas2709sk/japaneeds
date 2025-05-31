@@ -10,7 +10,7 @@
 ### User
 
 - Informations pages to help you prepare your trip.( Interactive map, live weather, information pages... )
-- After registration, earn 20 coins to make a reservation.( all your reservations history appears in your account)
+- After registration, earn 20 ccredits to make a reservation.( all your reservations history appears in your account)
 - Receive an email at each step of the reservation process.
 - After your reservation, you can leave a review for your guide.
 - Users can register as guide.
