@@ -16,9 +16,12 @@ class ReviewsController extends AbstractController
    #[Route('/', name: 'index')]
 public function index(Request $request, DocumentManager $dm): Response
 {
+    // Create new Review object in MongoDB
      $review = new Review();
+    //  Add day and time automatically for CreatedAt
      $review->setCreatedAt(new \DateTime());
 
+    //  Create form and link with Document review
     $reviewWebForm = $this->createForm(ReviewsWebsiteFormType::class, $review);
     $reviewWebForm->handleRequest($request);
 

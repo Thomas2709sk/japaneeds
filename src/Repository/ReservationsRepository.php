@@ -19,9 +19,10 @@ class ReservationsRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservations::class);
     }
 
+    // Count reservation per day for admin chart
     public function reservationsByDay(): array
     {
-        // Requête DQL pour compter les réservations par jour
+
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
@@ -33,8 +34,8 @@ class ReservationsRepository extends ServiceEntityRepository
 
         return $query->getResult();   
     }
-    //Nombre de Credits pour chaque reservations a ajouter au graphique de credits admin
-    // A modifier ( cause status)
+
+    //Count 2 credits for the admin when reservation status is 'Confirmé' and count by day for credits chart for admin
     public function creditsByDay(): array
 {
     $entityManager = $this->getEntityManager();
@@ -48,19 +49,6 @@ class ReservationsRepository extends ServiceEntityRepository
     )->setParameter('status', 'Confirmé');
 
     return $query->getResult();
-}
-
-// Recherche toutes les reservations et calcule la note moyenne de chaque guide
-// A Supprimer ??
-public function findAllWithAverageRatings(): array
-{
-    return $this->createQueryBuilder('r')
-        ->select('r as reservation', 'AVG(rv.rate) as averageRating')
-        ->leftJoin('r.guide', 'g')
-        ->leftJoin('g.reviews', 'rv', 'WITH', 'rv.validate = true') // Jointure avec condition sur les avis validés
-        ->groupBy('r.id')
-        ->getQuery()
-        ->getResult();
 }
 
 //Recherche reservations la plus proche superieur
@@ -117,6 +105,7 @@ public function findClosestDay(\DateTime|string $day, string $cityName): ?\DateT
     return $closestDate;
 }
 
+// Show all informations  needed for guides and reservations 
 /**
 * - price (float) : filtre sur le prix de la résa sur un mini (float) maxi (float)
 */
@@ -125,7 +114,7 @@ public function findReservationsWithGuideRatings(?string $day, ?string $city, ?a
 $qb = $this->createQueryBuilder('r')
 ->select('r', 'AVG(rev.rate) as averageRating')
 ->join('r.guide', 'g')
-->leftJoin('g.reviews', 'rev', 'WITH', 'rev.validate = true')
+->leftJoin('g.reviews', 'rev', 'WITH', 'rev.validate = true') // Show reviews only if validated by admin
 ->groupBy('r.id')
 ->orderBy('r.day', 'ASC');
 
@@ -171,25 +160,7 @@ $qb->andWhere('r.begin <= :begin')
 return $qb->getQuery()->getResult();
 }
 
-//DQL qui ne reconnais pas le datediff
-public function findClosestAvailableDate(string $day): ?\DateTime
-{
-    $targetDate = new \DateTime($day);
-    $now = new \DateTime();
-
-    $result = $this->createQueryBuilder('r')
-        ->select('r.day')
-        ->where('r.day >= :now')
-        ->setParameter('now', $now->format('Y-m-d'))
-        ->orderBy('ABS(DATEDIFF(r.day, :targetDate))', 'ASC')
-        ->setParameter('targetDate', $targetDate->format('Y-m-d'))
-        ->setMaxResults(1)
-        ->getQuery()
-        ->getOneOrNullResult();
-
-    return $result ? $result['day'] : null;
-}
-
+// Paginate reservations for each guide
 public function getAllPaginated(Guides $guide, int $page = 1, int $limit = 4): array
 {
     $offset = ($page - 1) * $limit;

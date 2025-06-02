@@ -35,88 +35,87 @@ class ReservationsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData(); // Récupérer les données du formulaire
 
-            // Rediriger vers la page des résultats avec les paramètres dans l'URL
+            // Redirect to results page with the day and date in the URL from the method 'GET'
             return $this->redirectToRoute('app_reservations_results', [
                 'day' => $data['date'] ? $data['date']->format('Y-m-d') : null,
                 'city' => $data['city'],
             ]);
         }
 
-        // Récupérez les utilisateurs (guides)
+        // Find 4 guides in the guides table
         $users = $usersRepository->findBy([], null, 4);
-
-        // // Récupérez toutes les réservations
-        // $reservationsWithRatings = $reservationsRepository->findAllWithAverageRatings();
 
         return $this->render(
             'reservations/index.html.twig',
             [
                 'form' => $form->createView(),
                 'users' => $users,
-                // 'reservationsWithRatings' => $reservationsWithRatings,
             ]
         );
     }
 
+
     #[Route(path: '/details/{id}', name: 'details')]
     public function details($id, ReservationsRepository $reservationsRepository, ReviewsRepository $reviewsRepository): Response
     {
+        // search the reservation by its ID
         $reservation = $reservationsRepository->findOneBy(['id' => $id]);
 
-        // Si la réservation n'existe pas
+        // if reservaton don't exist
         if (!$reservation) {
             throw $this->createNotFoundException('Cette réservation n\'existe pas');
         }
 
-        // Récupère le guide associé à la réservation
+        // search the guide associate with the reservation
         $guide = $reservation->getGuide();
 
-        // Calcul de la moyenne des notes pour ce guide
+        // Use 'getAverageRatingForGuide' in the Repository to calculate the Average rating of each guide
         $averageRating = $reviewsRepository->getAverageRatingForGuide($guide->getId());
 
-        // Récupère le nombre d'avis pour ce guide
+        // Use 'countReviews' in the Repository to have the number of reviews for each guide
         $reviewCount = $reviewsRepository->countReviews($guide->getId());
 
         // $averageRating = round($averageRating, 2);
 
-        // La réservation existe
+        // if reservation exist
         return $this->render('reservations/details.html.twig', compact('reservation', 'averageRating', 'reviewCount'));
     }
 
     // Book Réservations (PlacesDispo a modifier avec nbPlaces "+-1 pour l'instant")
-
     #[Route('/book/{id}', name: 'book')]
     public function book(Reservations $reservation, EntityManagerInterface $em, SendEmailService $mail)
-    {
+    {   
+        // look if user is logged and have 'ROLE_USER'
         $this->denyAccessUnlessGranted('ROLE_USER');
-
+        
+        // get User
         $user = $this->getUser();
 
-        // Vérifiez si l'utilisateur est bien une instance de Users
+        // if User is type of Users
         if (!$user instanceof Users) {
             throw new \LogicException('The user is not of type Users.');
         }
 
-
-        // Déduire les crédits de l'utilisateur
+    // If User book reservation
+        // Déduct the user credits depending of reservations price
         $user->setCredits($user->getCredits() - $reservation->getPrice());
 
-        // Ajouter l'utilisateur à la réservation
+        // Add the user to the reservation
         $reservation->addUser($user);
 
-        // Ajouter la réservation à l'utilisateur
+        // Add the reservation to the user account
         $user->addReservation($reservation);
 
 
-        // Mettre à jour les places disponibles
+        // edit places available of the reservation
         $reservation->setPlacesDispo($reservation->getPlacesDispo() - 1);
 
-        // Sauvegarder dans la base de données
+        // persist on the DB
         $em->persist($reservation);
         $em->persist($user);
         $em->flush();
 
-        // Envoyer l'email
+        // Send mail to the user
         $mail->send(
             'no-reply@japan.test',
             $user->getEmail(),
@@ -131,43 +130,42 @@ class ReservationsController extends AbstractController
     }
 
     // Annuler Réservations (PlacesDispo a modifier avec nbPlaces "+-1 pour l'instant")
-
     #[Route('cancel/{reservationId}', name: 'cancel')]
     public function cancel(int $reservationId, EntityManagerInterface $em): Response
     {
-        // Récupérer l'utilisateur connecté
+        // get the User
         $user = $this->getUser();
 
-        // Vérifier si l'utilisateur est connecté
+        // look if user is logged
         if (!$user instanceof Users) {
             throw new \LogicException('The user is not authenticated.');
         }
 
-        // Trouver la réservation
+        // search the reservation with its ID
         $reservation = $em->getRepository(Reservations::class)->find($reservationId);
 
-        // Vérifier si la réservation existe
+        // if reservation don't exist
         if (!$reservation) {
             $this->addFlash('error', 'La réservation n\'existe pas.');
             return $this->redirectToRoute('app_reservations_index');
         }
 
-        // Vérifier si l'utilisateur est celui qui a fait la réservation
+        // if the user made the reservation
         if (!$reservation->getUsers()->contains($user)) {
             $this->addFlash('error', 'Vous ne pouvez annuler cette réservation.');
             return $this->redirectToRoute('app_reservations_index');
         }
 
-        // Rendre les crédits à l'utilisateur lors de l'annulation
+        // if user cancel get credits back
         $user->setCredits($user->getCredits() + $reservation->getPrice());
 
-        // Retirer l'utilisateur de la réservation
+        // remove user from reservation
         $reservation->removeUser($user);
 
-        // Réincrémenter le nombre de places disponibles
+        // edit number of places available
         $reservation->setPlacesDispo($reservation->getPlacesDispo() + 1);
 
-        // Sauvegarder dans la base de données
+        // Save in DB
         $em->persist($reservation);
         $em->flush();
 
@@ -176,53 +174,60 @@ class ReservationsController extends AbstractController
         return $this->redirectToRoute('app_user_account_index');
     }
 
+    // if user say the reservation was good
     #[Route('/confirm/{id}', name: 'confirm')]
     public function confirm(
         int $id,
         Reservations $reservation,
         EntityManagerInterface $em
     ) {
+        // get the User
         $user = $this->getUser();
+
+         // search the reservation with its ID
         $reservation = $em->getRepository(Reservations::class)->find($id);
 
+        // if User is part of the reservation
         if (!$reservation->getUsers()->contains($user)) {
             $this->addFlash('error', 'Réservation invalide ou non autorisée.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Vérifier que la réservation peut être confirmée
+        // if user can confirm the end of the reservation
         if ($reservation->getStatus() !== 'Fini') {
             $this->addFlash('error', 'Cette réservation ne peut pas être confirmée.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Calculer les crédits pour le guide et l'admin
+        // Count credits for guide and admin
         $price = $reservation->getPrice();
         $platformFee = 2;
         $creditsForGuide = $price - $platformFee;
 
         $guide = $reservation->getGuide();
 
-        // Rechercher l'admin
+        // find admin by its id and if 'ROLE_ADMIN'
         $admin = $em->getRepository(Users::class)->find(1);
 
         if (!$admin || !in_array('ROLE_ADMIN', $admin->getRoles(), true)) {
             throw new \Exception('L\'utilisateur avec l\'ID 1 n\'est pas un administrateur.');
         }
 
-        // Récupérer l'utilisateur associé au Guide
+        // get the guide by its user id
         $userGuide = $guide->getUser();
 
-        // Transférer les crédits
-        $userGuide->setCredits($userGuide->getCredits() + $creditsForGuide); // Ajouter au guide (via l'utilisateur associé)
+        // Send credits
+             // Add to guide by its user ID
+        $userGuide->setCredits($userGuide->getCredits() + $creditsForGuide);
+            // Add to admin
         if ($admin) {
-            $admin->setCredits($admin->getCredits() + $platformFee); // Ajouter la commission à l'admin
+            $admin->setCredits($admin->getCredits() + $platformFee); 
         }
 
-        // Mettre à jour le statut de la réservation
+        // edit reservation status to 'Confirmé'
         $reservation->setStatus('Confirmé');
 
-        // Sauvegarder les modifications
+        // Save to DB
         $em->persist($guide);
         $em->persist($reservation);
         if ($admin) {
@@ -236,31 +241,32 @@ class ReservationsController extends AbstractController
         return $this->redirectToRoute('app_user_account_index');
     }
 
+    // If user say the reservation was bad
     #[Route('/bad/{id}', name: 'bad', methods: ['POST'])]
     public function createBadReviews(
         int $id,
         EntityManagerInterface $em
     ): Response {
-        // Récupérer l'utilisateur connecté
+        // get User
         $user = $this->getUser();
         if (!$user) {
             throw $this->createAccessDeniedException('Vous devez être connecté pour effectuer cette action.');
         }
 
-        // Trouver la réservation
+        // find reservation
         $reservation = $em->getRepository(Reservations::class)->find($id);
         if (!$reservation) {
             $this->addFlash('error', 'La réservation est introuvable.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Vérifier si l'utilisateur a participé à cette réservation
+        // search if user is part of the reservation
         if (!$reservation->getUsers()->contains($user)) {
             $this->addFlash('error', 'Vous ne pouvez pas modifier cette réservation.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Mettre à jour le statut de la réservation
+        // edit status of reservation
         $reservation->setStatus('Vérification par la plateforme');
         $em->persist($reservation);
         $em->flush();
@@ -301,12 +307,12 @@ class ReservationsController extends AbstractController
         Request $request,
         ReservationsRepository $reservationsRepository
     ): Response {
-        // Récupérer les paramètres de l'URL (jour et ville)
+        // get the day and city in the url of the search form
         $day = $request->query->get('day');
         $city = $request->query->get('city');
     
     
-        // Pré-remplir le formulaire avec les filtres initiaux
+        // add the day and city of the search form in the filters form
         $filtersForm = $this->createForm(SearchFiltersFormType::class, [
             'date' => $day ? new \DateTime($day) : null,
             'city' => $city,
@@ -314,25 +320,24 @@ class ReservationsController extends AbstractController
     
         $filtersForm->handleRequest($request);
     
-        // Construire les filtres à partir des paramètres ou du formulaire soumis
         $filters = [
             'date' => $day ? new \DateTime($day) : null,
             'city' => $city,
         ];
     
         if ($filtersForm->isSubmitted() && $filtersForm->isValid()) {
-            // Ajouter les filtres soumis par l'utilisateur
+            // Add filters used by user
             $filters = array_merge($filters, $filtersForm->getData());
         }
     
-        // Récupérer les réservations avec les filtres combinés
+        // Update reservation with filters used by user
         $reservations = $reservationsRepository->findReservationsWithGuideRatings(
             $filters['date'] ? $filters['date']->format('Y-m-d') : null,
             $filters['city'],
             $filters
         );
     
-        // Appeler findClosestDay uniquement si aucune réservation n'est trouvée
+        // if no reservation on choosen day use 'findClosestDay' to search for the next available day 
         $findClosestDay = null;
         if (empty($reservations) && $day && $city) {
             $findClosestDay = $reservationsRepository->findClosestDay($day, $city);
