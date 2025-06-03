@@ -105,7 +105,7 @@ public function findClosestDay(\DateTime|string $day, string $cityName): ?\DateT
     return $closestDate;
 }
 
-// Show all informations  needed for guides and reservations 
+// Show all informations  needed for guides and reservations
 /**
 * - price (float) : filtre sur le prix de la résa sur un mini (float) maxi (float)
 */

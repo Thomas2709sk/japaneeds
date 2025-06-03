@@ -16,7 +16,8 @@ class UsersController extends AbstractController
 {
     #[Route('/', name: 'index')]
     public function index(UsersRepository $usersRepository): Response
-    {
+    {   
+        // get all users by their ID
         $users = $usersRepository->findBy([], ['id' => 'ASC']);
 
         return $this->render('admin/users/index.html.twig', [
@@ -27,19 +28,19 @@ class UsersController extends AbstractController
     #[Route('/remove/{id}', name: 'remove')]
     public function removeUser(int $id, UsersRepository $usersRepository, EntityManagerInterface $em): Response
     {
-        // Vérifie si l'utilisateur connecté a le rôle ROLE_ADMIN
+        // check if user have 'ROLE_ADMIN'
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        // Récupérer l'utilisateur à supprimer
+        // find the user to remove with its ID
         $user = $usersRepository->find($id);
 
-        // Vérifier si l'utilisateur existe
+        // if user don't exist
         if (!$user) {
             $this->addFlash('error', 'Utilisateur introuvable.');
             return $this->redirectToRoute('app_admin_users_index');
         }
 
-        // Supprimer l'utilisateur
+        // Remove user
         $em->remove($user);
         $em->flush();
 

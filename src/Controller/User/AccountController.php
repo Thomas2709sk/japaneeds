@@ -22,25 +22,27 @@ class AccountController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, EntityManagerInterface $em, PictureService $pictureService): Response
     {
-        // Récupérer l'utilisateur actuellement connecté
+        // get User
         $user = $this->getUser();
 
-        // Vérifiez si l'utilisateur est bien une instance de Users
+
         if (!$user instanceof Users) {
             throw new \LogicException('The user is not of type Users.');
         }
 
+        // Create form
         $accountForm = $this->createForm(EditAccountFormType::class, $user);
 
         $accountForm->handleRequest($request);
 
-        // On vérifie si le formulaire est valide
+        // if form is valid
         if ($accountForm->isSubmitted() && $accountForm->isValid()) {
-            // Gérer l'upload de l'image si un fichier a été téléchargé
+            // upload picture for user profile picture
             $featuredImage = $accountForm->get('picture')->getData();
 
+            //  if picture is not null
             if ($featuredImage !== null) {
-                // Assurez-vous que $featuredImage est une instance de UploadedFile
+
                 if (!$featuredImage instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
                     throw new \LogicException('Uploaded file is not an instance of UploadedFile.');
                 }
@@ -49,20 +51,23 @@ class AccountController extends AbstractController
                 $user->setPicture($image);
             }
 
-            // Gérer le rôle de l'utilisateur
+            // Get user role
             $role = $accountForm->get('role')->getData();
 
             if ($role === 'guide') {
-                // Ajouter l'utilisateur à la table Guides s'il choisit 'guide'
+                // if User choose guide in the account form
                 $guide = $em->getRepository(Guides::class)->findOneBy(['user' => $user]);
                 if (!$guide) {
+                    // Create new object guide
                     $guide = new Guides();
+                    // User get a guide ID
                     $guide->setUser($user);
                     $em->persist($guide);
                 }
             } elseif ($role === 'voyageur') {
-                // Supprimer l'utilisateur de la table Guides s'il choisit 'voyageur'
+                // If User is a guide and chosse 'voyageur'
                 $guide = $em->getRepository(Guides::class)->findOneBy(['user' => $user]);
+                // Remove guide ID 
                 if ($guide) {
                     $em->remove($guide);
                 }

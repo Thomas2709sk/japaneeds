@@ -19,6 +19,7 @@ public function index(Security $security): Response
 {
     $admin = $security->getUser();
 
+    // Check if User have 'ROLE_ADMIN'
     if ($admin instanceof Users && in_array('ROLE_ADMIN', $admin->getRoles())) {
         $credits = $admin->getCredits();
     } else {
@@ -35,18 +36,18 @@ public function index(Security $security): Response
         ReservationsRepository $reservationRepository,
         Security $security
     ): JsonResponse {
-        // Vérifiez si l'utilisateur a les droits nécessaires
+        // Check if User have 'ROLE_ADMIN'
         if (!$security->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(['error' => 'Access Denied'], 403);
         }
 
-        // Appel au repository pour récupérer les données des crédits
+        // Use creditsByDay in the reservation Repository to count credits
         $credits = $reservationRepository->creditsByDay();
 
-        // Regrouper les crédits par mois et jour
+        // get the credits by day and month
         $aggregatedData = $this->aggregateCreditsByMonth($credits);
 
-        // Préparer les données formatées pour le frontend
+        // get the formated data for the front
         $data = $this->formatAggregatedData($aggregatedData);
 
         return new JsonResponse($data);

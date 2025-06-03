@@ -17,7 +17,8 @@ class CitiesController extends AbstractController
 {
     #[Route('/', name: 'index')]
     public function index(CitiesRepository $citiesRepository): Response
-    {
+    {   
+        // get all the cities from the table
         $cities = $citiesRepository->findBy([], ['name' => 'ASC']);
 
         return $this->render('admin/cities/index.html.twig', [
@@ -29,24 +30,24 @@ class CitiesController extends AbstractController
     #[Route('/ajouter', name: 'add')]
     public function addCities(Request $request, SluggerInterface $slugger, EntityManagerInterface $em): Response
     {
-        // On initialise une ville
+        // create new object cities
         $city = new Cities();
 
-        // On initialise le formulaire
+        // create form
         $cityForm = $this->createForm(AddCityFormType::class, $city);
 
-        // On traite le formulaire
+        // handle form
         $cityForm->handleRequest($request);
 
-        // On vérifie si le formulaire est envoyé et valide
+        // if form is valid
         if ($cityForm->isSubmitted() && $cityForm->isValid()) {
-            // On crée le slug
+            // create slug
             $slug = strtolower($slugger->slug($city->getName()));
 
-            // On attribue le slug à notre mot clef
+
             $city->setSlug($slug);
 
-            // On enregistre la ville dans la BDD
+            // save the city on the DB
             $em->persist($city);
             $em->flush();
 
@@ -54,7 +55,6 @@ class CitiesController extends AbstractController
             return $this->redirectToRoute('app_admin_cities_index');
         }
 
-        // On affiche la vue
         return $this->render('admin/cities/add.html.twig', [
             'cityForm' => $cityForm->createView(),
         ]);

@@ -19,6 +19,7 @@ final class StaffController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(UsersRepository $usersRepository): Response
     {
+        //  find user by pseudo in the repository
         $users = $usersRepository->findBy([], ['pseudo' => 'ASC']);
 
 
@@ -30,12 +31,17 @@ final class StaffController extends AbstractController
     #[Route('/create', name: 'create')]
     public function createStaff(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
+        // Create new Users object to add new staff
         $user = new Users();
+
+        // Create form
         $form = $this->createForm(AddStaffFormType::class, $user);
+
+        // handle form
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
+
             $plainPassword = $form->get('plainPassword')->getData();
 
             // $user->setRoles(['ROLE_STAFF']);
@@ -43,7 +49,11 @@ final class StaffController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
+            //  set verified to true for staff
             $user->setIsVerified(true);
+
+            // save to DB
             $entityManager->persist($user);
             $entityManager->flush();
 

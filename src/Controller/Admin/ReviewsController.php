@@ -17,7 +17,7 @@ class ReviewsController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(ReviewsRepository $reviewsRepository): Response
     {
-        // Récupérez tous les avis
+        // get All the reviews
         $reviews = $reviewsRepository->findAll();
         return $this->render(
             'admin/reviews/index.html.twig',
@@ -25,82 +25,80 @@ class ReviewsController extends AbstractController
         );
     }
 
+    // Confirm good review
     #[Route('/confirm/{id}', name: 'confirm', methods: ['POST'])]
     public function confirmGoodReview(Reviews $reviews, EntityManagerInterface $em, Security $security): Response
     {
-        // Vérifie que l'utilisateur connecté a le rôle ADMIN
+        // check if User have 'ROLE_ADMIN'
         if (!$security->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Seul un administrateur peut valider cet avis.');
         }
 
-        // Met à jour l'état de l'avis pour indiquer qu'il est validé
+        // set Validate to true
         $reviews->setValidate(true);
 
 
         $em->persist($reviews);
         $em->flush();
 
-        // Ajoute un message flash pour informer l'administrateur
         $this->addFlash('success', 'L\'avis a été validé et est maintenant visible par le guide.');
 
-        // Redirige vers la liste des avis
         return $this->redirectToRoute('app_admin_reviews_index');
     }
 
     #[Route('/confirm/bad/{id}', name: 'bad', methods: ['POST'])]
     public function confirmBadReview(Reviews $reviews, EntityManagerInterface $em, Security $security): Response
     {
-        // Vérifie que l'utilisateur connecté a le rôle ADMIN
+        // check if User have 'ROLE_ADMIN'
         if (!$security->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException('Seul un administrateur peut valider cet avis.');
         }
 
-        // Met à jour l'état de l'avis pour indiquer qu'il est validé
+        // set Validate to true
         $reviews->setValidate(true);
 
-        // Récupérer la réservation liée à l'avis
+        // get the reservation associate to the review
         $reservation = $reviews->getReservation();
         if (!$reservation) {
             $this->addFlash('error', 'Aucune réservation associée à cet avis.');
             return $this->redirectToRoute('app_admin_reviews_index');
         }
 
-        // Vérifier que la réservation peut être confirmée
+        // Check the status of the reservation
         if ($reservation->getStatus() !== 'Vérification par la plateforme') {
             $this->addFlash('error', 'Cette réservation ne peut pas être confirmée.');
             return $this->redirectToRoute('app_admin_reviews_index');
         }
 
-        // Calculer les crédits pour le guide et l'admin
+        // Count credits for the guide and admin
         $price = $reservation->getPrice();
         $platformFee = 2;
         $creditsForGuide = $price - $platformFee;
 
         $guide = $reservation->getGuide();
 
-        // Rechercher l'admin
+        // get Admin by its ID and role
         $admin = $em->getRepository(Users::class)->find(1);
 
         if (!$admin || !in_array('ROLE_ADMIN', $admin->getRoles(), true)) {
             throw new \Exception('L\'utilisateur avec l\'ID 1 n\'est pas un administrateur.');
         }
 
-        // Récupérer l'utilisateur associé au Guide
+        // get the guide by its ID and user ID
         $userGuide = $guide->getUser();
 
-        // Transférer les crédits
-        // Ajouter au guide
+        // Give credits
+            // for guide
         $userGuide->setCredits($userGuide->getCredits() + $creditsForGuide);
 
-        // Ajouter à l'admin
+            // for admin
         if ($admin) {
             $admin->setCredits($admin->getCredits() + $platformFee);
         }
 
-        // Mettre à jour le statut de la réservation
+        // Update reservation status
         $reservation->setStatus('Confirmé');
 
-        // Sauvegarder les modifications
         $em->persist($reviews);
         $em->persist($guide);
         $em->persist($reservation);
@@ -115,23 +113,24 @@ class ReviewsController extends AbstractController
         return $this->redirectToRoute('app_admin_reviews_index');
     }
 
+    // Delete review
     #[Route('/remove/{id}', name: 'remove')]
     public function removeReviews(int $id, ReviewsRepository $reviewsRepository, EntityManagerInterface $em): Response
     {
 
-        // Vérifie si l'utilisateur connecté a le rôle ROLE_ADMIN
+        // check if User have 'ROLE_ADMIN'
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        // Récupérer l'avis à supprimer
+        // get the review to delete by its ID
         $review = $reviewsRepository->find($id);
 
-        // Vérifier si l'utilisateur existe
+        // if review don't exist
         if (!$review) {
             $this->addFlash('error', 'Avis introuvable.');
             return $this->redirectToRoute('app_admin_reviews_index');
         }
 
-        // Supprimer l'avis
+        // delete review
         $em->remove($review);
         $em->flush();
 
@@ -147,19 +146,19 @@ class ReviewsController extends AbstractController
     public function removeBadReviews(int $id, ReviewsRepository $reviewsRepository, EntityManagerInterface $em): Response
     {
 
-        // Vérifie si l'utilisateur connecté a le rôle ROLE_ADMIN
+        // check if User have 'ROLE_ADMIN'
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        // Récupérer l'avis à supprimer
+        // get the review to delete by its ID
         $review = $reviewsRepository->find($id);
 
-        // Vérifier si l'utilisateur existe
+        // if review don't exist
         if (!$review) {
             $this->addFlash('error', 'Avis introuvable.');
             return $this->redirectToRoute('app_admin_reviews_index');
         }
 
-        // Supprimer l'avis
+        // remove review
         $em->remove($review);
         $em->flush();
 

@@ -15,19 +15,19 @@ class DefaultController extends AbstractController
     public function index(DocumentManager $dm, Request $request)
     {
 
-         // Récupérer les avis depuis MongoDB
+         // find all review from MongoDB
         $reviews = $dm->getRepository(Review::class)->findAll();
 
-         // Créer le formulaire de recherche de réservations
+         // Create search Reservation form
         $form = $this->createForm(SearchReservationsFormType::class);
 
-        // Traiter la requête
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            // Rediriger vers la page des résultats avec les paramètres dans l'URL
+            // return results page with the day and city of the search Reservation form 
             return $this->redirectToRoute('app_reservations_results', [
                 'day' => $data['date'] ? $data['date']->format('Y-m-d') : null,
                 'city' => $data['city'],

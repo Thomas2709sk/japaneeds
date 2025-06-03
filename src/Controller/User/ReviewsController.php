@@ -22,32 +22,33 @@ class ReviewsController extends AbstractController
         ]);
     }
 
+    //  For good review
     #[Route('/create/{reservationId}', name: 'create', methods: ['POST'])]
     public function create(
         int $reservationId,
         Request $request,
         EntityManagerInterface $em
     ): Response {
-        // Récupérer l'utilisateur connecté
+        // find User
         $user = $this->getUser();
         if (!$user) {
             throw $this->createAccessDeniedException('Vous devez être connecté pour laisser un avis.');
         }
 
-        // Trouver la réservation
+        // find reservation
         $reservation = $em->getRepository(Reservations::class)->find($reservationId);
         if (!$reservation) {
             $this->addFlash('error', 'La réservation est introuvable.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Vérifier si l'utilisateur a participé à cette réservation
+        // if User is part of the reservation
         if (!$reservation->getUsers()->contains($user)) {
             $this->addFlash('error', 'Vous ne pouvez pas laisser un avis pour cette réservation.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Vérifier si un avis existe déjà pour cette réservation
+        // if review from User already exist
         $existingReview = $em->getRepository(Reviews::class)->findOneBy([
             'reservation' => $reservation,
             'user' => $user,
@@ -57,16 +58,16 @@ class ReviewsController extends AbstractController
             return $this->redirectToRoute('app_user_reservations_index');
         }
 
-        // Créer un nouvel avis
+        // if no review create a new Reviews object
         $review = new Reviews();
         $review->setUser($user);
         $review->setGuide($reservation->getGuide());
         $review->setReservation($reservation);
 
-        // Créer le formulaire
+        // Create form
         $reviewForm = $this->createForm(ReviewsGuideFormType::class, $review);
 
-        // Gérer la soumission du formulaire
+    
         $reviewForm->handleRequest($request);
         if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {
             $em->persist($review);
@@ -76,33 +77,35 @@ class ReviewsController extends AbstractController
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Retourner le formulaire au template
+
         return $this->render('user/reviews/index.html.twig', [
             'reviewForm' => $reviewForm,
             'reservation' => $reservation,
         ]);
     }
-    #[Route('/reviews/bad/{reservationId}', name: 'bad')]
+
+    //  For bad review
+    #[Route('/reviews/bad/{reservationId}', name: 'bad',  methods: ['POST'])]
     public function createBadReview(
         int $reservationId,
         EntityManagerInterface $em,
         Request $request
     ): Response {
-        // Récupérer la réservation
+        // Find reservation
         $reservation = $em->getRepository(Reservations::class)->find($reservationId);
         if (!$reservation) {
             $this->addFlash('error', 'La réservation est introuvable.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Vérifier si l'utilisateur connecté peut laisser un avis
+        // if User is part of the reservation
         $user = $this->getUser();
         if (!$reservation->getUsers()->contains($user)) {
             $this->addFlash('error', 'Vous ne pouvez pas laisser un avis pour cette réservation.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-          // Vérifier si un avis existe déjà pour cette réservation
+          // if review from User already exist
           $existingReview = $em->getRepository(Reviews::class)->findOneBy([
             'reservation' => $reservation,
             'user' => $user,
@@ -112,12 +115,15 @@ class ReviewsController extends AbstractController
             return $this->redirectToRoute('app_user_account_index');
         }
 
+        // if no review create a new Reviews object
         $review = new Reviews();
         $review->setUser($user);
         $review->setGuide($reservation->getGuide());
         $review->setReservation($reservation);
 
+        //  Create form
         $reviewForm = $this->createForm(ReviewsGuideFormType::class, $review);
+        
         $reviewForm->handleRequest($request);
 
         if ($reviewForm->isSubmitted() && $reviewForm->isValid()) {

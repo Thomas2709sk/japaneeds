@@ -12064,8 +12064,8 @@ body {
   height: 17px;
 }
 
-.map {
-  max-height: 350px;
+.map-regions {
+  max-height: 26.25rem;
   width: auto;
   display: block;
   margin-left: auto;

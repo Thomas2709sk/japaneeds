@@ -14,18 +14,19 @@ class ReviewsController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(ReviewsRepository $reviewsRepository, GuidesRepository $guidesRepository): Response
     {
-        // Récupère l'utilisateur connecté
+        // get User
         $user = $this->getUser();
 
-        // Récupérer le guide associé à l'utilisateur
+        // get the guide ID associate with the user ID
         $guide = $guidesRepository->findOneBy(['user' => $user]);
 
-        // Vérifier si le guide existe
+        // if guide exist
         if (!$guide) {
             $this->addFlash('error', 'Vous devez être un guide pour voir les avis.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
+        // find reviews for each guide and only show if validate = true
         $reviews = $reviewsRepository->findBy([
             'guide' => $guide,
             'validate' => true,
@@ -39,29 +40,29 @@ class ReviewsController extends AbstractController
     #[Route('/{id}/details', name: 'details')]
     public function detailsReviews(int $id, ReviewsRepository $reviewsRepository, GuidesRepository $guidesRepository): Response
     {
-        // Récupérer le guide par son ID
+        // get guide by its ID
         $reviewedGuide = $guidesRepository->find($id);
 
-        // Vérifier si ce guide existe
+        // if guide exist
         if (!$reviewedGuide) {
             $this->addFlash('error', 'Le guide que vous cherchez n\'existe pas.');
             return $this->redirectToRoute('app_reservations_index');
         }
 
 
-        // Récupérer les avis validés associés au guide
+        // find reviews for each guide and only show if validate = true
         $reviews = $reviewsRepository->findBy([
             'guide' => $reviewedGuide,
             'validate' => true,
         ]);
 
-        // Obtenir la note moyenne
+        // get the average rating of the guide 
         $averageRating = $reviewsRepository->getAverageRatingForGuide($id);
 
-        // Obtenir le nombre total d'avis
+        // get total reviews
         $totalReviews = $reviewsRepository->countReviews($id);
 
-        // Obtenir la répartition des avis par note
+        // get total of reviews for each rate
         $ratingsDistribution = $reviewsRepository->countReviewsByRating($id);
 
         return $this->render('guide/reviews/details.html.twig', [

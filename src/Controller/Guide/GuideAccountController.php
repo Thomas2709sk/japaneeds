@@ -20,32 +20,33 @@ class GuideAccountController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, EntityManagerInterface $em, ReservationsRepository $reservationsRepository): Response
     {
-        // Récupérer l'utilisateur actuellement connecté
+        // get User
         $user = $this->getUser();
 
-        // Vérifie si l'utilisateur est bien une instance de Users
+
         if (!$user instanceof Users) {
             throw new \LogicException('The user is not of type Users.');
         }
 
-        // Récupérer l'entité Guide associée à l'utilisateur connecté
+        // get the guide ID associate with the user ID
         $guide = $em->getRepository(Guides::class)->findOneBy(['user' => $user]);
 
-        // Si l'utilisateur n'est pas encore lié à un guide, créer un nouvel objet Guide
+        // if User don't have a guide ID
         if (!$guide) {
+            //  Create new guide object
             $guide = new Guides();
-            $guide->setUser($user); // Associe le guide à l'utilisateur
+            $guide->setUser($user);
         }
 
-        // Créer le formulaire basé sur l'entité Guide
+        // Create form
         $accountForm = $this->createForm(EditGuideFormType::class, $guide);
 
-        // Gérer la requête du formulaire
+        // handle form request
         $accountForm->handleRequest($request);
 
-        // Vérifier si le formulaire est soumis et valide
+        // if form is valid
         if ($accountForm->isSubmitted() && $accountForm->isValid()) {
-            // Persister les changements dans la base de données
+
             $em->persist($guide);
             $em->flush();
 
@@ -57,7 +58,7 @@ class GuideAccountController extends AbstractController
         }
 
         if ($guide) {
-            // Récupérer les réservations associées au guide
+            // get the reservation of the guide
             $reservations = $reservationsRepository->findBy(['guide' => $guide]);
         } else {
             $reservations = [];

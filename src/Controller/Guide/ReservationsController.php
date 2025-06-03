@@ -25,22 +25,22 @@ class ReservationsController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, EntityManagerInterface $em, ReservationsRepository $reservationsRepository): Response
     {
-        // Récupérer l'utilisateur actuellement connecté
+        // get User
         $user = $this->getUser();
 
-        // Vérifie si l'utilisateur est bien une instance de Users
+
         if (!$user instanceof Users) {
             throw new \LogicException('The user is not of type Users.');
         }
 
-        // Récupérer l'entité Guide associée à l'utilisateur connecté
+        // get the guide ID associate with the user ID
         $guide = $em->getRepository(Guides::class)->findOneBy(['user' => $user]);
 
-        // On récupère le numéro de page
+        // get the number of pages ( start at 1)
         $page = $request->query->get('page', 1);
 
 
-         // Récupérer les réservations paginées associées au guide
+         // get all the reservations of the guide paginated
     $pagination = $reservationsRepository->getAllPaginated($guide, $page);
 
     // Retourner la vue avec les données paginées
@@ -54,26 +54,28 @@ class ReservationsController extends AbstractController
     #[Route('/add', name: 'add')]
     public function addReservation(Request $request, EntityManagerInterface $em, GuidesRepository $guidesRepository, CitiesRepository $citiesRepository): Response
     {
-        // Récupérer l'utilisateur actuellement connecté
+        // get User
         $user = $this->getUser();
 
-        // Créer un objet Reservation vide
+        // Create new reservation object
         $reservations = new Reservations();
+
+        // Create form
         $form = $this->createForm(AddReservationFormType::class, $reservations);
 
-        // Récupérer le guide associé à l'utilisateur connecté
+        // get the guide ID associate with the user ID
         $guide = $guidesRepository->findOneBy(['user' => $user]);
 
-        // Vérifier si le guide existe
+        // if guide don't exist
         if (!$guide) {
             $this->addFlash('error', 'Vous devez être un guide pour créer une réservation.');
             return $this->redirectToRoute('app_user_account_index');
         }
 
-        // Récupérer les villes associées au guide
+        // get the cities the guide selected in this account
         $selectedCities = $guide->getCities();
 
-        // Passer les villes sélectionnées au formulaire
+        // add the cities to the form
         $form = $this->createForm(AddReservationFormType::class, $reservations, [
             'selected_cities' => $selectedCities
         ]);
@@ -81,15 +83,15 @@ class ReservationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Associer le guide à la réservation
+            // Associate the guide to the reservation
             $reservations->setGuide($guide);
 
 
-            // Définir placesDispo à la valeur de nbplaces du guide
+            // set 'PlacesDispo' for the reservation depending of 'NbPlaces' the guide set in this account
             $reservations->setPlacesDispo($guide->getNbplaces() ?? 0);
 
-            // Enregistrer la réservation
-            // Le token est automatiquement généré par le constructeur
+            // Add reservation
+            // generate random token as uniqID for the reservation number to avoid having ID that follow
             $reservations->setReservNumber('RES#' . substr(bin2hex(random_bytes(4)), 0, 8));
             $em->persist($reservations);
             $em->flush();
@@ -110,16 +112,16 @@ class ReservationsController extends AbstractController
         EntityManagerInterface $em,
         SendEmailService $mail
     ): Response {
-        // Vérification de l'autorisation avec le Voter
+        // Check if guide have access to delete with the Voter
         if (!$authChecker->isGranted(ReservationsVoter::DELETE, $reservation)) {
             throw $this->createAccessDeniedException('Vous n\'avez pas le droit de supprimer cette réservation.');
         }
     
-        // Récupérer les utilisateurs liés à cette réservation
+        // Get all the Users from the reservations
         $users = $reservation->getUsers(); 
    
-        // Envoyer un email à chaque utilisateur
-           // Rendre les crédits à l'utilisateur lors de l'annulation
+        // send mail to each users
+           // set credits back to each users
         foreach ($users as $user) {
             $user->setCredits($user->getCredits() + $reservation->getPrice());
             $mail->send(
@@ -131,32 +133,32 @@ class ReservationsController extends AbstractController
             );
         }
 
-                // Suppression de la réservation
+                // delete reservation
                 $em->remove($reservation);
                 $em->flush();
     
-        // Flash message et redirection
         $this->addFlash('success', 'La réservation a été supprimée et les utilisateurs ont été notifiés.');
     
         return $this->redirectToRoute('app_guide_account_index');
     }
 
+    // Guide click on start button on the reservation
     #[Route('/start/{id}', name: 'start', methods: ['POST'])]
     public function startReservation(Reservations $reservation, EntityManagerInterface $entityManager): Response
     {
-        // Vérifie que l'utilisateur connecté est le guide de la réservation
+        // check if the guide is the owner of the reservation
         if ($this->getUser() !== $reservation->getGuide()->getUser()) {
             throw $this->createAccessDeniedException('Vous ne pouvez pas démarrer cette réservation.');
         }
     
-        // Vérifie que la réservation est dans le bon statut
+        // Check status reservation 
         if ($reservation->getStatus() !== 'A venir') {
             $this->addFlash('error', 'Cette réservation ne peut pas être démarrée.');
             return $this->redirectToRoute('app_guide_account_index');
         }
 
     
-        // Met à jour le statut de la réservation
+        // Update status reservation when guide start reservation
         $reservation->setStatus('En cours');
         $entityManager->persist($reservation);
         $entityManager->flush();
@@ -166,24 +168,25 @@ class ReservationsController extends AbstractController
         return $this->redirectToRoute('app_guide_account_index');
     }
 
+    // Guide click on end button of the reservation
     #[Route('/end/{id}', name: 'end', methods: ['POST'])]
     public function endReservation(Reservations $reservation, EntityManagerInterface $entityManager,  SendEmailService $mail): Response
     {
-        // Vérifie que l'utilisateur connecté est le guide de la réservation
+        // check if the guide is the owner of the reservation
         if ($this->getUser() !== $reservation->getGuide()->getUser()) {
             throw $this->createAccessDeniedException('Vous ne pouvez pas finir cette réservation.');
         }
     
-        // Vérifie que la réservation est dans le bon statut
+        // Check status reservation 
         if ($reservation->getStatus() !== 'En cours') {
             $this->addFlash('error', 'Cette réservation ne peut pas être terminée.');
             return $this->redirectToRoute('app_guide_account_index');
         }
 
-         // Récupérer les utilisateurs liés à cette réservation
+         // Get all the Users from the reservations
          $users = $reservation->getUsers(); 
 
-         // Envoyer un email à chaque utilisateur
+         // send mail to each users
          foreach ($users as $user) {
             $mail->send(
                 'no-reply@japan.test',
@@ -194,14 +197,13 @@ class ReservationsController extends AbstractController
             );
         }
     
-        // Met à jour le statut de la réservation
+        // Update status
         $reservation->setStatus('Fini');
         $entityManager->persist($reservation);
         $entityManager->flush();
     
         $this->addFlash('success', 'La réservation a été terminée avec succès.');
     
-        // Redirige vers la liste des réservations ou une autre page
         return $this->redirectToRoute('app_guide_account_index');
     }
 }

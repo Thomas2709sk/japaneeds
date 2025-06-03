@@ -25,25 +25,25 @@ class ReservGraphController extends AbstractController
             ReservationsRepository $reservationRepository,
             Security $security // Vérifiez les permissions de l'utilisateur
         ): JsonResponse {
-            // Vérifiez si l'utilisateur a les droits nécessaires
+            // Check if User have 'ROLE_ADMIN'
             if (!$security->isGranted('ROLE_ADMIN')) {
                 return new JsonResponse(['error' => 'Access Denied'], 403);
             }
     
-            // Définir la locale en français
+            // set local to French
             setlocale(LC_TIME, 'fr_FR.UTF-8');
     
-            // Appel au repository pour récupérer les données
+            // Use reservationByDay in the reservation Repository to count the reservation for each day
             $reservations = $reservationRepository->reservationsByDay();
             
-            // Regrouper les réservations par mois et jour
+            // set the reservation per month and day
             $aggregatedData = [];
             foreach ($reservations as $reservation) {
                 if ($reservation['date'] instanceof \DateTime) {
-                    $monthYear = $reservation['date']->format('Y-m'); // Exemple : "2025-03"
-                    $day = $reservation['date']->format('d'); // Jour du mois (exemple : "31")
+                    $monthYear = $reservation['date']->format('Y-m'); // "2025-03"
+                    $day = $reservation['date']->format('d');
                     
-                    // Initialisation si le mois n'existe pas
+                    // if month don't exist
                     if (!isset($aggregatedData[$monthYear])) {
                         $aggregatedData[$monthYear] = [];
                     }
@@ -52,13 +52,15 @@ class ReservGraphController extends AbstractController
                 }
             }
             
-            // Préparer les données pour les renvoyer
+            // set the data
             $data = [];
             foreach ($aggregatedData as $monthYear => $days) {
-                $date = new \DateTime($monthYear . "-01"); // Crée une date pour déterminer le nombre de jours
-                $daysInMonth = $date->format('t'); // Nombre de jours dans le mois
+                // Create a new date
+                $date = new \DateTime($monthYear . "-01"); 
+                // number of day for each month
+                $daysInMonth = $date->format('t'); 
     
-                // Utiliser IntlDateFormatter pour obtenir le mois en français
+                // set the month in French
                 $formatter = new \IntlDateFormatter(
                     'fr_FR',
                     \IntlDateFormatter::LONG,
@@ -69,17 +71,18 @@ class ReservGraphController extends AbstractController
                 );
                 $monthInFrench = $formatter->format($date);
                 
-                // Créer les labels et counts
+                // Create labels and count
                 $labels = [];
                 $counts = [];
                 for ($i = 1; $i <= $daysInMonth; $i++) {
-                    $day = str_pad($i, 2, '0', STR_PAD_LEFT); // Ajout du zéro pour les jours < 10
+                    // for the day < 10 had 0
+                    $day = str_pad($i, 2, '0', STR_PAD_LEFT); 
                     $labels[] = $day;
-                    $counts[] = $days[$day] ?? 0; // Valeur par défaut : 0
+                    $counts[] = $days[$day] ?? 0;
                 }
     
                 $data[] = [
-                    'month' => $monthInFrench, // Mois et année en français (exemple : "mars 2025")
+                    'month' => $monthInFrench,
                     'labels' => $labels,
                     'counts' => $counts,
                 ];

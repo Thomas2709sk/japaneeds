@@ -15,15 +15,15 @@ class ReservationsController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
-        // Récupérer l'utilisateur actuellement connecté
+        // get User
         $user = $this->getUser();
 
-        // Vérifiez si l'utilisateur est bien une instance de Users
+ 
         if (!$user instanceof Users) {
             throw new \LogicException('The user is not of type Users.');
         }
 
-         // Récupérer les réservations de l'utilisateur
+         // get the reservation of the User
          $reservations = $user->getReservations();
 
 

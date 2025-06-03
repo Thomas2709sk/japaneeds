@@ -18,6 +18,7 @@ class SpecialitiesController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(SpecialitiesRepository $specialitiesRepository): Response
     {   
+        // get all the specialities from the table
         $specialities = $specialitiesRepository->findBy([], ['name' => 'ASC']);
 
         return $this->render('admin/specialities/index.html.twig', [
@@ -28,24 +29,22 @@ class SpecialitiesController extends AbstractController
     #[Route('/ajouter', name: 'add')]
     public function addCategories(Request $request, SluggerInterface $slugger, EntityManagerInterface $em): Response
     {   
-        // On initialise une ville
+        // create new object specialities
         $speciality = new Specialities();
 
-        // On initialise le formulaire
+        // Create form
         $specialityForm = $this->createForm(AddSpecialityFormType::class, $speciality);
 
-        // On traite le formulaire
+        // handle form
         $specialityForm->handleRequest($request);
 
-        // On vérifie si le formulaire est envoyé et valide
+        // if form is valid
         if($specialityForm->isSubmitted() && $specialityForm->isValid()){
-            // On crée le slug
+            // create slug
             $slug = strtolower($slugger->slug($speciality->getName()));
 
-            // On attribue le slug à notre mot clef
             $speciality->setSlug($slug);
 
-            // On enregistre la ville dans la BDD
             $em->persist($speciality);
             $em->flush();
 
@@ -53,7 +52,6 @@ class SpecialitiesController extends AbstractController
             return $this->redirectToRoute('app_admin_specialities_index');
         }
 
-        // On affiche la vue
         return $this->render('admin/specialities/add.html.twig', [
             'specialityForm' => $specialityForm->createView(),
         ]);
