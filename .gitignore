@@ -25,7 +25,7 @@
 ###< symfony/asset-mapper ###
 
 /.bash_history
-/.env
+
 # Mes fichiers test
 /test.html
 /localtest.html
