@@ -16,7 +16,10 @@ class DefaultController extends AbstractController
     {
 
          // find all review from MongoDB
-        $reviews = $dm->getRepository(Review::class)->findAll();
+        // $reviews = $dm->getRepository(Review::class)->findAll();
+        
+        // find 2 reviews
+        $reviews = $dm->getRepository(Review::class)->findBy([], null, 2);
 
          // Create search Reservation form
         $form = $this->createForm(SearchReservationsFormType::class);
