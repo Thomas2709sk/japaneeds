@@ -5,6 +5,6 @@ mariadb:
 
 
 mongodb:
- type: mongodb:4.4
+ type: mongodb:6.0
  disk: 256
 
