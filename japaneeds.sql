@@ -157,7 +157,8 @@ INSERT INTO `reservations` (`id`, `guide_id`, `city_id`, `day`, `begin`, `end`, 
 (24, 2, 1, '2025-04-29', '10:00:00', '17:00:00', 0, 20, 0, 'RES#60806657', 'Confirmé', 'Kyoto Station, Rue Shiokōji, Shiokōji Nord, Arrondissement de Shimogyō, Kyoto, Préfecture de Kyoto, 600-8216, Japon'),
 (25, 6, 1, '2025-05-31', '11:00:00', '18:00:00', 0, 20, 1, 'RES#9271b7a8', 'A venir', 'Kyoto Station, Rue Shiokōji, Shiokōji Nord, Arrondissement de Shimogyō, Kyoto, Préfecture de Kyoto, 600-8216, Japon'),
 (26, 1, 1, '2025-05-31', '14:00:00', '20:00:00', 1, 15, 1, 'RES#4f4ae7af', 'A venir', 'Kyoto Station, Rue Shiokōji, Shiokōji Nord, Arrondissement de Shimogyō, Kyoto, Préfecture de Kyoto, 600-8216, Japon'),
-(27, 2, 1, '2025-05-31', '09:00:00', '17:00:00', 1, 25, 1, 'RES#a911e27e', 'A venir', 'Kyoto Station, Rue Shiokōji, Shiokōji Nord, Arrondissement de Shimogyō, Kyoto, Préfecture de Kyoto, 600-8216, Japon');
+(27, 2, 1, '2025-05-31', '09:00:00', '17:00:00', 1, 25, 1, 'RES#a911e27e', 'A venir', 'Kyoto Station, Rue Shiokōji, Shiokōji Nord, Arrondissement de Shimogyō, Kyoto, Préfecture de Kyoto, 600-8216, Japon'),
+(28, 2, 1, '2025-06-25', '09:00:00', '17:00:00', 1, 25, 1, 'RES#a911e27e', 'A venir', 'Kyoto Station, Rue Shiokōji, Shiokōji Nord, Arrondissement de Shimogyō, Kyoto, Préfecture de Kyoto, 600-8216, Japon');
 
 -- --------------------------------------------------------
 
@@ -233,8 +234,6 @@ INSERT INTO `users` (`id`, `email`, `roles`, `password`, `pseudo`, `credits`, `p
 (3, 'ntc@mail.fr', '[]', '$2y$13$0OpXZEPciEd4L4BwAYye8Os9C7onnbFmXGDugnfzCcF2hxNEODdX.', 'Oliver', 0, 'ab09d4afdce1c42a3872b4eb4033cf78.jpeg', 0),
 (4, 'ntd@mail.fr', '[]', '$2y$13$oBh9BKYJUMrySYJgwmu/seyPKL6eV/Mh4TjtvjhQPV2iRi9.QvzYO', 'julia', 18, '4feaa5c865c1e07ae1c667af89bf6056.jpeg', 0),
 (5, 'ntab@mail.fr', '[]', '$2y$13$AXCycRlqqu/JrljBpyO9/unM7GzA7jGYmFOgdo.gOCWiUrwfr96SW', 'chiharu', 20, 'c6a50cc19e1eb1087b54295d8c1d15fa.jpeg', 1),
-(6, 'ntb@mailt.fr', '[]', '$2y$13$zK9k8hUdwCNDfVgRTg5tyuU2F778oJG45m6bmKNaZPrZ1Snbg7.VG', 'thomas', 20, NULL, 1),
-(7, 'nt@maail.fr', '[]', '$2y$13$nDOjFmXQpYJGWRFxPfkjMeIXsCWqlDTged44aS2WIdDmqVaS0IPPe', 'thomas', 20, NULL, 1),
 (9, 'ntbb@mail.fr', '[\"ROLE_STAFF\"]', '$2y$13$2jDpXXpXL6hDH2RrtXE15Oph5yjLpGeB77ggC9pfLDKHzLnwvXzKq', 'azerty', 20, NULL, 1);
 
 -- --------------------------------------------------------
