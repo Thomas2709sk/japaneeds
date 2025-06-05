@@ -5,7 +5,7 @@ type: 'php:8.4'
 
 runtime:
     extensions:
-        - mongodb
+        - mongodb: "2.0.0"
 
 
 
