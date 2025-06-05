@@ -3,6 +3,11 @@ name: app
 
 type: 'php:8.4'
 
+dependencies:
+    php:
+        mongodb: "*"
+
+
 
 web:
   locations:
