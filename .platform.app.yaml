@@ -5,7 +5,7 @@ type: 'php:8.4'
 
 dependencies:
     php:
-        ext-mongodb: "*"
+        mongodb: "*"
 
 
 
