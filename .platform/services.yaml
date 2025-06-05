@@ -1,12 +1,10 @@
 # The name given to the MariaDB/MySQL service (lowercase alphanumeric only).
 mariadb:
-
     type: mariadb:11.4
-
     disk: 256
 
 
 mongodb:
-    type: mongodb:6.0
-    disk: 512
+    type: mongodb:5.0
+    disk: 256
 
