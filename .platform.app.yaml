@@ -13,14 +13,6 @@ web:
 
 
 mounts:
-  'web/uploads':
-    source: local
-    source_path: uploads
-
-
-disk: 512
-
-mounts:
   "/var/cache": { source: local, source_path: var/cache }
 
 disk: 256
