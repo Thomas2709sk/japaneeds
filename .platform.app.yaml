@@ -3,9 +3,10 @@ name: app
 
 type: 'php:8.4'
 
-dependencies:
-    php:
-        mongodb: "^2.0"
+runtime:
+    extensions:
+        - mongodb
+
 
 
 
