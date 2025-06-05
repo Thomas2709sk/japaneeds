@@ -3,6 +3,6 @@ mariadb:
     disk: 256
 
 mongodb:
-    type: mongodb:4.5
+    type: mongodb:4.3
     disk: 512
 
