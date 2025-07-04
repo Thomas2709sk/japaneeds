@@ -69,6 +69,6 @@ DirectoryIndex index.php
         # the start page to the front controller explicitly so that the website
         # and the generated links can still be used.
         RedirectMatch 307 ^/$ /index.php/
-        # RedirectTemp cannot be used instead
+
     </IfModule>
 </IfModule>
