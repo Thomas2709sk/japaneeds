@@ -78,7 +78,8 @@ class ReservationsController extends AbstractController
         // $averageRating = round($averageRating, 2);
 
         // if reservation exist
-        return $this->render('reservations/details.html.twig', compact('reservation', 'averageRating', 'reviewCount'));
+        return $this->render('reservations/details.html.twig',
+         compact('reservation', 'averageRating', 'reviewCount'));
     }
 
     // Book Réservations (PlacesDispo a modifier avec nbPlaces "+-1 pour l'instant")
