@@ -67,7 +67,6 @@ DirectoryIndex index.php
     <IfModule mod_alias.c>
         # When mod_rewrite is not available, we instruct a temporary redirect of
         # the start page to the front controller explicitly so that the website
-        # and the generated links can still be used.
         RedirectMatch 307 ^/$ /index.php/
 
     </IfModule>
